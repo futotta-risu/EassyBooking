@@ -1,8 +1,24 @@
 package org.SlavaLenin.EassyBooking.app;
 
 public class Airline {
-
-	private int name;
+	private String name;
 	private int ICAO;
+	
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getICAO() {
+		return ICAO;
+	}
+	public void setICAO(int iCAO) {
+		ICAO = iCAO;
+	}
+	
+
+	
 
 }
