@@ -5,6 +5,7 @@ public class Airport {
 	private String location;
 	private String airportCode;
 	private int gates;
+	
 	public String getName() {
 		return name;
 	}

@@ -1,12 +1,23 @@
 package org.SlavaLenin.EassyBooking.app;
 
+import java.util.List;
+
 import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class PassengerInfo {
 	private String passengerName;
 	private String passengerLastName;
+	private List<FlightReservation> flightReservations;
+	@PrimaryKey
 	private String passengerDNI;
+	
+	public List<FlightReservation> getFlightReservations() {
+		return flightReservations;
+	}
+	public void setFlightReservations(List<FlightReservation> flightReservations) {
+		this.flightReservations = flightReservations;
+	}
 	private long passengerPhoneNum;
 	
 	public String getPassengerName() {

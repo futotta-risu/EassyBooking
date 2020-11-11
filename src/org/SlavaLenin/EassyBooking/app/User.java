@@ -1,15 +1,28 @@
 package org.SlavaLenin.EassyBooking.app;
-import javax.jdo.annotations.PersistenceCapable;
+import java.util.List;
+
+import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class User {
-
+	@PrimaryKey
 	private String OAuth;
 	private String username;
 	private String name;
 	private String email;
 	private int loginSystemType;
+	private List<FlightReservation> flightReservations;
 	
+	@Join
+	@Persistent(mappedBy = "user", dependentElement = "true")
+	private List<Pago> pagos;
+	
+	public List<FlightReservation> getFlightReservations() {
+		return flightReservations;
+	}
+	public void setFlightReservations(List<FlightReservation> flightReservations) {
+		this.flightReservations = flightReservations;
+	}
 	public String getOAuth() {
 		return OAuth;
 	}

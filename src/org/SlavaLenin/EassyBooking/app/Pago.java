@@ -8,10 +8,25 @@ import javax.jdo.annotations.*;
 public class Pago {
 
 	private Date date;
+	@PrimaryKey
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
+	private FlightReservation flightReservations;
+	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public FlightReservation getFlightReservations() {
+		return flightReservations;
+	}
+	public void setFlightReservations(FlightReservation flightReservations) {
+		this.flightReservations = flightReservations;
+	}
 	public Date getDate() {
 		return date;
 	}
