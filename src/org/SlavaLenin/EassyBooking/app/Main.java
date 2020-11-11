@@ -26,7 +26,7 @@ public class Main {
 			try {
 			    transaction.begin();
 			    
-List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
+			    List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 			    
 			    // ------ PASSENGER INFO ------
 			    PassengerInfo passengerInfo = new PassengerInfo();
@@ -63,10 +63,10 @@ List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 			    
 			    User user = new User();
 			    
-			   // pm.makePersistent(reservation);
+			    pm.makePersistent(user);
 			    
-			   /*
-			    * System.out.println("+ Inserted inventory into db: " + resrvation.getFlightReservationID());
+			   
+			    System.out.println("+ Inserted inventory into db: " + user.getUsername());
 			    
 			    transaction.commit();
 			} catch(Exception ex) {
@@ -87,10 +87,10 @@ List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 				transaction.begin();
 	
 			    @SuppressWarnings("unchecked")
-				Query<Product> productsQuery = pm.newQuery("SELECT FROM " + Product.class.getName() + " WHERE price < 150.00 ORDER BY price ASC");
+				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber = 1234");
 			    
-			    for (Product product : productsQuery.executeList()) {
-			        System.out.println("? Selected product from db: " + product.getName());
+			    for (Flight flight : flightQuery.executeList()) {
+			        System.out.println("? Selected product from db: " + Flight.class.getName());
 			    }
 			    	
 			    transaction.commit();
@@ -115,7 +115,7 @@ List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE price < 150.00 ORDER BY price ASC");
 			    
 			    for (Flight flight : flightQuery.executeList()) {
-			        System.out.println("- Deleted product from db: " + flight.getFlightNumber()());
+			        System.out.println("- Deleted product from db: " + flight.getFlightNumber());
 			        pm.deletePersistent(flight);
 			    }
 
@@ -136,7 +136,7 @@ List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 	
 			    pm.close();
 			}
-			*/
+			
 			
 		} catch (Exception ex) {
 			System.err.println("* Exception: " + ex.getMessage());
