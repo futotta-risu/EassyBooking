@@ -21,7 +21,6 @@ public class Flight {
 	public void setFlightReservations(List<FlightReservation> flightReservations) {
 		this.flightReservations = flightReservations;
 	}
-	private PassengerInfo[] infoPassengers;
 	public int getFlightNumber() {
 		return flightNumber;
 	}
@@ -58,12 +57,7 @@ public class Flight {
 	public void setNumberPassengers(int numberPassengers) {
 		this.numberPassengers = numberPassengers;
 	}
-	public PassengerInfo[] getInfoPassengers() {
-		return infoPassengers;
-	}
-	public void setInfoPassengers(PassengerInfo[] infoPassengers) {
-		this.infoPassengers = infoPassengers;
-	}
+
 
 	
 }
