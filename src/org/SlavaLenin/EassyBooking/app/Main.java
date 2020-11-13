@@ -13,19 +13,20 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.db.DBHandler;
+
 public class Main {
 
 	public static void main(String[] args) {
 
 		try {
-			PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-			PersistenceManager pm = pmf.getPersistenceManager();				
-			Transaction transaction = pm.currentTransaction();	
+			DBHandler dbh = new DBHandler();	
+			dbh.createNewTransaction();
 			Calendar calendar = Calendar.getInstance();
 			
 			// ------------------------------------- INSERT -----------------------------------------------------
 			try {
-			    transaction.begin();
+				dbh.beginTransaction();
 			    
 			    //List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
 			    //PassengerInfo passengerInfo = new PassengerInfo();
@@ -89,63 +90,59 @@ public class Main {
 			    
 			        
 			    // Cuales creamos persistentes??
-			    pm.makePersistent(user);
+			    dbh.getPm().makePersistent(user);
 			    System.out.println("+ Inserted user into db: " + user.getUsername());
 
-			    pm.makePersistent(flight);
+			    dbh.getPm().makePersistent(flight);
 			    System.out.println("+ Inserted flight into db: " + flight.getFlightNumber());
 
-			    pm.makePersistent(flightReservation);
+			    dbh.getPm().makePersistent(flightReservation);
 			    System.out.println("+ Inserted flightReservation into db: " + flightReservation.getFlightReservationID());
 
-			    pm.makePersistent(pago);
+			    dbh.getPm().makePersistent(pago);
 			    System.out.println("+ Inserted pago into db: " + pago.getPaymentID());
 			    
 			    //pm.makePersistent(passengerInfo);
 			    //System.out.println("+ Inserted passengerInfo into db: " + passengerInfo.getPassengerDNI());
 
 		    
-			    transaction.commit();
+			    dbh.commitTransaction();
 			} catch(Exception ex) {
 				System.err.println("* Exception inserting data into db: " + ex.getMessage());
 			} finally {		    
-				if (transaction.isActive()) {
-			        transaction.rollback();
-			    }
-			    pm.close();
+				dbh.rollbakcAndClosePM();
 			}
 			
 			// ------------------------------------- SELECT -----------------------------------------------------
-			pm = pmf.getPersistenceManager();
-			transaction = pm.currentTransaction();
+			dbh.createNewTransaction();
 				
 			try {
-				transaction.begin();
+				dbh.beginTransaction();
 	
 			    @SuppressWarnings("unchecked")
-				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == 1234");
+				Query<Flight> flightQuery = dbh.getFlightByFlightNumber("1234");
+				
 			    
 			    for (Flight flight : flightQuery.executeList()) {
 			        System.out.println("? Selected Flight from db: " + flight.getFlightNumber());
 			    }
 			    
 			    @SuppressWarnings("unchecked")
-				Query<User> userQuery = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == Username1234");
+				Query<User> userQuery = dbh.getUserFromUsername("Username1234");
 			    
 			    for (User user : userQuery.executeList()) {
 			        System.out.println("? Selected User from db: " + user.getUsername());
 			    }
 			    
 			    @SuppressWarnings("unchecked")
-				Query<FlightReservation> flightReservationQuery = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == 24343");
+				Query<FlightReservation> flightReservationQuery = dbh.getFlightReservationFromFlightReservationID("24343");
 			    
 			    for (FlightReservation flightReservation : flightReservationQuery.executeList()) {
 			        System.out.println("? Selected flightReservation from db: " + flightReservation.getFlightReservationID());
 			    }
 			    
 			    @SuppressWarnings("unchecked")
-				Query<Pago> pagoQuery = pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == 4567890");
-			    
+				Query<Pago> pagoQuery = dbh.getPago("4567890");
 			    for (Pago pago : pagoQuery.executeList()) {
 			        System.out.println("? Selected pago from db: " + pago.getPaymentID());
 			    }
@@ -157,48 +154,38 @@ public class Main {
 			        System.out.println("? Selected product from db: " + passengerInfo.getPassengerDNI());
 			    }*/
 			    
-			    transaction.commit();
+			    dbh.commitTransaction();
 			} catch(Exception ex) {
 				System.err.println("* Exception executing a query: " + ex.getMessage());
 			} finally {
-				if (transaction.isActive()) {
-			        transaction.rollback();
-			    }
-
-			    pm.close();
+				dbh.rollbakcAndClosePM();
 			}			
 			
 			//------------------------------------ DELETE -------------------------------------------------
-			pm = pmf.getPersistenceManager();
-			transaction = pm.currentTransaction();
+			dbh.createNewTransaction();
 			
 			try {
-				transaction.begin();
+				dbh.beginTransaction();
 				
 			    @SuppressWarnings("unchecked")
-				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName());
+				Query<Flight> flightQuery = dbh.getPm().newQuery("SELECT FROM " + Flight.class.getName());
 			    
 			    for (Flight flight : flightQuery.executeList()) {
 			        System.out.println("- Deleted flight from db: " + flight.getFlightNumber());
-			        pm.deletePersistent(flight);
+			        dbh.getPm().deletePersistent(flight);
 			    }
 
-				
-				Extent<FlightReservation> reservationExtend = pm.getExtent(FlightReservation.class);
+			    Query<FlightReservation> reservations = dbh.getPm().newQuery("SELECT FROM " + FlightReservation.class.getName());
 			    
-			    for (FlightReservation reservation : reservationExtend) {
+			    for (FlightReservation reservation : reservations.executeList()) {
 			    	System.out.println("- Deleted inventory from db: " + reservation.getFlightReservationID());
-			    	pm.deletePersistent(reservation);			        
+			    	dbh.deleteFlightReservation(reservation);		        
 			    }
-			    transaction.commit();
+			    dbh.commitTransaction();
 			} catch(Exception ex) {
 				System.err.println("* Exception deleting data from DB: " + ex.getMessage());
 			} finally {
-				if (transaction.isActive()) {
-			        transaction.rollback();
-			    }
-	
-			    pm.close();
+				dbh.rollbakcAndClosePM();
 			}
 			
 			
