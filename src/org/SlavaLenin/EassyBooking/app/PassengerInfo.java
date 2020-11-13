@@ -1,4 +1,4 @@
-package org.SlavaLenin.EassyBooking.app;
+/*package org.SlavaLenin.EassyBooking.app;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class PassengerInfo {
 	private String passengerName;
 	private String passengerLastName;
 	private List<FlightReservation> flightReservations;
-	@PrimaryKey
+	//@PrimaryKey
 	private String passengerDNI;
 	
 	public List<FlightReservation> getFlightReservations() {
@@ -48,3 +48,4 @@ public class PassengerInfo {
 	
 
 }
+*/

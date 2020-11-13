@@ -27,16 +27,19 @@ public class Main {
 			try {
 			    transaction.begin();
 			    
-			    List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
+			    //List<PassengerInfo> listaPasajeros = new ArrayList<PassengerInfo>();
+			    //PassengerInfo passengerInfo = new PassengerInfo();
+
 			    List<FlightReservation> listaReservas = new ArrayList<FlightReservation>();
-			    PassengerInfo passengerInfo = new PassengerInfo();
 			    Pago pago = new Pago();
 			    Flight flight = new Flight();
 			    FlightReservation flightReservation = new FlightReservation();
 			    User user = new User();
-
 			    
-			    // ------ PASSENGER INFO ------
+			    ArrayList<String> pp = new ArrayList<String>();
+			    
+			    /*
+			     ------ PASSENGER INFO ------
 			    passengerInfo.setPassengerDNI("456765347U");
 			    passengerInfo.setPassengerLastName("Gimenez");
 			    passengerInfo.setPassengerName("Pedro");
@@ -44,7 +47,7 @@ public class Main {
 			    passengerInfo.setFlightReservations(listaReservas);
 			    
 			    listaPasajeros.add(passengerInfo);
-			    
+			    */
 			    
 				// -------- PAGO ---------------
 			    pago.setConfirmationCode("bfndsk2");
@@ -53,14 +56,14 @@ public class Main {
 			    pago.setFlightReservations(flightReservation);
 			    pago.setPaymentID(4567890);
 			    pago.setUser(user);
-
+			    
 			    
 				// -------- FLIGHT RESERVATION ---------------
 			    flightReservation.setFlight(flight);
 			    flightReservation.setFlightReservationID(24343);
 			    flightReservation.setNumberOfSeats(4);
 			    flightReservation.setPago(pago);
-			    flightReservation.setPassengersInfo(listaPasajeros);
+			    flightReservation.setPassengersInfo(pp);
 			    flightReservation.setPrice(202);
 			    flightReservation.setUser(user);
 			    
@@ -71,7 +74,7 @@ public class Main {
 			    flight.setFlightNumber(1234);
 			    flight.setDateArrival(calendar.getTime());
 			    flight.setDateDeparture(calendar.getTime());
-			    flight.setFlightReservations(listaReservas);
+			    //flight.setFlightReservations(listaReservas);
 			    flight.setNumberPassengers(5);
 			    flight.setNumberRemainingSeats(20);
 			    
@@ -97,9 +100,9 @@ public class Main {
 
 			    pm.makePersistent(pago);
 			    System.out.println("+ Inserted pago into db: " + pago.getPaymentID());
-
-			    pm.makePersistent(passengerInfo);
-			    System.out.println("+ Inserted passengerInfo into db: " + passengerInfo.getPassengerDNI());
+			    
+			    //pm.makePersistent(passengerInfo);
+			    //System.out.println("+ Inserted passengerInfo into db: " + passengerInfo.getPassengerDNI());
 
 		    
 			    transaction.commit();
@@ -147,12 +150,13 @@ public class Main {
 			        System.out.println("? Selected pago from db: " + pago.getPaymentID());
 			    }
 			    
-			    @SuppressWarnings("unchecked")
+			    /*@SuppressWarnings("unchecked")
 				Query<PassengerInfo> passengerInfoQuery = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE passengerDNI == 1234");
 			    
 			    for (PassengerInfo passengerInfo : passengerInfoQuery.executeList()) {
 			        System.out.println("? Selected product from db: " + passengerInfo.getPassengerDNI());
-			    }
+			    }*/
+			    
 			    transaction.commit();
 			} catch(Exception ex) {
 				System.err.println("* Exception executing a query: " + ex.getMessage());
@@ -172,10 +176,10 @@ public class Main {
 				transaction.begin();
 				
 			    @SuppressWarnings("unchecked")
-				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE price < 150.00 ORDER BY price ASC");
+				Query<Flight> flightQuery = pm.newQuery("SELECT FROM " + Flight.class.getName());
 			    
 			    for (Flight flight : flightQuery.executeList()) {
-			        System.out.println("- Deleted product from db: " + flight.getFlightNumber());
+			        System.out.println("- Deleted flight from db: " + flight.getFlightNumber());
 			        pm.deletePersistent(flight);
 			    }
 

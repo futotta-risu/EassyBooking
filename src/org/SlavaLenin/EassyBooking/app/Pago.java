@@ -8,7 +8,7 @@ import javax.jdo.annotations.*;
 public class Pago {
 
 	private Date date;
-	@PrimaryKey
+	//@PrimaryKey
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;

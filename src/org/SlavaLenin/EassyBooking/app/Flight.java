@@ -6,21 +6,27 @@ import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class Flight {
-	@PrimaryKey
+	//@PrimaryKey
 	private int flightNumber;
 	private Date dateDeparture;
 	private Date dateArrival;
 	private int totalSeats;
 	private int numberRemainingSeats;
 	private int numberPassengers;
-	private List<FlightReservation> flightReservations;
+	@NotPersistent
+	private Airline aerolinea;
+	@NotPersistent
+	private Airport aeropuerto;
 	
+	//private List<FlightReservation> flightReservations;
+	/*
 	public List<FlightReservation> getFlightReservations() {
 		return flightReservations;
 	}
 	public void setFlightReservations(List<FlightReservation> flightReservations) {
 		this.flightReservations = flightReservations;
 	}
+	*/
 	public int getFlightNumber() {
 		return flightNumber;
 	}

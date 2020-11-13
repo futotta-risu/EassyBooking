@@ -1,11 +1,12 @@
 package org.SlavaLenin.EassyBooking.app;
+
 import java.util.List;
 
 import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class User {
-	@PrimaryKey
+	//@PrimaryKey
 	private String OAuth;
 	private String username;
 	private String name;
@@ -13,8 +14,10 @@ public class User {
 	private int loginSystemType;
 	private List<FlightReservation> flightReservations;
 	
-	@Join
-	@Persistent(mappedBy = "user", dependentElement = "true")
+	private PaymentMethod paymentMethod;
+	
+	//@Join
+	//@Persistent(mappedBy = "user", dependentElement = "true")
 	private List<Pago> pagos;
 	
 	public List<FlightReservation> getFlightReservations() {
@@ -52,6 +55,12 @@ public class User {
 	}
 	public void setLoginSystemType(int loginSystemType) {
 		this.loginSystemType = loginSystemType;
+	}
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 	
 	

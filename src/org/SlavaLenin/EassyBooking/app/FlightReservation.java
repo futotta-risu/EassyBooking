@@ -5,19 +5,19 @@ import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class FlightReservation {
-	@PrimaryKey
+	//@PrimaryKey
 	private int flightReservationID;
 	private int price;
 	private int numberOfSeats;
 	
-	@Join
-	@Persistent(mappedBy = "flightReservations", dependentElement="true")
-	private List<PassengerInfo> passengersInfo;
-	@Join
+	//@Join
+	//@Persistent(mappedBy = "flightReservations", dependentElement="true")
+	private List<String> passengersInfo;
+	//@Join
 	private User user;
-	@Join
+	//@Join
 	private Pago pago;
-	@Join
+	//@Join
 	private Flight flight;
 	
 	
@@ -57,10 +57,10 @@ public class FlightReservation {
 	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats = numberOfSeats;
 	}
-	public List<PassengerInfo> getPassengersInfo() {
+	public List<String> getPassengersInfo() {
 		return passengersInfo;
 	}
-	public void setPassengersInfo(List<PassengerInfo> passengersInfo) {
+	public void setPassengersInfo(List<String> passengersInfo) {
 		this.passengersInfo = passengersInfo;
 	}
 
