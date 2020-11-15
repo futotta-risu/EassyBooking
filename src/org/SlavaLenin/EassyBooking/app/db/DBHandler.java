@@ -65,17 +65,17 @@ public class DBHandler {
 	
 	@SuppressWarnings("unchecked")
 	public Query<Pago> getPago(String paymentID){		
-		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == '" + paymentID+"'");
+		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + paymentIDd);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Query<FlightReservation> getFlightReservationFromFlightReservationID(String flightReservationID){		
-		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == '" + flightReservationID+"'"); 
+		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Query<Flight> getFlightByFlightNumber(String flightNumber){
-		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == '" + flightNumber+"'");
+		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber);
 	}
 	
 	@SuppressWarnings("unchecked")
