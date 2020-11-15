@@ -2,7 +2,15 @@ package org.SlavaLenin.EassyBooking.app.payments;
 
 import java.util.Date;
 
-public class CreditCard {
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+
+import org.SlavaLenin.EassyBooking.app.PaymentMethod;
+
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+public class CreditCard extends PaymentMethod{
 	
 	private String name;
 	private String bankAccount;
