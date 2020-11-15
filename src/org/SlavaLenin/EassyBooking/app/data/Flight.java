@@ -6,14 +6,18 @@ import javax.jdo.annotations.*;
 public class Flight {
 
 	private int flightNumber;
-	private Date dateDeparture;
-	private Date dateArrival;
-	private int totalSeats;
-	private int numberRemainingSeats;
-	private int numberPassengers;
-	
-	@NotPersistent
 	private Airline aerolinea;
+
+	@NotPersistent
+	private Date dateDeparture;
+	@NotPersistent
+	private Date dateArrival;
+	@NotPersistent
+	private int totalSeats;
+	@NotPersistent
+	private int numberRemainingSeats;
+	@NotPersistent
+	private int numberPassengers;
 	@NotPersistent
 	private Airport aeropuerto;
 	
