@@ -34,7 +34,7 @@ public class DBHandler {
 	}
 	
 	public void commitTransaction() {
-		transaction.begin();
+		transaction.commit();
 	}
 	
 	public boolean isActiveTransaction() {
@@ -60,22 +60,22 @@ public class DBHandler {
 	
 	@SuppressWarnings("unchecked")
 	public Query<User> getUserFromUsername(String username){		
-		return this.pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == " + username);
+		return this.pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + username +"'");
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Query<Pago> getPago(String paymentID){		
-		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == 4567890" + paymentID);
+		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == '" + paymentID+"'");
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Query<FlightReservation> getFlightReservationFromFlightReservationID(String flightReservationID){		
-		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
+		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == '" + flightReservationID+"'"); 
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Query<Flight> getFlightByFlightNumber(String flightNumber){
-		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber);
+		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == '" + flightNumber+"'");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -86,6 +86,10 @@ public class DBHandler {
 	@SuppressWarnings("unchecked")
 	public Query<FlightReservation> getFlightReservations(){
 		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
+	}
+	
+	public void updateFlightReservationPrice(String newPrice) {
+		pm.newQuery("UPDATE " + FlightReservation.class.getName() + " SET price=value-5.0 WHERE this.value > 100");
 	}
 	
 	public void deleteFlightReservation(FlightReservation reservation) {
