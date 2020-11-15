@@ -1,4 +1,4 @@
-package org.SlavaLenin.EassyBooking.app;
+package org.SlavaLenin.EassyBooking.app.data;
 
 public class Airport {
 	private String name;

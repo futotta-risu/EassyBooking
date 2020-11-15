@@ -1,16 +1,18 @@
 package org.SlavaLenin.EassyBooking.app.db;
 
 
+import java.util.List;
+
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.SlavaLenin.EassyBooking.app.Flight;
-import org.SlavaLenin.EassyBooking.app.FlightReservation;
-import org.SlavaLenin.EassyBooking.app.Pago;
-import org.SlavaLenin.EassyBooking.app.User;
+import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
+import org.SlavaLenin.EassyBooking.app.data.Pago;
+import org.SlavaLenin.EassyBooking.app.data.User;
 
 public class DBHandler {
 	
@@ -64,13 +66,14 @@ public class DBHandler {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Query<Pago> getPago(String paymentID){		
-		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + paymentIDd);
+	public Pago getPago(String paymentID){		
+		Query<Pago> payment = this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + paymentID);
+		return (Pago) payment.execute();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Query<FlightReservation> getFlightReservationFromFlightReservationID(String flightReservationID){		
-		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
+	public FlightReservation getFlightReservationFromID(String flightReservationID){		
+		Query<FlightReservation> fr =  this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
+		return (FlightReservation) fr.execute();
 	}
 	
 	@SuppressWarnings("unchecked")

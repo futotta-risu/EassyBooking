@@ -6,6 +6,12 @@ import java.util.List;
 
 import javax.jdo.Query;
 
+import org.SlavaLenin.EassyBooking.app.dao.FlightDAO;
+import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
+import org.SlavaLenin.EassyBooking.app.data.Pago;
+import org.SlavaLenin.EassyBooking.app.data.PassengerInfo;
+import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 
 public class Main {
@@ -16,6 +22,7 @@ public class Main {
 			DBHandler dbh = new DBHandler();	
 			dbh.createNewTransaction();
 			Calendar calendar = Calendar.getInstance();
+			FlightDAO fl = new FlightDAO();
 			
 			// ------------------------------------- INSERT -----------------------------------------------------
 			try {
@@ -83,7 +90,7 @@ public class Main {
 			    dbh.getPm().makePersistent(user);
 			    System.out.println("+ Inserted user into db: " + user.getUsername());
 
-			    dbh.getPm().makePersistent(flight);
+			    fl.storeFlight(flight);
 			    System.out.println("+ Inserted flight into db: " + flight.getFlightNumber());
 
 			    dbh.getPm().makePersistent(flightReservation);
@@ -108,10 +115,10 @@ public class Main {
 				dbh.beginTransaction();
 	
 			    
-				Query<Flight> flightQuery = dbh.getFlightByFlightNumber("1234");
+				List<Flight> flightQuery = fl.getFlights();
 				
 			    
-			    for (Flight flight : flightQuery.executeList()) 
+			    for (Flight flight : flightQuery) 
 			        System.out.println("? Selected Flight from db: " + flight.getFlightNumber());
 			    
 			    
@@ -123,16 +130,11 @@ public class Main {
 			    
 			    
 			    
-				Query<FlightReservation> flightReservationQuery = dbh.getFlightReservationFromFlightReservationID("24343");
+				FlightReservation flightReservation = dbh.getFlightReservationFromID("24343");
+			    System.out.println("? Selected flightReservation from db: " + flightReservation.getFlightReservationID());
 			    
-			    for (FlightReservation flightReservation : flightReservationQuery.executeList()) 
-			        System.out.println("? Selected flightReservation from db: " + flightReservation.getFlightReservationID());
-			    
-			    
-			   
-				Query<Pago> pagoQuery = dbh.getPago("4567890");
-			    for (Pago pago : pagoQuery.executeList()) 
-			        System.out.println("? Selected pago from db: " + pago.getPaymentID());
+				Pago pago = dbh.getPago("4567890");
+			    System.out.println("? Selected pago from db: " + pago.getPaymentID());
 			    
 			    
 			    
