@@ -1,24 +1,35 @@
 package org.SlavaLenin.EassyBooking.app.data;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.annotations.*;
 
-@PersistenceCapable
-public class User {
+
+@PersistenceCapable(detachable = "true")
+public class User implements Serializable {
 	
 	private String OAuth;
 	private String username;
 	private String name;
 	private String email;
 	private int loginSystemType;
+	
+	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")
+	@Join
 	private List<FlightReservation> flightReservations;
 	
 	private PaymentMethod paymentMethod;
 	
-	//@Join
-	//@Persistent(mappedBy = "user", dependentElement = "true")
+	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")
+	@Join
 	private List<Pago> pagos;
+	
+	public User() {
+		this.flightReservations = new ArrayList<>();
+		this.pagos = new ArrayList<>();
+	}
 	
 	public List<FlightReservation> getFlightReservations() {
 		return flightReservations;
@@ -26,6 +37,11 @@ public class User {
 	public void setFlightReservations(List<FlightReservation> flightReservations) {
 		this.flightReservations = flightReservations;
 	}
+	public void addFlightReservation(FlightReservation flightReservation) {
+		this.flightReservations.add(flightReservation);
+	}
+	
+	
 	public String getOAuth() {
 		return OAuth;
 	}
@@ -62,11 +78,24 @@ public class User {
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
+	
 	public List<Pago> getPagos() {
 		return pagos;
 	}
 	public void setPagos(List<Pago> pagos) {
 		this.pagos = pagos;
+	}
+	public void addPago(Pago pago) {
+		this.pagos.add(pago);
+	}
+	
+	public void removeFlightReservation(FlightReservation flightReservation) {
+		this.flightReservations.remove(flightReservation);
+	}
+	
+	@Override
+	public String toString() {
+		return "User [username=" + username + "]";
 	}
 	
 	

@@ -25,6 +25,29 @@ import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 
 
 public class Main {
+	
+	public static void printAll(FlightDAO flightDAO, FlightReservationDAO flr, PagoDAO pagoDAO, UserDAO userDAO) {
+		System.out.println("-----------------");
+		List<FlightReservation>list = flr.getFlightReservations();
+	    for(FlightReservation fl2 : list)
+			System.out.println(fl2);
+		
+	    List<User> u_list = userDAO.getUsers();
+	    
+	    for(User u : u_list)
+			System.out.println(u);
+	    
+	    List<Pago> p_list = pagoDAO.getPagos();
+	    
+	    for(Pago u : p_list)
+			System.out.println(u);
+	    
+	    List<Flight> f_list = flightDAO.getFlights();
+	    
+	    for(Flight u : f_list)
+			System.out.println(u);
+	    System.out.println("-----------------");
+	}
 
 	public static void main(String[] args) {
 
@@ -32,7 +55,7 @@ public class Main {
 				
 			Calendar calendar = Calendar.getInstance();
 			
-			FlightDAO fl = new FlightDAO();
+			FlightDAO flightDAO = new FlightDAO();
 			FlightReservationDAO flr = new FlightReservationDAO();
 			PagoDAO pagoDAO = new PagoDAO();
 			UserDAO userDAO = new UserDAO();
@@ -59,17 +82,56 @@ public class Main {
 		    
 		    listaPasajeros.add(passengerInfo);
 		    
-		    
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
 			// -------- PAGO ---------------
 		    pago.setConfirmationCode("bfndsk2");
 		    pago.setDate(calendar.getTime());
 		    pago.setExtraInfo("Informacion extra");
-		    pago.setFlightReservations(flightReservation);
 		    pago.setPaymentID(4567890);
-		    pago.setUser(user);
+		    pagoDAO.storePago(pago);
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    
+		    // ------ FLIGHT -------
+		    flight.setFlightNumber(1234);
+		    flight.setDateArrival(calendar.getTime());
+		    flight.setDateDeparture(calendar.getTime());
+		    flight.setNumberPassengers(5);
+		    flight.setNumberRemainingSeats(20);
+		    
+		    flightDAO.storeFlight(flight);
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    
+			
 		    
 		    
-			// -------- FLIGHT RESERVATION ---------------
+		    
+		    
+	
+			// -------- USER ---------------
+		    user.setEmail("kfjeejw@gmail.com");
+		    user.setLoginSystemType(2);
+		    user.setName("NombreUser");
+		    user.setOAuth("djofndspfmmfp83yr8y2gf293fh");
+		    user.setUsername("Username1234");
+		    System.out.println("1--");
+		    userDAO.storeUser(user);
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    System.out.println("1--");
+		    user = userDAO.getUser("Username1234");
+		    System.out.println("2--");
+		    pago = pagoDAO.getPago("4567890");
+		    System.out.println("5--");
+		    user.addPago(pago);
+		    System.out.println("3--");
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    System.out.println("1--"); 
+		    
+		    
+		    user = userDAO.getUser("Username1234");
+		    System.out.println("88--");
+		    pago = pagoDAO.getPago("4567890");
+		    flight = flightDAO.getFlight("1234");
+		    // -------- FLIGHT RESERVATION ---------------
 		    flightReservation.setFlight(flight);
 		    flightReservation.setFlightReservationID(24343);
 		    flightReservation.setNumberOfSeats(4);
@@ -81,160 +143,33 @@ public class Main {
 		    listaReservas.add(flightReservation);
 		    
 		    
-		    // ------ FLIGHT -------
-		    flight.setFlightNumber(1234);
-		    flight.setDateArrival(calendar.getTime());
-		    flight.setDateDeparture(calendar.getTime());
-		    flight.setNumberPassengers(5);
-		    flight.setNumberRemainingSeats(20);
-		    
-	
-			// -------- USER ---------------
-		    user.setEmail("kfjeejw@gmail.com");
-		    user.setFlightReservations(listaReservas);
-		    user.setLoginSystemType(2);
-		    user.setName("NombreUser");
-		    user.setOAuth("djofndspfmmfp83yr8y2gf293fh");
-		    user.setUsername("Username1234");
-		    
-		    
-		    GenericDAO.pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		    PersistenceManager pm = GenericDAO.pmf.getPersistenceManager();
-		    Transaction tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        pm.makePersistent(user);
-		        pm.makePersistent(flight);
-		        pm.makePersistent(pago);
-		        pm.makePersistent(flightReservation);
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("2----- Hemos guardado y a editar--------");
-		    
-		    // UPDATE
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        Query<FlightReservation> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
-				List<FlightReservation> cosa = query.executeList();
-				int i = 444;
-				for(FlightReservation frl : cosa){
-		        	
-					frl.setFlightReservationID(i++);
-				}
-				pm.makePersistentAll(cosa);
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("3-------------");
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        Query<FlightReservation> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
-				for(FlightReservation frl : query.executeList()){
-					System.out.println(frl.getFlightReservationID());
-				}
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("4-------------");
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        Query<FlightReservation> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
-				for(FlightReservation frl : query.executeList()){
-					System.out.println(frl.getFlightReservationID());
-				}
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("5-------------");
-		    System.out.println("4-------------");
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        Query<User> query = pm.newQuery("SELECT FROM " + User.class.getName());
-				for(User frl : query.executeList()){
-					System.out.println(frl.getUsername());
-				}
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("353454-------------");
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        pm.flush();
-		        Query<User> query1 = pm.newQuery(User.class);
-				System.out.println(" * '" + query1.deletePersistentAll() + "' users and their accounts deleted from the DB.");
-		        pm.flush();
-				tx.commit();
-				pm.flush();
-		    }catch(Exception e) {
-		    	System.out.println("999-------------");
-		    	e.printStackTrace();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    System.out.println("8-------------");
-		    System.out.println("4-------------");
-		    pm = GenericDAO.pmf.getPersistenceManager();
-		    tx=pm.currentTransaction();
-		    try{
-		        tx.begin();
-		        Query<User> query = pm.newQuery("SELECT FROM " + User.class.getName());
-				for(User frl : query.executeList()){
-					System.out.println(frl.getUsername());
-				}
-		        tx.commit();
-		    }
-		    finally{
-		        if (tx.isActive()){
-		            tx.rollback();
-		        }
-		        pm.close();
-		    }
-		    /*
-		    userDAO.storeUser(user);
-		    fl.storeFlight(flight);
 		    flr.storeFlightReservation(flightReservation);
-		    pagoDAO.storePago(pago);
-			    
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    
+		    flightReservation = flr.getFlightReservation("24343");
+		    user.addFlightReservation(flightReservation);
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    
+		    
+		    System.out.println("-----UPDATE-------");
+		    flightReservation = flr.getFlightReservation("24343");
+		    flightReservation.setFlightReservationID(88);
+		    flr.updateFlightReservation(flightReservation);
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		     
+		    System.out.println("-----DELETE-------");
+		    flightReservation = flr.getFlightReservation("88");
+		    System.out.println(flightReservation);
+		    user = userDAO.getUser("Username1234");
+		    System.out.println(user);
+		    
+		    System.out.println("-----DELETE1-------");
+		    user.removeFlightReservation(flightReservation);
+		    System.out.println("-----DELETE2-------");
+		    flr.deleteFlightReservation(String.valueOf(flightReservation.getFlightReservationID()));
+		    System.out.println("-----DELETE3-------");
+		    printAll(flightDAO, flr, pagoDAO, userDAO);
+		    /*
 			
 			// ------------------------------------- SELECT -----------------------------------------------------
 			

@@ -9,6 +9,7 @@ import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 
 public class FlightDAO extends GenericDAO{
 
@@ -17,7 +18,22 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public void storeFlight(Flight flight) {
-		//this.storeObject(flight);
+		PersistenceManager pm = pmf.getPersistenceManager();
+	    Transaction tx=pm.currentTransaction();
+
+		try{
+	        tx.begin();
+	        pm.makePersistent(flight);
+	        tx.commit();
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+	    finally{
+	        if (tx.isActive()){
+	            tx.rollback();
+	        }
+	        pm.close();
+	    }
 	}
 	
 	public List<Flight> getFlights() {
@@ -38,7 +54,7 @@ public class FlightDAO extends GenericDAO{
 				Extent<Flight> extent = pm.getExtent(Flight.class, true);
 
 				for (Flight product : extent) {
-					products.add(product);
+					products.add((Flight) pm.detachCopy(product));
 				}
 
 				tx.commit();
@@ -56,7 +72,7 @@ public class FlightDAO extends GenericDAO{
 		
 	}
 	
-	public Flight getProduct(String flightNumber) {
+	public Flight getFlight(String flightNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -69,7 +85,7 @@ public class FlightDAO extends GenericDAO{
 			tx.begin();
 			Query<?> query = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber );
 			query.setUnique(true);
-			product = (Flight) query.execute();
+			product = (Flight) pm.detachCopy((Flight) query.execute());
 			tx.commit();
 
 		} catch (Exception ex) {

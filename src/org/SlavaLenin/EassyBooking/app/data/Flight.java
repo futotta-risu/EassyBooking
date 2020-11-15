@@ -1,13 +1,15 @@
 package org.SlavaLenin.EassyBooking.app.data;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.*;
 
 @PersistenceCapable(detachable = "true")
-public class Flight {
+public class Flight implements Serializable {
 
 	private int flightNumber;
+	@NotPersistent
 	private Airline aerolinea;
 
 	@NotPersistent
@@ -18,7 +20,6 @@ public class Flight {
 	private int totalSeats;
 	@NotPersistent
 	private int numberRemainingSeats;
-	private int numberPassengers;
 	
 	/*
 	@Join
@@ -86,6 +87,10 @@ public class Flight {
 	public void removeFlightReservations(FlightReservation f) {
 		flightReservations.remove(f);
 	}*/
+	@Override
+	public String toString() {
+		return "Flight [flightNumber=" + flightNumber + "]";
+	}
 
 
 	

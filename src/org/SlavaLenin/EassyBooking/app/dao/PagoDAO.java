@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 
 public class PagoDAO extends GenericDAO{
@@ -16,7 +17,22 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public void storePago(Pago pago) {
-		//this.storeObject(pago);
+		PersistenceManager pm = pmf.getPersistenceManager();
+	    Transaction tx=pm.currentTransaction();
+
+		try{
+	        tx.begin();
+	        pm.makePersistent(pago);
+	        tx.commit();
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+	    finally{
+	        if (tx.isActive()){
+	            tx.rollback();
+	        }
+	        pm.close();
+	    }
 	}
 	
 	public List<Pago> getPagos() {
@@ -37,7 +53,7 @@ public class PagoDAO extends GenericDAO{
 				Extent<Pago> extent = pm.getExtent(Pago.class, true);
 
 				for (Pago product : extent) {
-					products.add(product);
+					products.add((Pago) pm.detachCopy(product));
 				}
 
 				tx.commit();
@@ -68,7 +84,7 @@ public class PagoDAO extends GenericDAO{
 			tx.begin();
 			Query<?> query = pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + id_pago );
 			query.setUnique(true);
-			product = (Pago) query.execute();
+			product = (Pago) pm.detachCopy((Pago) query.execute());
 			tx.commit();
 
 		} catch (Exception ex) {

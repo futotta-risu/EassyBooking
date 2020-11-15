@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.User;
 
 public class UserDAO extends GenericDAO{
@@ -16,10 +17,25 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public void storeUser(User user) {
-		//this.storeObject(user);
+		PersistenceManager pm = pmf.getPersistenceManager();
+	    Transaction tx=pm.currentTransaction();
+
+		try{
+	        tx.begin();
+	        pm.makePersistent(user);
+	        tx.commit();
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+	    finally{
+	        if (tx.isActive()){
+	            tx.rollback();
+	        }
+	        pm.close();
+	    }
 	}
 	
-	public List<User> getUser() {
+	public List<User> getUsers() {
 			PersistenceManager pm = this.pmf.getPersistenceManager();
 			/*
 			 * By default only 1 level is retrieved from the db so if we wish to fetch more
@@ -37,7 +53,7 @@ public class UserDAO extends GenericDAO{
 				Extent<User> extent = pm.getExtent(User.class, true);
 
 				for (User product : extent) {
-					products.add(product);
+					products.add((User) pm.detachCopy(product));
 				}
 
 				tx.commit();
@@ -67,7 +83,7 @@ public class UserDAO extends GenericDAO{
 			tx.begin();
 			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + username +"'");
 			query.setUnique(true);
-			user = (User) query.execute();
+			user = (User) pm.detachCopy((User) query.execute());
 			tx.commit();
 
 		} catch (Exception ex) {

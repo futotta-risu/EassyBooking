@@ -1,31 +1,21 @@
 package org.SlavaLenin.EassyBooking.app.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.jdo.annotations.*;
 
-@PersistenceCapable
-public class Pago {
+@PersistenceCapable(detachable = "true")
+public class Pago implements Serializable {
 
 	private Date date;
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
-	private FlightReservation flightReservations;
+	
+	
 	private User user;
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public FlightReservation getFlightReservations() {
-		return flightReservations;
-	}
-	public void setFlightReservations(FlightReservation flightReservations) {
-		this.flightReservations = flightReservations;
-	}
 	public Date getDate() {
 		return date;
 	}
@@ -49,6 +39,10 @@ public class Pago {
 	}
 	public void setExtraInfo(String extraInfo) {
 		this.extraInfo = extraInfo;
+	}
+	@Override
+	public String toString() {
+		return "Pago [paymentID=" + paymentID + ", date=" + date + "]";
 	}
 	
 	

@@ -23,9 +23,10 @@ public class FlightReservationDAO extends GenericDAO{
 
 		try{
 	        tx.begin();
-	        System.out.println("*Guardando el flightReservation*");
 	        pm.makePersistent(flightreservation);
 	        tx.commit();
+	    }catch(Exception e) {
+	    	e.printStackTrace();
 	    }
 	    finally{
 	        if (tx.isActive()){
@@ -45,11 +46,11 @@ public class FlightReservationDAO extends GenericDAO{
 				System.out.println("   * Retrieving an Extent for FlightReservation.");
 
 				tx.begin();
-				Query<FlightReservation> extent = pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
-				System.out.println(extent.executeList().size());
-				for (FlightReservation product : extent.executeList()) {
-					products.add(product);
-				}
+				Extent<FlightReservation> extent = pm.getExtent(FlightReservation.class, true);
+				
+				for (FlightReservation product : extent) 
+					products.add((FlightReservation) pm.detachCopy(product));
+				
 
 				tx.commit();
 			} catch (Exception ex) {
@@ -61,12 +62,12 @@ public class FlightReservationDAO extends GenericDAO{
 
 				pm.close();
 			}
-
+			
 			return products;
 		
 	}
 	
-	public FlightReservation getProduct(String flightNumber) {
+	public FlightReservation getFlightReservation(String flightNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -80,9 +81,8 @@ public class FlightReservationDAO extends GenericDAO{
 			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightNumber );
 			query.setUnique(true);
 			
-			product = (FlightReservation) query.execute();
+			product = (FlightReservation) pm.detachCopy((FlightReservation) query.execute());
 			tx.commit();
-			System.out.println(" Imprimo esto porque sino no funciona" + product.getFlightReservationID());
 
 		} catch (Exception ex) {
 			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
@@ -97,7 +97,7 @@ public class FlightReservationDAO extends GenericDAO{
 		return product;
 	}
 	
-	public void updateFlight(FlightReservation flightreservation) {
+	public void updateFlightReservation(FlightReservation flightreservation) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
@@ -117,6 +117,36 @@ public class FlightReservationDAO extends GenericDAO{
 		}
 	}
 	
+	
+	public void deleteFlightReservation(String flightNumber) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		Transaction tx = pm.currentTransaction();
+		FlightReservation flightReservation = null;
+
+		try {
+			System.out.println("   * Querying a FlightReservation: " + flightNumber);
+
+			tx.begin();
+			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightNumber );
+			query.setUnique(true);
+			
+			flightReservation = (FlightReservation) pm.detachCopy((FlightReservation) query.execute());
+			flightReservation.removeFlight();
+			pm.deletePersistent(flightReservation);
+			tx.commit();
+
+		} catch (Exception ex) {
+			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+	}
 	
 	public void deleteAllFlightReservations() {
 		System.out.println("- Cleaning the DB...");
