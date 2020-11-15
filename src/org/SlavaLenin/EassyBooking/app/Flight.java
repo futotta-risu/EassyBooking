@@ -18,6 +18,18 @@ public class Flight {
 	@NotPersistent
 	private Airport aeropuerto;
 	
+	public Airline getAerolinea() {
+		return aerolinea;
+	}
+	public void setAerolinea(Airline aerolinea) {
+		this.aerolinea = aerolinea;
+	}
+	public Airport getAeropuerto() {
+		return aeropuerto;
+	}
+	public void setAeropuerto(Airport aeropuerto) {
+		this.aeropuerto = aeropuerto;
+	}
 	//private List<FlightReservation> flightReservations;
 	/*
 	public List<FlightReservation> getFlightReservations() {
