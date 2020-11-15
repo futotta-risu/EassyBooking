@@ -1,4 +1,4 @@
-package org.SlavaLenin.EassyBooking.app.payments;
+package org.SlavaLenin.EassyBooking.app.data.payment;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;

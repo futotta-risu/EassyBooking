@@ -1,4 +1,4 @@
-package org.SlavaLenin.EassyBooking.app.payments;
+package org.SlavaLenin.EassyBooking.app.data.payment;
 
 import java.util.Date;
 
