@@ -10,9 +10,6 @@ import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 
-
-
-
 public class FlightDAO extends GenericDAO{
 
 	public FlightDAO() {
@@ -20,7 +17,7 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public void storeFlight(Flight flight) {
-		this.storeObject(flight);
+		//this.storeObject(flight);
 	}
 	
 	public List<Flight> getFlights() {
@@ -35,7 +32,7 @@ public class FlightDAO extends GenericDAO{
 			List<Flight> products = new ArrayList<>();
 
 			try {
-				System.out.println("   * Retrieving an Extent for Products.");
+				System.out.println("   * Retrieving an Extent for Flight.");
 
 				tx.begin();
 				Extent<Flight> extent = pm.getExtent(Flight.class, true);
@@ -67,7 +64,7 @@ public class FlightDAO extends GenericDAO{
 		Flight product = null;
 
 		try {
-			System.out.println("   * Querying a Product: " + flightNumber);
+			System.out.println("   * Querying a Flight: " + flightNumber);
 
 			tx.begin();
 			Query<?> query = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber );
@@ -93,6 +90,7 @@ public class FlightDAO extends GenericDAO{
 		Transaction tx = pm.currentTransaction();
 
 		try {
+			System.out.println("   * Updating a Flight: " + flight);
 			tx.begin();
 			pm.makePersistent(flight);
 			tx.commit();
@@ -103,6 +101,33 @@ public class FlightDAO extends GenericDAO{
 				tx.rollback();
 			}
 
+			pm.close();
+		}
+	}
+	
+	public void deleteAllFligths() {
+		System.out.println("- Cleaning the DB...");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		try {
+			tx.begin();
+
+			Query<Flight> query1 = pm.newQuery(Flight.class);
+			System.out.println(" * '" + query1.deletePersistentAll() + "' shelves deleted from the DB.");
+
+			System.out.println(" * 11.");
+			tx.commit();
+			System.out.println(" * 12.");
+		} catch (Exception ex) {
+			System.out.println(" * 15.");
+			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			System.out.println(" * 13.");
+			if (tx != null && tx.isActive())
+				tx.rollback();
+			System.out.println(" * 14.");
 			pm.close();
 		}
 	}

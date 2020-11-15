@@ -1,8 +1,10 @@
 package org.SlavaLenin.EassyBooking.app.data;
 import java.util.Date;
+import java.util.List;
+
 import javax.jdo.annotations.*;
 
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 public class Flight {
 
 	private int flightNumber;
@@ -11,6 +13,11 @@ public class Flight {
 	private int totalSeats;
 	private int numberRemainingSeats;
 	private int numberPassengers;
+	
+	/*
+	@Join
+	@Persistent(mappedBy="flight", dependentElement="true")
+	private List<FlightReservation> flightReservations;*/
 	
 	@NotPersistent
 	private Airline aerolinea;
@@ -66,6 +73,13 @@ public class Flight {
 	public void setNumberPassengers(int numberPassengers) {
 		this.numberPassengers = numberPassengers;
 	}
+	/*
+	public void removeFlightReservations() {
+		flightReservations.clear();
+	}
+	public void removeFlightReservations(FlightReservation f) {
+		flightReservations.remove(f);
+	}*/
 
 
 	

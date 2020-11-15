@@ -16,10 +16,10 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public void storeUser(User user) {
-		this.storeObject(user);
+		//this.storeObject(user);
 	}
 	
-	public List<User> getPago() {
+	public List<User> getUser() {
 			PersistenceManager pm = this.pmf.getPersistenceManager();
 			/*
 			 * By default only 1 level is retrieved from the db so if we wish to fetch more
@@ -31,7 +31,7 @@ public class UserDAO extends GenericDAO{
 			List<User> products = new ArrayList<>();
 
 			try {
-				System.out.println("   * Retrieving an Extent for Products.");
+				System.out.println("   * Retrieving an Extent for User.");
 
 				tx.begin();
 				Extent<User> extent = pm.getExtent(User.class, true);
@@ -55,42 +55,41 @@ public class UserDAO extends GenericDAO{
 		
 	}
 	
-	public User getProduct(String username) {
+	public User getUser(String username) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
-		User product = null;
+		User user = null;
 
 		try {
-			System.out.println("   * Querying a Product: " + username);
+			System.out.println("   * Querying a User: " + username);
 
 			tx.begin();
 			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + username +"'");
 			query.setUnique(true);
-			product = (User) query.execute();
+			user = (User) query.execute();
 			tx.commit();
 
 		} catch (Exception ex) {
 			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
 		} finally {
+
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
 
 			pm.close();
 		}
-
-		return product;
+		return user;
 	}
 	
-	public void updatePago(User flight) {
+	public void updateUser(User user) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		try {
 			tx.begin();
-			pm.makePersistent(flight);
+			pm.makePersistent(user);
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());

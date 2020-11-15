@@ -1,7 +1,5 @@
 package org.SlavaLenin.EassyBooking.app.data;
 
-
-
 public class PassengerInfo {
 	
 	private String passengerName;

@@ -61,6 +61,11 @@ public class FlightReservation {
 		this.passengersInfo = passengersInfo;
 	}
 
+	public void removeFlight() {
+		this.flight=null;
+		this.user=null;
+		this.pago = null;
+	}
 	
 	
 }
