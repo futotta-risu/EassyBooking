@@ -8,7 +8,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 
 public class PagoDAO extends GenericDAO{
@@ -36,11 +35,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public List<Pago> getPagos() {
-			PersistenceManager pm = this.pmf.getPersistenceManager();
-			/*
-			 * By default only 1 level is retrieved from the db so if we wish to fetch more
-			 * than one level, we must indicate it
-			 */
+			PersistenceManager pm = pmf.getPersistenceManager();
 			pm.getFetchPlan().setMaxFetchDepth(3);
 
 			Transaction tx = pm.currentTransaction();
@@ -100,7 +95,7 @@ public class PagoDAO extends GenericDAO{
 		return product;
 	}
 	
-	public void updateFlight(Pago pago) {
+	public void updatePago(Pago pago) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
@@ -120,4 +115,63 @@ public class PagoDAO extends GenericDAO{
 			pm.close();
 		}
 	}
+	
+	public void deletePago(String id_pago) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+
+		Transaction tx = pm.currentTransaction();
+		Pago pago = null;
+
+		try {
+			System.out.println("   * Querying a FlightReservation: " + id_pago);
+
+			tx.begin();
+			Query<?> query = pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + id_pago );
+			query.setUnique(true);
+			
+			pago = (Pago) pm.detachCopy((Pago) query.execute());
+			// TODO Add deletion from user
+			pago.borrarPago();
+			pm.deletePersistent(pago);
+			tx.commit();
+
+		} catch (Exception ex) {
+			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+	}
+	
+	public void deleteAllPagos() {
+		System.out.println("- Cleaning the DB...");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<String> IDs = new ArrayList<String>();
+		try {
+			tx.begin();
+			
+			Extent<Pago> extentB = pm.getExtent(Pago.class, true);
+			
+			for (Pago b : extentB) {
+				IDs.add(String.valueOf(b.getPaymentID()));
+			}
+			
+			tx.commit();
+		} catch (Exception ex) {
+			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			if (tx != null && tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
+		for(String id : IDs)
+			deletePago(id);
+	}
+	
 }

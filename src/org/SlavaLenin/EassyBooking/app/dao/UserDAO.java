@@ -8,7 +8,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.User;
 
 public class UserDAO extends GenericDAO{
@@ -36,7 +35,7 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public List<User> getUsers() {
-			PersistenceManager pm = this.pmf.getPersistenceManager();
+			PersistenceManager pm = pmf.getPersistenceManager();
 			/*
 			 * By default only 1 level is retrieved from the db so if we wish to fetch more
 			 * than one level, we must indicate it

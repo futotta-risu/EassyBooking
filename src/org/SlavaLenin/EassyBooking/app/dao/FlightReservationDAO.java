@@ -8,7 +8,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 
 
@@ -37,7 +36,7 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	public List<FlightReservation> getFlightReservations() {
-			PersistenceManager pm = this.pmf.getPersistenceManager();
+			PersistenceManager pm = pmf.getPersistenceManager();
 
 			Transaction tx = pm.currentTransaction();
 			List<FlightReservation> products = new ArrayList<>();
@@ -152,31 +151,27 @@ public class FlightReservationDAO extends GenericDAO{
 		System.out.println("- Cleaning the DB...");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-		
+		List<String> IDs = new ArrayList<String>();
 		try {
 			tx.begin();
 			
 			Extent<FlightReservation> extentB = pm.getExtent(FlightReservation.class, true);
 			
 			for (FlightReservation b : extentB) {
-				System.out.println(".........4");
-				System.out.println(b.getFlightReservationID());
-				System.out.println("--------");
-				pm.deletePersistent(b);
-				System.out.println(".........1");
+				IDs.add(String.valueOf(b.getFlightReservationID()));
 			}
-			System.out.println(" * 12.");
 			
 			tx.commit();
-			System.out.println(" * 12.");
 		} catch (Exception ex) {
 			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
 			ex.printStackTrace();
 		} finally {
 			if (tx != null && tx.isActive())
 				tx.rollback();
-			System.out.println(" * 14.");
 			pm.close();
 		}
+		for(String id : IDs)
+			deleteFlightReservation(id);
 	}
+	
 }

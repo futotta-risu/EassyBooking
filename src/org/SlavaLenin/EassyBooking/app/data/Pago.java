@@ -9,6 +9,7 @@ import javax.jdo.annotations.*;
 public class Pago implements Serializable {
 
 	private Date date;
+	@Unique
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
@@ -40,6 +41,11 @@ public class Pago implements Serializable {
 	public void setExtraInfo(String extraInfo) {
 		this.extraInfo = extraInfo;
 	}
+	
+	public void borrarPago() {
+		this.user = null;
+	}
+	
 	@Override
 	public String toString() {
 		return "Pago [paymentID=" + paymentID + ", date=" + date + "]";

@@ -7,6 +7,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(detachable = "true")
 public class FlightReservation implements Serializable {
 
+	@Unique
 	private int flightReservationID;
 	private int price;
 	private int numberOfSeats;

@@ -11,6 +11,7 @@ import javax.jdo.annotations.*;
 public class User implements Serializable {
 	
 	private String OAuth;
+	@Unique
 	private String username;
 	private String name;
 	private String email;
@@ -20,6 +21,7 @@ public class User implements Serializable {
 	@Join
 	private List<FlightReservation> flightReservations;
 	
+	@Persistent
 	private PaymentMethod paymentMethod;
 	
 	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")

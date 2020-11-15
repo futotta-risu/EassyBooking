@@ -9,7 +9,6 @@ import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
-import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 
 public class FlightDAO extends GenericDAO{
 
@@ -37,11 +36,7 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public List<Flight> getFlights() {
-			PersistenceManager pm = this.pmf.getPersistenceManager();
-			/*
-			 * By default only 1 level is retrieved from the db so if we wish to fetch more
-			 * than one level, we must indicate it
-			 */
+			PersistenceManager pm = pmf.getPersistenceManager();
 			pm.getFetchPlan().setMaxFetchDepth(3);
 
 			Transaction tx = pm.currentTransaction();
@@ -121,6 +116,7 @@ public class FlightDAO extends GenericDAO{
 		}
 	}
 	
+	@Deprecated
 	public void deleteAllFligths() {
 		System.out.println("- Cleaning the DB...");
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -130,20 +126,13 @@ public class FlightDAO extends GenericDAO{
 			tx.begin();
 
 			Query<Flight> query1 = pm.newQuery(Flight.class);
-			System.out.println(" * '" + query1.deletePersistentAll() + "' shelves deleted from the DB.");
-
-			System.out.println(" * 11.");
 			tx.commit();
-			System.out.println(" * 12.");
 		} catch (Exception ex) {
-			System.out.println(" * 15.");
 			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
 			ex.printStackTrace();
 		} finally {
-			System.out.println(" * 13.");
 			if (tx != null && tx.isActive())
 				tx.rollback();
-			System.out.println(" * 14.");
 			pm.close();
 		}
 	}

@@ -8,6 +8,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {
 
+	@Unique
 	private int flightNumber;
 	@NotPersistent
 	private Airline aerolinea;
