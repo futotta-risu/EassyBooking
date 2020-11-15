@@ -1,24 +1,13 @@
-/*package org.SlavaLenin.EassyBooking.app;
+package org.SlavaLenin.EassyBooking.app;
 
-import java.util.List;
 
-import javax.jdo.annotations.*;
 
-@PersistenceCapable
 public class PassengerInfo {
+	
 	private String passengerName;
 	private String passengerLastName;
-	private List<FlightReservation> flightReservations;
-	//@PrimaryKey
 	private String passengerDNI;
-	
-	public List<FlightReservation> getFlightReservations() {
-		return flightReservations;
-	}
-	public void setFlightReservations(List<FlightReservation> flightReservations) {
-		this.flightReservations = flightReservations;
-	}
-	private long passengerPhoneNum;
+	private String passengerPhoneNum;
 	
 	public String getPassengerName() {
 		return passengerName;
@@ -38,14 +27,13 @@ public class PassengerInfo {
 	public void setPassengerDNI(String passengerDNI) {
 		this.passengerDNI = passengerDNI;
 	}
-	public long getPassengerPhoneNum() {
+	public String getPassengerPhoneNum() {
 		return passengerPhoneNum;
 	}
-	public void setPassengerPhoneNum(long passengerPhoneNum) {
+	public void setPassengerPhoneNum(String passengerPhoneNum) {
 		this.passengerPhoneNum = passengerPhoneNum;
 	}
 	
 	
 
 }
-*/

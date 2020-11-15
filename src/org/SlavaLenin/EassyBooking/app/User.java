@@ -6,7 +6,7 @@ import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class User {
-	//@PrimaryKey
+	
 	private String OAuth;
 	private String username;
 	private String name;
@@ -61,6 +61,12 @@ public class User {
 	}
 	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
+	}
+	public List<Pago> getPagos() {
+		return pagos;
+	}
+	public void setPagos(List<Pago> pagos) {
+		this.pagos = pagos;
 	}
 	
 	

@@ -52,33 +52,38 @@ public class DBHandler {
 	    this.pm.close();
 	}
 	
-	// TODO Hacer mas tarde para clases generalizadas
-	//public void makePersistent();
-	
+	@Deprecated
+	@SuppressWarnings({ "unchecked", "static-access" })
 	public Query<Object> getSelectWhere(String className, String columnName, String value){
 		return this.pm.newQuery(selectWhereQuery.format(className, columnName, value));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<User> getUserFromUsername(String username){		
 		return this.pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == " + username);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<Pago> getPago(String paymentID){		
 		return this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == 4567890" + paymentID);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<FlightReservation> getFlightReservationFromFlightReservationID(String flightReservationID){		
 		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<Flight> getFlightByFlightNumber(String flightNumber){
 		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<Flight> getFlights(){
 		return this.pm.newQuery("SELECT FROM " + Flight.class.getName());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Query<FlightReservation> getFlightReservations(){
 		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
 	}

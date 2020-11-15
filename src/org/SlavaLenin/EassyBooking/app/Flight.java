@@ -1,18 +1,17 @@
 package org.SlavaLenin.EassyBooking.app;
 import java.util.Date;
-import java.util.List;
-
 import javax.jdo.annotations.*;
 
 @PersistenceCapable
 public class Flight {
-	//@PrimaryKey
+
 	private int flightNumber;
 	private Date dateDeparture;
 	private Date dateArrival;
 	private int totalSeats;
 	private int numberRemainingSeats;
 	private int numberPassengers;
+	
 	@NotPersistent
 	private Airline aerolinea;
 	@NotPersistent
@@ -30,15 +29,7 @@ public class Flight {
 	public void setAeropuerto(Airport aeropuerto) {
 		this.aeropuerto = aeropuerto;
 	}
-	//private List<FlightReservation> flightReservations;
-	/*
-	public List<FlightReservation> getFlightReservations() {
-		return flightReservations;
-	}
-	public void setFlightReservations(List<FlightReservation> flightReservations) {
-		this.flightReservations = flightReservations;
-	}
-	*/
+	
 	public int getFlightNumber() {
 		return flightNumber;
 	}
