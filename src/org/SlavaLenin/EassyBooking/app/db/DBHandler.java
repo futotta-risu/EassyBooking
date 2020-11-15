@@ -15,6 +15,7 @@ import org.SlavaLenin.EassyBooking.app.User;
 public class DBHandler {
 	
 	private final  String selectWhereQuery = "SELECT FROM %s WHERE %s == %s";
+	
 	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	private PersistenceManager pm = pmf.getPersistenceManager();				
 	private Transaction transaction = pm.currentTransaction();	
@@ -72,6 +73,14 @@ public class DBHandler {
 	
 	public Query<Flight> getFlightByFlightNumber(String flightNumber){
 		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber);
+	}
+	
+	public Query<Flight> getFlights(){
+		return this.pm.newQuery("SELECT FROM " + Flight.class.getName());
+	}
+	
+	public Query<FlightReservation> getFlightReservations(){
+		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
 	}
 	
 	public void deleteFlightReservation(FlightReservation reservation) {

@@ -168,14 +168,14 @@ public class Main {
 				dbh.beginTransaction();
 				
 			    @SuppressWarnings("unchecked")
-				Query<Flight> flightQuery = dbh.getPm().newQuery("SELECT FROM " + Flight.class.getName());
+				Query<Flight> flightQuery = dbh.getFlights();
 			    
 			    for (Flight flight : flightQuery.executeList()) {
 			        System.out.println("- Deleted flight from db: " + flight.getFlightNumber());
 			        dbh.getPm().deletePersistent(flight);
 			    }
 
-			    Query<FlightReservation> reservations = dbh.getPm().newQuery("SELECT FROM " + FlightReservation.class.getName());
+			    Query<FlightReservation> reservations = dbh.getFlightReservations();
 			    
 			    for (FlightReservation reservation : reservations.executeList()) {
 			    	System.out.println("- Deleted inventory from db: " + reservation.getFlightReservationID());
