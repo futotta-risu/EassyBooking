@@ -95,6 +95,10 @@ public class User implements Serializable {
 		this.flightReservations.remove(flightReservation);
 	}
 	
+	public boolean chekPassword(String password) {
+		return this.OAuth.equals(password);
+	}
+	
 	@Override
 	public String toString() {
 		return "User [username=" + username + "]";
