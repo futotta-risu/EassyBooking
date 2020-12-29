@@ -1,6 +1,8 @@
 package org.SlavaLenin.EassyBooking.app.dto;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
 private String userName;
 private String name;
 public UserDTO() {
