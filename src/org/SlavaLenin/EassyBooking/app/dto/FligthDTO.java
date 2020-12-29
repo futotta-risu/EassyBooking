@@ -1,5 +1,7 @@
 package org.SlavaLenin.EassyBooking.app.dto;
 
+import java.io.Serializable;
+
 public class FligthDTO implements Serializable {
 private String fligthNumber;
 private String dateDeparture;
