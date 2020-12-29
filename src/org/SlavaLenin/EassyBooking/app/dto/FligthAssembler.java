@@ -9,6 +9,8 @@ import org.SlavaLenin.EassyBooking.app.data.Flight;
 
 public class FligthAssembler {
 
+	
+	private static FligthAssembler instance;
 	public FligthAssembler() {
 		super();
 		
