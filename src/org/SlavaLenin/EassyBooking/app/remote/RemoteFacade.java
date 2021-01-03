@@ -2,10 +2,10 @@ package org.SlavaLenin.EassyBooking.app.remote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
 
-import es.deusto.ingenieria.sd.auctions.server.remote.RemoteFacade;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
@@ -39,20 +39,20 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		this.user = LoginService.getInstance().register(email, password);
 	}
 
-	public List<FlightDTO> buscarvuelo(String id) {
-		System.out.println(" *RemoteFacade Busqueda Vuelo: " + id);
-		return AirlineService.getInstance().buscar(id);
-	}
 
-	public boolean reservarVuelo(String id) {
+	public boolean reservarVuelo(String id, AirlineEnum airline) {
 		if (user != null) {
 			System.out.println(" *RemoteFacade Busqueda Vuelo: " + id);
-			return AirlineService.getInstance().reservar(id);
+			return AirlineService.getInstance().reservar(id, airline);
 		}else {
 			return false;
 		}
 		
 	}
-	
+
+	public List<FlightDTO> buscarVuelo(String id) {
+		System.out.println(" *RemoteFacade Busqueda Vuelo: " + id);
+		return AirlineService.getInstance().buscar(id);
+	}
 
 }
