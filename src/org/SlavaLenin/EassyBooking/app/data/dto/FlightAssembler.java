@@ -1,17 +1,18 @@
-package org.SlavaLenin.EassyBooking.app.dto;
+package org.SlavaLenin.EassyBooking.app.data.dto;
 
 import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.dto.FlightDTO;
 
 
 
 
-public class FlightAssemblerDTO {
+public class FlightAssembler {
 
 	
-	private static FlightAssemblerDTO instance;
-	public FlightAssemblerDTO() {
+	private static FlightAssembler instance;
+	public FlightAssembler() {
 		super();
 		
 	}
@@ -20,10 +21,10 @@ public class FlightAssemblerDTO {
 		FlightDTO flightDTO= new FlightDTO( flight.getFlightNumber(),flight.getDateArrival(),flight.getDateDeparture(),flight.getNumberPassengers(),flight.getNumberRemainingSeats(),flight.getTotalSeats());
 		return flightDTO;
 	}
-	public static FlightAssemblerDTO getInstance() {
+	public static FlightAssembler getInstance() {
 		if (instance == null) {
 			try {
-				instance = new FlightAssemblerDTO();
+				instance = new FlightAssembler();
 			} catch (Exception e) {
 				System.err.println("# Error crando la RemoteFacade: " + e);
 			}
