@@ -1,4 +1,4 @@
-package org.SlavaLenin.EassyBooking.app.dto;
+package org.SlavaLenin.EassyBooking.app.data.dto;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
 import java.util.List;
