@@ -1,12 +1,9 @@
 package org.SlavaLenin.EassyBooking.app.gateway;
 
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirFranceGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
-import org.SlavaLenin.EassyBooking.app.gateway.login.GoogleGateway;
-import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
-import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
-import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
-import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentGateway;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.KoreanAirGateway;
 
 class AirlineTypeNotFoundException extends Exception {
 	public AirlineTypeNotFoundException(String errorMessage) {
@@ -29,8 +26,3 @@ public class AirlineGatewayFactory {
 	
 }
 
-
-
-public class LoginGatewayFactory {
-	
-}
