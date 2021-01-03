@@ -1,6 +1,7 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
+import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 
 public class LoginService {
@@ -35,6 +36,11 @@ public class LoginService {
 			DBHandler.store(new User(email, password));
 		}
 
+	}
+
+	public UserDTO getUser(String username) {
+		return null;
+		// TODO Auto-generated method stub
 	}
 	
 }

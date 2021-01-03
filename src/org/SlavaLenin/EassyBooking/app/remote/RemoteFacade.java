@@ -58,7 +58,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
 	public List<FlightDTO> buscarVuelo(String id) {
 		System.out.println(" *RemoteFacade Busqueda Vuelo: " + id);
-		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
+		return FlightAssembler.assenble(AirlineService.getInstance().buscarVuelo(id));
 	}
 
 }
