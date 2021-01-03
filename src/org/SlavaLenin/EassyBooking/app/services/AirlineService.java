@@ -3,14 +3,20 @@ package org.SlavaLenin.EassyBooking.app.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.db.DBHandler;
+import org.SlavaLenin.EassyBooking.app.dto.FlightDTO;
+import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
+import org.SlavaLenin.EassyBooking.app.gateway.LoginTypeNotFoundException;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 
 
 public class AirlineService {
 	
 	private static AirlineService instance;
 	private static AirlineGatewayFactory factory;
-	private AirlineEnum<String> airlines;
+	private AirlineEnum airlines;
 	
 	
 	private AirlineService() {
@@ -24,17 +30,17 @@ public class AirlineService {
 		return instance;
 	}
 	
-	public List<FlightDTO> buscarVuelo(String id){
+	public List<Flight> buscarVuelo(String id){
 		
-		List<AirlineGateways> gateways = new ArrayList<AirlineGateway>();
-		for (AirlineEnum<String> airline : airlines) {
+		List<AirlineGateway> gateways = new ArrayList<AirlineGateway>();
+		for (AirlineEnum airline : airlines) {
 			gateways.add(factory.create(airline));
 		}
 		
-		List<FlightDTO> result = new ArrayList<FlightDTO>();
-		for (AirlineGateways gateway : gateways) {
-			List<FlightDTO> temp = gateways.buscar(id);
-			for (FlightDTO flight : temp) {
+		List<Flight> result = new ArrayList<Flight>();
+		for (AirlineGateway gateway : gateways) {
+			List<Flight> temp = gateway.buscar(id);
+			for (Flight flight : temp) {
 				result.add(flight);
 			}
 			
@@ -42,9 +48,10 @@ public class AirlineService {
 		return result;
 	}
 	
-	public boolean reservar(String id, AirlineEnum airline) {
+	public boolean reservar(String id, AirlineEnum airline){
 		AirlineGateway gateway = factory.create(airline);
 		gateway.reservar(id);
+		return true;
 	}
 	
 
