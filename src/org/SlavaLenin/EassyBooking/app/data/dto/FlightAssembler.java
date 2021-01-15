@@ -17,15 +17,22 @@ public class FlightAssembler {
 		
 	}
 
-	public static FlightDTO assenble (List<Flight> flights) {
-		FlightDTO flightDTO=new FlightDTO();
+	public static List<FlightDTO> assemble(List<Flight> flights) {
+		List<FlightDTO> flightDTOList = new ArrayList<FlightDTO>();
 		
 		for (Flight flight : flights) {
-			 flightDTO= new FlightDTO( flight.getFlightNumber(),flight.getDateArrival(),flight.getDateDeparture(),flight.getNumberPassengers(),flight.getNumberRemainingSeats(),flight.getTotalSeats());
+			 flightDTOList.add(new FlightDTO( flight.getFlightNumber(),flight.getDateArrival(),flight.getDateDeparture(),flight.getNumberPassengers(),flight.getNumberRemainingSeats(),flight.getTotalSeats()));
 		}
 		
-		return flightDTO;
+		return flightDTOList;
 	}
+	
+	public static FlightDTO assemble(Flight flight) {
+
+		FlightDTO result = new FlightDTO( flight.getFlightNumber(),flight.getDateArrival(),flight.getDateDeparture(),flight.getNumberPassengers(),flight.getNumberRemainingSeats(),flight.getTotalSeats());
+		return result;
+	}
+	
 	public static FlightAssembler getInstance() {
 		if (instance == null) {
 			try {

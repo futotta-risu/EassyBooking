@@ -1,24 +1,33 @@
 package org.SlavaLenin.EassyBooking.app.data.dto;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
-import java.util.List;
+import java.io.Serializable;
 
-public class UserAssembler {
+public class UserAssembler implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private static UserAssembler instance;
+	
 	public UserAssembler() {
-		super();
-		
+		super();	
+	}
+	
+	public static UserAssembler getInstance() {
+		if(instance == null ) {
+			instance = new UserAssembler();
+		}
+		return instance;
 	}
 
-	public UserDTO assenble (User user) {
+	public UserDTO assemble (User user) {
 		
-		
-	
-		
-		
-		return null;
+		UserDTO result = new UserDTO(user.getUsername(), user.getName());
+		return result;
 		
 	}
 

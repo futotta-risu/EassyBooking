@@ -19,6 +19,7 @@ public class LoginService {
 		return instance;
 	}
 	
+	
 	public User login(String email, String password) {
 		User user = DBHandler.getInstance().getUser(email);
 		
@@ -38,9 +39,5 @@ public class LoginService {
 
 	}
 
-	public UserDTO getUser(String username) {
-		return null;
-		// TODO Auto-generated method stub
-	}
 	
 }
