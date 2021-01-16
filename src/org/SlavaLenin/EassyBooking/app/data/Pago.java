@@ -14,6 +14,12 @@ public class Pago implements Serializable {
 	private String confirmationCode;
 	private String extraInfo;
 	
+	public Pago(Date date, int id, String confCode, String extraInfo) {
+		this.date = date;
+		this.paymentID = id;
+		this.confirmationCode = confCode;
+		this.extraInfo = extraInfo;
+	}
 	
 	private User user;
 	

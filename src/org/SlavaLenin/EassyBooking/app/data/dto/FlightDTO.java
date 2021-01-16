@@ -14,9 +14,9 @@ public class FlightDTO implements Serializable {
 	private int airportDeparture;
 	private int airportArrival;
 	
+	
 	public FlightDTO() {
 	    super();
-	    // TODO Auto-generated constructor stub
 	}
 	
 	public FlightDTO(int fligthNumber, Date dateDeparture, Date dateArrival, int airlineNumber,
