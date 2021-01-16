@@ -4,11 +4,8 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.GoogleGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
-class LoginTypeNotFoundException extends Exception {
-	public LoginTypeNotFoundException(String errorMessage) {
-        super(errorMessage);
-    }
-}
+import org.SlavaLenin.EassyBooking.app.gateway.exceptions.*;
+
 
 
 public class LoginGatewayFactory {
