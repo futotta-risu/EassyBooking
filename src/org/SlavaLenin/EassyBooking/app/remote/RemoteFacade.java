@@ -5,7 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightAssembler;
-import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;

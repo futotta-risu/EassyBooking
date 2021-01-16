@@ -3,35 +3,30 @@ package org.SlavaLenin.EassyBooking.app.data.dto;
 import java.io.Serializable;
 
 public class UserDTO implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String userName;
-	private String name;
+	private String username;
+	private String key;
 	
 	public UserDTO() {
 		super();
 	}
 	
-	public UserDTO(String userName, String name) {
+	public UserDTO(String username, String password) {
 		super();
-		this.userName = userName;
-		this.name = name;
+		this.username = username;
+		this.key = password;
 	}
 	
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return key;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.key = password;
 	}
 
 
