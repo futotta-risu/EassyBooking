@@ -18,10 +18,11 @@ public class EntityDataService {
 		return FlightAssembler.assenble(AirlineService.getInstance().buscarVuelo(id));
 		
 	}
+	
 	public UserDTO getUser(String username) {
 		
 		return LoginService.getInstance().getUser(username);
-		
+
 	}
 	
 }
