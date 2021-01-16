@@ -29,7 +29,7 @@ public class LoginService {
 		}
 	}
 	
-	public void register(String email, String password) {
+	public User register(String email, String password) {
 		User user = DBHandler.getInstance().getUser(email);
 		
 		if(user == null) {

@@ -3,9 +3,15 @@ package org.SlavaLenin.EassyBooking.app.gateway.payment;
 public class PaypalGateway implements PaymentGateway {
 
 	@Override
-	public boolean pay(int amount) {
-		System.out.println("Conectando a Paypal..");
-		return true;
+	public void validateUser(String user, String key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pay(String user, String key, int amount) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
