@@ -1,9 +1,9 @@
 package org.SlavaLenin.EassyBooking.app.gateway.exceptions;
 
-public class LoginTypeNotFoundException extends Exception {
+public class AirlineTypeNotFoundException extends Exception {
 	private static final long serialVersionUID = 1L;
 
-	public LoginTypeNotFoundException(String errorMessage) {
+	public AirlineTypeNotFoundException(String errorMessage) {
         super(errorMessage);
     }
 }
