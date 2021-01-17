@@ -106,6 +106,12 @@ public class DBManager {
 		pm.deletePersistent(flight);
 	}
 	
+	public static DBManager getInstance() {
+		if(instance == null ) {
+			instance = new DBManager();
+		}
+		return instance;
+	}
 
 	public PersistenceManager getPm() {
 		return pm;
