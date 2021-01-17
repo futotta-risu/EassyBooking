@@ -1,6 +1,5 @@
 package org.SlavaLenin.EassyBooking.app.db;
 
-
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -11,8 +10,14 @@ import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
+import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
 
-public class DBHandler {
+public class DBManager {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private static DBManager instance;
+	
 	
 	private final  String selectWhereQuery = "SELECT FROM %s WHERE %s == %s";
 	
@@ -20,7 +25,7 @@ public class DBHandler {
 	private PersistenceManager pm = pmf.getPersistenceManager();				
 	private Transaction transaction = pm.currentTransaction();	
 	
-	public DBHandler() {
+	public DBManager() {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		
 	}
