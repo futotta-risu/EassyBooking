@@ -34,18 +34,18 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		return instance;
 	}
 
-	public void login(String email, String password) throws LoginTypeNotFoundException {
+	public void login(String email, String password) throws LoginTypeNotFoundException, RemoteException {
 		System.out.println(" *RemoteFacade LOGIN: " + email + "/" + password);
 		this.user = LoginService.getInstance().login(email, password);
 	}
 
-	public void register(String email, String password) {
+	public void register(String email, String password) throws RemoteException {
 		System.out.println(" *RemoteFacade REGISTER: " + email + "/" + password);
 		LoginService.getInstance().register(email, password);
 	}
 
 
-	public void reservarVuelo(String id, AirlineEnum airline) throws AirlineTypeNotFoundException {
+	public void reservarVuelo(String id, AirlineEnum airline) throws AirlineTypeNotFoundException , RemoteException {
 		if (user != null) {
 			System.out.println(" *RemoteFacade RESERVA de vuelo: " + id + "/" + airline);
 			AirlineService.getInstance().reservar(id, airline);
@@ -53,7 +53,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		
 	}
 
-	public List<FlightDTO> buscarVuelo(String id) throws AirlineTypeNotFoundException {
+	public List<FlightDTO> buscarVuelo(String id) throws AirlineTypeNotFoundException , RemoteException {
 		System.out.println(" *RemoteFacade BUSCAR Vuelo: " + id);
 		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
 	}

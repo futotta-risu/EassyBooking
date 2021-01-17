@@ -16,7 +16,7 @@ public class FlightDAO extends GenericDAO{
 		super();
 	}
 	
-	public void storeFlight(Flight flight) {
+	public static void storeFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
@@ -35,7 +35,7 @@ public class FlightDAO extends GenericDAO{
 	    }
 	}
 	
-	public List<Flight> getFlights() {
+	public static List<Flight> getFlights() {
 			PersistenceManager pm = pmf.getPersistenceManager();
 			pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -67,7 +67,7 @@ public class FlightDAO extends GenericDAO{
 		
 	}
 	
-	public Flight getFlight(String flightNumber) {
+	public static Flight getFlight(String flightNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -96,7 +96,7 @@ public class FlightDAO extends GenericDAO{
 		return product;
 	}
 	
-	public void updateFlight(Flight flight) {
+	public static void updateFlight(Flight flight) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
