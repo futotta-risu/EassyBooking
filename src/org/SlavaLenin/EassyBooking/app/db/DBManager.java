@@ -6,11 +6,14 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.data.Airline;
+import org.SlavaLenin.EassyBooking.app.data.Airport;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 public class DBManager {
 	
@@ -115,5 +118,13 @@ public class DBManager {
 
 	public PersistenceManager getPm() {
 		return pm;
+	}
+	public Airport getAirportByCode(String airportDeparture) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Airline getAirlinetByEnum(AirlineEnum airline) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

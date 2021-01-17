@@ -16,12 +16,5 @@
 	<classpathentry exported="true" kind="lib" path="lib/framework/log4j-1.2.14.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/framework/mysql-connector-java-8.0.21.jar"/>
 	<classpathentry kind="lib" path="lib/locals/PaymentManager.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/datanucleus-api-jdo-5.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/datanucleus-cache-5.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/datanucleus-core-5.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/datanucleus-rdbms-5.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/javax.jdo-3.2.0-m13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Gorka Zarate/Documents/GitHub/EassyBooking/lib/mysql-connector-java-8.0.21.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -10,7 +10,6 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(detachable = "true")
 public class User implements Serializable {
 	
-	private String OAuth;
 	@Unique
 	private String username;
 	private String name;
@@ -33,6 +32,13 @@ public class User implements Serializable {
 		this.pagos = new ArrayList<>();
 	}
 	
+	public User(String email) {
+		this.email = email;
+		this.username = email;
+		this.flightReservations = new ArrayList<>();
+		this.pagos = new ArrayList<>();
+	}
+	
 	public List<FlightReservation> getFlightReservations() {
 		return flightReservations;
 	}
@@ -44,12 +50,6 @@ public class User implements Serializable {
 	}
 	
 	
-	public String getOAuth() {
-		return OAuth;
-	}
-	public void setOAuth(String oAuth) {
-		OAuth = oAuth;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -93,10 +93,6 @@ public class User implements Serializable {
 	
 	public void removeFlightReservation(FlightReservation flightReservation) {
 		this.flightReservations.remove(flightReservation);
-	}
-	
-	public boolean chekPassword(String password) {
-		return this.OAuth.equals(password);
 	}
 	
 	@Override

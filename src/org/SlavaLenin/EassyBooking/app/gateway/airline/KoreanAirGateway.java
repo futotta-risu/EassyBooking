@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 
 import es.deusto.ingenieria.sd.sms.server.remote.IAirlineManager;
@@ -36,7 +37,7 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 
 	@Override
-	public List<FlightDTO> buscar(String id) {
+	public List<AirlineFlightDTO> buscar(String id) {
 		return null;
 	}
 

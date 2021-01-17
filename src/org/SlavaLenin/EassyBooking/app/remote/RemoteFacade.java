@@ -5,7 +5,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightAssembler;
+import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
+import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
@@ -31,10 +34,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		return instance;
 	}
 
-	public boolean login(String email, String password) {
+	public void login(String email, String password) throws LoginTypeNotFoundException {
 		System.out.println(" *RemoteFacade LOGIN: " + email + "/" + password);
 		this.user = LoginService.getInstance().login(email, password);
-		return user != null;
 	}
 
 	public void register(String email, String password) {
@@ -43,17 +45,15 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 	}
 
 
-	public boolean reservarVuelo(String id, AirlineEnum airline) {
+	public void reservarVuelo(String id, AirlineEnum airline) throws AirlineTypeNotFoundException {
 		if (user != null) {
 			System.out.println(" *RemoteFacade RESERVA de vuelo: " + id + "/" + airline);
-			return AirlineService.getInstance().reservar(id, airline);
-		}else {
-			return false;
+			AirlineService.getInstance().reservar(id, airline);
 		}
 		
 	}
 
-	public List<FlightDTO> buscarVuelo(String id) {
+	public List<FlightDTO> buscarVuelo(String id) throws AirlineTypeNotFoundException {
 		System.out.println(" *RemoteFacade BUSCAR Vuelo: " + id);
 		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
 	}

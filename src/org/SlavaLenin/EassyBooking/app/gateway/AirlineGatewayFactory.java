@@ -9,7 +9,7 @@ import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundExc
 
 
 public class AirlineGatewayFactory {
-	public AirlineGateway create(AirlineEnum airlineType) throws AirlineTypeNotFoundException{
+	public static AirlineGateway create(AirlineEnum airlineType) throws AirlineTypeNotFoundException{
 		switch(airlineType) {
 		case KoreanAir:
 			return new KoreanAirGateway();
