@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.jdo.annotations.*;
 
+import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
+
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {
 
@@ -31,14 +33,17 @@ public class Flight implements Serializable {
 	private int numberPassengers;
 	@NotPersistent
 	private Airport aeropuerto;
+	@NotPersistent
+	private Airport aeropuertoArrival;
 	
 	
 	public Flight(AirlineFlightDTO afd) {
-		this.aerolinea = afd.getAerolinea();
-		this.aeropuerto = afd.getAeropuerto();
+		this.aerolinea = afd.getAirline().name();
+		this.aeropuerto = afd.getAirportDeparture();
+		this.aeropuertoArrival = afd.getAirportArrival();
 		this.dateArrival = afd.getDateArrival();
 		this.dateDeparture = afd.getDateDeparture();
-		this.flightNumber = afd.getFlightNumber();
+		this.flightNumber = afd.getFligthNumber();
 	}
 	
 	public Airline getAerolinea() {
