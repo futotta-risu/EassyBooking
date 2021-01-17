@@ -37,8 +37,10 @@ public class LoginService {
 		User user = DBManager.getInstance().getUser(email);
 		
 		if(user == null) {
-			DBManager.store(new User(email));
+			user = new User(email);
+			DBManager.getInstance().storeUser(user);
 		}
+		return user;
 
 	}
 

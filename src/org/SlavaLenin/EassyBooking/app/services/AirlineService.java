@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
-import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
-import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
-import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
 
 
 public class AirlineService {
@@ -40,9 +36,9 @@ public class AirlineService {
 		List<Flight> result = new ArrayList<Flight>();
 		
 		for (AirlineGateway gateway : gateways) {
-			List<AirlineFlightDTO> temp = gateway.buscar(id);
-			for (AirlineFlightDTO flight : temp) {
-				result.add(new Flight(flight));
+			List<Flight> temp = gateway.buscar(id);
+			for (Flight flight : temp) {
+				result.add(flight);
 			}	
 		}
 		return result;
