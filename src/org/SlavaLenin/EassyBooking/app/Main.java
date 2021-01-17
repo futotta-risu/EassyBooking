@@ -1,5 +1,5 @@
 package org.SlavaLenin.EassyBooking.app;
-
+/*
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -21,9 +21,8 @@ import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.PassengerInfo;
 import org.SlavaLenin.EassyBooking.app.data.User;
-import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 
-/*
+
 public class Main {
 	
 	public static void printAll(FlightDAO flightDAO, FlightReservationDAO flightReservationDAO, PagoDAO pagoDAO, UserDAO userDAO) {
