@@ -3,6 +3,7 @@ package org.SlavaLenin.EassyBooking.app.gateway.airline;
 import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 
 public class AirFranceGateway implements AirlineGateway {
@@ -14,7 +15,7 @@ public class AirFranceGateway implements AirlineGateway {
 	}
 
 	@Override
-	public List<FlightDTO> buscar(String id) {
+	public List<AirlineFlightDTO> buscar(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

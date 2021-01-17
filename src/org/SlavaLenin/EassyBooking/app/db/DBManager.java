@@ -8,15 +8,21 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+<<<<<<< HEAD
 import org.SlavaLenin.EassyBooking.app.dao.FlightDAO;
 import org.SlavaLenin.EassyBooking.app.dao.FlightReservationDAO;
 import org.SlavaLenin.EassyBooking.app.dao.PagoDAO;
 import org.SlavaLenin.EassyBooking.app.dao.UserDAO;
+=======
+import org.SlavaLenin.EassyBooking.app.data.Airline;
+import org.SlavaLenin.EassyBooking.app.data.Airport;
+>>>>>>> 528c9996052b7d81267f77a4d9698102620f9341
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 public class DBManager {
 	
@@ -121,5 +127,16 @@ public class DBManager {
 	public void deleteAllFlightReservations() {
 		FlightReservationDAO.deleteAllFlightReservations();
 	}
+<<<<<<< HEAD
 	
+=======
+	public Airport getAirportByCode(String airportDeparture) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Airline getAirlinetByEnum(AirlineEnum airline) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> 528c9996052b7d81267f77a4d9698102620f9341
 }

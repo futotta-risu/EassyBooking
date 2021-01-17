@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jdo.annotations.*;
 
 import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {
@@ -32,18 +33,18 @@ public class Flight implements Serializable {
 	@NotPersistent
 	private int numberPassengers;
 	@NotPersistent
-	private Airport aeropuerto;
+	private Airport airportDeparture;
 	@NotPersistent
-	private Airport aeropuertoArrival;
+	private Airport airportArrival;
 	
 	
-	public Flight(AirlineFlightDTO afd) {
-		this.aerolinea = afd.getAirline().name();
-		this.aeropuerto = afd.getAirportDeparture();
-		this.aeropuertoArrival = afd.getAirportArrival();
-		this.dateArrival = afd.getDateArrival();
-		this.dateDeparture = afd.getDateDeparture();
-		this.flightNumber = afd.getFligthNumber();
+	public Flight(AirlineFlightDTO afdto) {
+		this.aerolinea = DBManager.getInstance().getAirlinetByEnum(afdto.getAirline());
+		this.airportDeparture = DBManager.getInstance().getAirportByCode(afdto.getAirportDeparture());
+		this.airportArrival = DBManager.getInstance().getAirportByCode(afdto.getAirportDeparture());
+		this.dateArrival = afdto.getDateArrival();
+		this.dateDeparture = afdto.getDateDeparture();
+		this.flightNumber = afdto.getFligthNumber();
 	}
 	
 	public Airline getAerolinea() {
@@ -51,12 +52,6 @@ public class Flight implements Serializable {
 	}
 	public void setAerolinea(Airline aerolinea) {
 		this.aerolinea = aerolinea;
-	}
-	public Airport getAeropuerto() {
-		return aeropuerto;
-	}
-	public void setAeropuerto(Airport aeropuerto) {
-		this.aeropuerto = aeropuerto;
 	}
 	
 	public int getFlightNumber() {
@@ -95,16 +90,25 @@ public class Flight implements Serializable {
 	public void setNumberPassengers(int numberPassengers) {
 		this.numberPassengers = numberPassengers;
 	}
-	/*
-	public void removeFlightReservations() {
-		flightReservations.clear();
-	}
-	public void removeFlightReservations(FlightReservation f) {
-		flightReservations.remove(f);
-	}*/
 	@Override
 	public String toString() {
 		return "Flight [flightNumber=" + flightNumber + "]";
+	}
+
+	public Airport getAirportDeparture() {
+		return airportDeparture;
+	}
+
+	public void setAirportDeparture(Airport airportDeparture) {
+		this.airportDeparture = airportDeparture;
+	}
+
+	public Airport getAirportArrival() {
+		return airportArrival;
+	}
+
+	public void setAirportArrival(Airport airportArrival) {
+		this.airportArrival = airportArrival;
 	}
 
 

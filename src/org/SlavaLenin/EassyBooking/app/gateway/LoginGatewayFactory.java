@@ -9,7 +9,7 @@ import org.SlavaLenin.EassyBooking.app.gateway.exceptions.*;
 
 
 public class LoginGatewayFactory {
-	public LoginGateway create(LoginEnum loginType) throws LoginTypeNotFoundException{
+	public static LoginGateway create(LoginEnum loginType) throws LoginTypeNotFoundException{
 		switch(loginType) {
 		case Google:
 			return new GoogleGateway();
