@@ -2,7 +2,7 @@ package org.SlavaLenin.EassyBooking.app.services;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
-import org.SlavaLenin.EassyBooking.app.db.DBHandler;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 public class LoginService {
 	
@@ -21,7 +21,7 @@ public class LoginService {
 	
 	
 	public User login(String email, String password) {
-		User user = DBHandler.getInstance().getUser(email);
+		User user = DBManager.getInstance().getUser(email);
 		
 		if(user!= null && user.chekPassword(password)) {
 			return user;
@@ -31,10 +31,10 @@ public class LoginService {
 	}
 	
 	public User register(String email, String password) {
-		User user = DBHandler.getInstance().getUser(email);
+		User user = DBManager.getInstance().getUser(email);
 		
 		if(user == null) {
-			DBHandler.store(new User(email, password));
+			DBManager.store(new User(email, password));
 		}
 
 	}

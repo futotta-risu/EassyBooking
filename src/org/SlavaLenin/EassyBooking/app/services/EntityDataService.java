@@ -15,7 +15,7 @@ public class EntityDataService {
 	public FlightDTO getFlight(String id) {
 		
 		
-		return FlightAssembler.assenble(AirlineService.getInstance().buscarVuelo(id));
+		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
 		
 	}
 	

@@ -32,6 +32,15 @@ public class Flight implements Serializable {
 	@NotPersistent
 	private Airport aeropuerto;
 	
+	
+	public Flight(AirlineFlightDTO afd) {
+		this.aerolinea = afd.getAerolinea();
+		this.aeropuerto = afd.getAeropuerto();
+		this.dateArrival = afd.getDateArrival();
+		this.dateDeparture = afd.getDateDeparture();
+		this.flightNumber = afd.getFlightNumber();
+	}
+	
 	public Airline getAerolinea() {
 		return aerolinea;
 	}

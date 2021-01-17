@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
-import org.SlavaLenin.EassyBooking.app.db.DBHandler;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 public class PaymentService {
 
@@ -21,7 +21,6 @@ public class PaymentService {
 		if(instance == null ) {
 			instance = new PaymentService();
 		}
-		
 		return instance;
 	}
 	
@@ -32,10 +31,12 @@ public class PaymentService {
 		contador++;
 		
 		if(pago != null) {
-			DBHandler.store(pago);
+			DBManager.store(pago);
 		}
 
 	}
+	
+	
 	
 	
 	
