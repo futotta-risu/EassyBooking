@@ -24,6 +24,7 @@ public class DBManager {
 	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	private PersistenceManager pm = pmf.getPersistenceManager();				
 	private Transaction transaction = pm.currentTransaction();	
+	private User userP= (User) pm.getUserObject();
 	
 	public DBManager() {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
@@ -48,6 +49,10 @@ public class DBManager {
 	
 	public void rollbackTransaction() {
 		transaction.rollback();
+	}
+	public void storeUser(User user) {
+		pm = pmf.getPersistenceManager();
+		userP=(User)pm.setUserObject(user);
 	}
 	
 	public void rollbakcAndClosePM() {
@@ -105,6 +110,7 @@ public class DBManager {
 	public void deleteFlight(Flight flight) {
 		pm.deletePersistent(flight);
 	}
+	
 	
 	public static DBManager getInstance() {
 		if(instance == null ) {
