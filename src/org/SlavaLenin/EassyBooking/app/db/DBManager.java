@@ -1,11 +1,17 @@
 package org.SlavaLenin.EassyBooking.app.db;
 
+import java.util.List;
+
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.dao.FlightDAO;
+import org.SlavaLenin.EassyBooking.app.dao.FlightReservationDAO;
+import org.SlavaLenin.EassyBooking.app.dao.PagoDAO;
+import org.SlavaLenin.EassyBooking.app.dao.UserDAO;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
@@ -17,100 +23,7 @@ public class DBManager {
 	private static final long serialVersionUID = 1L;
 	
 	private static DBManager instance;
-	
-	
-	private final  String selectWhereQuery = "SELECT FROM %s WHERE %s == %s";
-	
 	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-	private PersistenceManager pm = pmf.getPersistenceManager();				
-	private Transaction transaction = pm.currentTransaction();	
-	private User userP= (User) pm.getUserObject();
-	
-	public DBManager() {
-		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		
-	}
-	public void createNewTransaction() {
-		pm = pmf.getPersistenceManager();				
-		transaction = pm.currentTransaction();
-	}
-	
-	public void beginTransaction() {
-		transaction.begin();
-	}
-	
-	public void commitTransaction() {
-		transaction.commit();
-	}
-	
-	public boolean isActiveTransaction() {
-		return transaction.isActive();
-	}
-	
-	public void rollbackTransaction() {
-		transaction.rollback();
-	}
-	public void storeUser(User user) {
-		pm = pmf.getPersistenceManager();
-		userP=(User)pm.setUserObject(user);
-	}
-	
-	public void rollbakcAndClosePM() {
-		if (this.isActiveTransaction()) {
-	        this.rollbackTransaction();
-	    }
-	    this.pm.close();
-	}
-	
-	@Deprecated
-	@SuppressWarnings({ "unchecked", "static-access" })
-	public Query<Object> getSelectWhere(String className, String columnName, String value){
-		return this.pm.newQuery(selectWhereQuery.format(className, columnName, value));
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Query<User> getUserFromUsername(String username){		
-		return this.pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + username +"'");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Pago getPago(String paymentID){		
-		Query<Pago> payment = this.pm.newQuery("SELECT FROM " + Pago.class.getName() + " WHERE paymentID == " + paymentID);
-		return (Pago) payment.execute();
-	}
-	
-	public FlightReservation getFlightReservationFromID(String flightReservationID){		
-		Query<FlightReservation> fr =  this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID); 
-		return (FlightReservation) fr.execute();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Query<Flight> getFlightByFlightNumber(String flightNumber){
-		return this.pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Query<Flight> getFlights(){
-		return this.pm.newQuery("SELECT FROM " + Flight.class.getName());
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Query<FlightReservation> getFlightReservations(){
-		return this.pm.newQuery("SELECT FROM " + FlightReservation.class.getName());
-	}
-	
-	public void updateFlightReservationPrice(String newPrice) {
-		pm.newQuery("UPDATE " + FlightReservation.class.getName() + " SET price=value-5.0 WHERE this.value > 100");
-	}
-	
-	public void deleteFlightReservation(FlightReservation reservation) {
-		pm.deletePersistent(reservation);
-	}
-	
-	public void deleteFlight(Flight flight) {
-		pm.deletePersistent(flight);
-	}
-	
 	
 	public static DBManager getInstance() {
 		if(instance == null ) {
@@ -118,8 +31,95 @@ public class DBManager {
 		}
 		return instance;
 	}
-
-	public PersistenceManager getPm() {
-		return pm;
+	
+	public DBManager() {
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	}
+	
+	
+	// -------------- USER -----------------
+	public void storeUser(User user) {
+		UserDAO.storeUser(user);
+	}
+	
+	public List<User> getUsers() {
+		return UserDAO.getUsers();
+	}
+	
+	public User getUser(String username) {
+		return UserDAO.getUser(username);
+	}
+	
+	public void updateUser(User user) {
+		UserDAO.updateUser(user);
+	}
+	
+	
+	// -------------- PAGO -----------------
+	public void storePago(Pago pago) {
+		PagoDAO.storePago(pago);
+	}
+	
+	public List<Pago> getPagos() {
+		return PagoDAO.getPagos();
+	}
+	
+	public Pago getPago(String id_pago) {
+		return PagoDAO.getPago(id_pago);
+	}
+	
+	public void updatePago(Pago pago) {
+		PagoDAO.updatePago(pago);
+	}
+	
+	public void deletePago(String id_pago) {
+		PagoDAO.deletePago(id_pago);
+	}
+	
+	public void deleteAllPagos() {
+		PagoDAO.deleteAllPagos();
+	}
+	
+	// -------------- FLIGHT -----------------
+	public void storeFlight(Flight flight) {
+		FlightDAO.storeFlight(flight);
+	}
+	
+	public List<Flight> getFlights() {
+		return FlightDAO.getFlights();
+	}
+	
+	public Flight getFlight(String flightNumber) {
+		return FlightDAO.getFlight(flightNumber);
+	}
+	
+	public void updateFlight(Flight flight) {
+		FlightDAO.updateFlight(flight);
+	}
+	
+	// -------------- FLIGHT RESERVATION -----------------
+	public void storeFlightReservation(FlightReservation flightReservation) {
+		FlightReservationDAO.storeFlightReservation(flightReservation);
+	}
+	
+	public List<FlightReservation> getFlightReservations() {
+		return FlightReservationDAO.getFlightReservations();
+	}
+	
+	public FlightReservation getFlightReservation(String flightNumber) {
+		return FlightReservationDAO.getFlightReservation(flightNumber);
+	}
+	
+	public void updateFlightReservation(FlightReservation flightReservation) {
+		FlightReservationDAO.updateFlightReservation(flightReservation);
+	}
+	
+	public void deleteFlightReservation(String flightNumber) {
+		FlightReservationDAO.deleteFlightReservation(flightNumber);
+	}
+	
+	public void deleteAllFlightReservations() {
+		FlightReservationDAO.deleteAllFlightReservations();
+	}
+	
 }

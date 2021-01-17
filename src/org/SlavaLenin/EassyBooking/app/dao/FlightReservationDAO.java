@@ -16,7 +16,7 @@ public class FlightReservationDAO extends GenericDAO{
 		super();
 	}
 	
-	public void storeFlightReservation(FlightReservation flightreservation) {
+	public static void storeFlightReservation(FlightReservation flightreservation) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
@@ -35,7 +35,7 @@ public class FlightReservationDAO extends GenericDAO{
 	    }
 	}
 	
-	public List<FlightReservation> getFlightReservations() {
+	public static List<FlightReservation> getFlightReservations() {
 			PersistenceManager pm = pmf.getPersistenceManager();
 
 			Transaction tx = pm.currentTransaction();
@@ -66,7 +66,7 @@ public class FlightReservationDAO extends GenericDAO{
 		
 	}
 	
-	public FlightReservation getFlightReservation(String flightNumber) {
+	public static FlightReservation getFlightReservation(String flightReservationID) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -74,10 +74,10 @@ public class FlightReservationDAO extends GenericDAO{
 		FlightReservation product = null;
 
 		try {
-			System.out.println("   * Querying a FlightReservation: " + flightNumber);
+			System.out.println("   * Querying a FlightReservation: " + flightReservationID);
 
 			tx.begin();
-			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightNumber );
+			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID );
 			query.setUnique(true);
 			
 			product = (FlightReservation) pm.detachCopy((FlightReservation) query.execute());
@@ -96,7 +96,7 @@ public class FlightReservationDAO extends GenericDAO{
 		return product;
 	}
 	
-	public void updateFlightReservation(FlightReservation flightreservation) {
+	public static void updateFlightReservation(FlightReservation flightreservation) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
@@ -117,17 +117,17 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	
-	public void deleteFlightReservation(String flightNumber) {
+	public static void deleteFlightReservation(String flightReservationID) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 
 		Transaction tx = pm.currentTransaction();
 		FlightReservation flightReservation = null;
 
 		try {
-			System.out.println("   * Querying a FlightReservation: " + flightNumber);
+			System.out.println("   * Querying a FlightReservation: " + flightReservationID);
 
 			tx.begin();
-			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightNumber );
+			Query<?> query = pm.newQuery("SELECT FROM " + FlightReservation.class.getName() + " WHERE flightReservationID == " + flightReservationID );
 			query.setUnique(true);
 			
 			flightReservation = (FlightReservation) pm.detachCopy((FlightReservation) query.execute());
@@ -147,7 +147,7 @@ public class FlightReservationDAO extends GenericDAO{
 
 	}
 	
-	public void deleteAllFlightReservations() {
+	public static void deleteAllFlightReservations() {
 		System.out.println("- Cleaning the DB...");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
