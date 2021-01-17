@@ -6,7 +6,6 @@ import java.util.List;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
-import org.SlavaLenin.EassyBooking.app.gateway.LoginTypeNotFoundException;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 
