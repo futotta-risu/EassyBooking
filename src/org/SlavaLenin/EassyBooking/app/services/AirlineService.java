@@ -8,6 +8,7 @@ import org.SlavaLenin.EassyBooking.app.db.DBHandler;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
+import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
 
 
 public class AirlineService {
