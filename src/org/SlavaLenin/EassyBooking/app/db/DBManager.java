@@ -1,5 +1,6 @@
 package org.SlavaLenin.EassyBooking.app.db;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
@@ -9,15 +10,20 @@ import org.SlavaLenin.EassyBooking.app.dao.FlightDAO;
 import org.SlavaLenin.EassyBooking.app.dao.FlightReservationDAO;
 import org.SlavaLenin.EassyBooking.app.dao.PagoDAO;
 import org.SlavaLenin.EassyBooking.app.dao.UserDAO;
-
+import org.SlavaLenin.EassyBooking.app.data.Airline;
+import org.SlavaLenin.EassyBooking.app.data.Airport;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 public class DBManager {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private HashMap<String, Airline> airlines = new HashMap<String, Airline>();
+	private HashMap<String, Airport> airports = new HashMap<String, Airport>();
 	
 	private static DBManager instance;
 	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
@@ -118,4 +124,35 @@ public class DBManager {
 	public void deleteAllFlightReservations() {
 		FlightReservationDAO.deleteAllFlightReservations();
 	}
+	
+	public void storeAirport(String code, Airport airport) {
+		if(!airports.containsKey(code)) 
+			airports.put(code, airport);
+	}
+	
+	public boolean hasAirport(String code) {
+		return airports.containsKey(code);
+	}
+	
+	public Airport getAirport(String code) {
+		if(airports.containsKey(code))
+			return airports.get(code);
+		return null;
+	}
+	
+	public void storeAirline(String code, Airline airline) {
+		if(!airlines.containsKey(code)) 
+			airlines.put(code, airline);
+	}
+	
+	public boolean hasAirline(String code) {
+		return airlines.containsKey(code);
+	}
+	
+	public Airline getAirline(String code) {
+		if(airlines.containsKey(code))
+			return airlines.get(code);
+		return null;
+	}
+	
 }

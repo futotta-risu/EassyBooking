@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 
 import org.SlavaLenin.EassyBooking.app.controller.ServerManagerController;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
@@ -29,6 +30,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
 import java.awt.Toolkit;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
 
 public class ServerManagerFrame extends JFrame {
 
@@ -39,18 +42,22 @@ public class ServerManagerFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textPassword;
 	private JTextField textUsername;
-	private JLabel lblUsernameActual, lblFlightNumberInfo;
+	private JLabel lblUsernameActual, lblFlightNumber;
 	private JTextField textField;
 	private JTextField flightIdSearch;
 	private DefaultListModel<String> flightModel = new DefaultListModel<String>();
 
+	JLabel lblAirportDeparture, lblTotalSeats, lblRemainingSeats, lblDateDeparture;
+	
+	JLabel lblAirline, lblDateArrival, lblAirportArrival;
+	
 	/**
 	 * Create the frame.
 	 */
 	public ServerManagerFrame(ServerManagerController smcontroller) {
 		FileHandler fileHandler = null;
 		try {
-			fileHandler = new FileHandler("myLogFile");
+			fileHandler = new FileHandler("log/eassybooking/eassybookingserver");
 		} catch (SecurityException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -172,33 +179,136 @@ public class ServerManagerFrame extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
                 Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
-                lblFlightNumberInfo.setText(String.valueOf(f.getFlightNumber()));
+                lblFlightNumber.setText(String.valueOf(f.getFlightNumber()));
+                
+                lblTotalSeats.setText(String.valueOf(f.getTotalSeats()));
+                lblRemainingSeats.setText(String.valueOf(f.getNumberRemainingSeats()));
+                
+                lblDateDeparture.setText(f.getDateDeparture().toString());
+                // TODO Airport Functions
+                lblAirportDeparture.setText(DBManager.getInstance().getAirport(f.getAirportDeparture()).getName());
+                
+                lblDateArrival.setText(f.getDateArrival().toString());
+                lblAirportArrival.setText(DBManager.getInstance().getAirport(f.getAirportArrival()).getName());
+            	
+            	lblAirline.setText(DBManager.getInstance().getAirline(f.getAirlineCode()).getName());
+            	
+                
             }
         });
 		JPanel FlightInfoPanel = new JPanel();
 		FlightCenterPanel.add(FlightInfoPanel);
-		FlightInfoPanel.setLayout(new GridLayout(5, 0, 0, 0));
+		FlightInfoPanel.setLayout(new GridLayout(4, 0, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		FlightInfoPanel.add(panel_1);
+		JPanel FlightInfoFlightDataPanel = new JPanel();
+		FlightInfoPanel.add(FlightInfoFlightDataPanel);
+		FlightInfoFlightDataPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lblFlightNumber = new JLabel("Flightnumber:");
-		panel_1.add(lblFlightNumber);
+		JPanel FlightInfoFlightNumberPanel = new JPanel();
+		FlightInfoFlightDataPanel.add(FlightInfoFlightNumberPanel);
 		
-		lblFlightNumberInfo = new JLabel("_");
-		panel_1.add(lblFlightNumberInfo);
+		JLabel lblFlightNumberInfo = new JLabel("Flightnumber:");
+		FlightInfoFlightNumberPanel.add(lblFlightNumberInfo);
 		
-		JPanel panel_2 = new JPanel();
-		FlightInfoPanel.add(panel_2);
+		lblFlightNumber = new JLabel("");
+		FlightInfoFlightNumberPanel.add(lblFlightNumber);
 		
-		JPanel panel_8 = new JPanel();
-		FlightInfoPanel.add(panel_8);
+		JPanel FlightInfoSeatsPanel = new JPanel();
+		FlightInfoFlightDataPanel.add(FlightInfoSeatsPanel);
+		FlightInfoSeatsPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panel_7 = new JPanel();
-		FlightInfoPanel.add(panel_7);
+		JPanel FlightInfoTotalSeatsPanel = new JPanel();
+		FlightInfoSeatsPanel.add(FlightInfoTotalSeatsPanel);
 		
-		JPanel panel_9 = new JPanel();
-		FlightInfoPanel.add(panel_9);
+		JLabel lblTotalSeatsInfo = new JLabel("Seats:");
+		FlightInfoTotalSeatsPanel.add(lblTotalSeatsInfo);
+		
+		lblTotalSeats = new JLabel("");
+		FlightInfoTotalSeatsPanel.add(lblTotalSeats);
+		
+		JPanel FlightInfoRemainingSeatsPanel = new JPanel();
+		FlightInfoSeatsPanel.add(FlightInfoRemainingSeatsPanel);
+		
+		JLabel lblRemainingSeatsInfo = new JLabel("Remaining:");
+		FlightInfoRemainingSeatsPanel.add(lblRemainingSeatsInfo);
+		
+		lblRemainingSeats = new JLabel("");
+		FlightInfoRemainingSeatsPanel.add(lblRemainingSeats);
+		
+		JPanel FlightInfoDeparturePanel = new JPanel();
+		FlightInfoDeparturePanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		FlightInfoPanel.add(FlightInfoDeparturePanel);
+		FlightInfoDeparturePanel.setLayout(new GridLayout(3, 0, 0, 0));
+		
+		JPanel FlightInfoDepartureTitlePanel = new JPanel();
+		FlightInfoDeparturePanel.add(FlightInfoDepartureTitlePanel);
+		
+		JLabel lblDepartureTitle = new JLabel("Departure");
+		lblDepartureTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		FlightInfoDepartureTitlePanel.add(lblDepartureTitle);
+		
+		JPanel FlightInfoDateDeparturePanel = new JPanel();
+		FlightInfoDeparturePanel.add(FlightInfoDateDeparturePanel);
+		
+		JLabel lblDateDepartureInfo = new JLabel("Date:");
+		FlightInfoDateDeparturePanel.add(lblDateDepartureInfo);
+		
+		lblDateDeparture = new JLabel(" ");
+		FlightInfoDateDeparturePanel.add(lblDateDeparture);
+		
+		JPanel FlightInfoAirportDeparturePanel = new JPanel();
+		FlightInfoDeparturePanel.add(FlightInfoAirportDeparturePanel);
+		
+		JLabel lblAirportDepartureInfo = new JLabel("Airport:");
+		FlightInfoAirportDeparturePanel.add(lblAirportDepartureInfo);
+		
+		lblAirportDeparture = new JLabel("");
+		FlightInfoAirportDeparturePanel.add(lblAirportDeparture);
+		
+		JPanel FlightInfoArrivalPanel = new JPanel();
+		FlightInfoPanel.add(FlightInfoArrivalPanel);
+		FlightInfoArrivalPanel.setLayout(new GridLayout(3, 0, 0, 0));
+		
+		JPanel FlightInfoArrivalTitlePanel = new JPanel();
+		FlightInfoArrivalPanel.add(FlightInfoArrivalTitlePanel);
+		
+		JLabel FlightInfoArrivalTitle = new JLabel("Arrival");
+		FlightInfoArrivalTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
+		FlightInfoArrivalTitlePanel.add(FlightInfoArrivalTitle);
+		
+		JPanel FlightInfoDateArrivalPanel = new JPanel();
+		FlightInfoArrivalPanel.add(FlightInfoDateArrivalPanel);
+		
+		JLabel lblDateArrivalInfo = new JLabel("Date:");
+		FlightInfoDateArrivalPanel.add(lblDateArrivalInfo);
+		
+		lblDateArrival = new JLabel("");
+		FlightInfoDateArrivalPanel.add(lblDateArrival);
+		
+		JPanel FlightInfoAirportArrivalPanel = new JPanel();
+		FlightInfoArrivalPanel.add(FlightInfoAirportArrivalPanel);
+		
+		JLabel lblAirportArrivalInfo = new JLabel("Airport:");
+		FlightInfoAirportArrivalPanel.add(lblAirportArrivalInfo);
+		
+		lblAirportArrival = new JLabel("");
+		FlightInfoAirportArrivalPanel.add(lblAirportArrival);
+		
+		JPanel FlightInfoAirlinePanel = new JPanel();
+		FlightInfoPanel.add(FlightInfoAirlinePanel);
+		FlightInfoAirlinePanel.setLayout(new GridLayout(2, 0, 0, 0));
+		
+		JPanel FlightInfoAirlineInfoPanel = new JPanel();
+		FlightInfoAirlinePanel.add(FlightInfoAirlineInfoPanel);
+		
+		lblAirline = new JLabel("Airline");
+		FlightInfoAirlineInfoPanel.add(lblAirline);
+		
+		JPanel FlightInfoButtonsPanel = new JPanel();
+		FlightInfoAirlinePanel.add(FlightInfoButtonsPanel);
+		
+		JButton btnReserval = new JButton("Reservar");
+		FlightInfoButtonsPanel.add(btnReserval);
 		
 		JPanel FlightSearchPanel = new JPanel();
 		FlightPanel.add(FlightSearchPanel, BorderLayout.NORTH);

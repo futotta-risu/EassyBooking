@@ -11,7 +11,7 @@ public class Flight implements Serializable {
 	@Unique
 	private int flightNumber;
 	@NotPersistent
-	private Airline aerolinea;
+	private String airlineCode;
 
 	@NotPersistent
 	private Date dateDeparture;
@@ -29,20 +29,32 @@ public class Flight implements Serializable {
 	
 	@NotPersistent
 	private int numberPassengers;
+	
+	/**
+	 * ICAO of the Departure Airport.
+	 * 
+	 * We can get the Airport object through the DBManager and the getAiport(String code) method
+	 */
 	@NotPersistent
-	private Airport airportDeparture;
+	private String airportDeparture;
+	
+	/**
+	 * ICAO of the Arrival Airport.
+	 * 
+	 * We can get the Airport object through the DBManager and the getAiport(String code) method
+	 */
 	@NotPersistent
-	private Airport airportArrival;
+	private String airportArrival;
 	
 	
 	public Flight() {
 	}
 	
-	public Airline getAerolinea() {
-		return aerolinea;
+	public String getAirlineCode() {
+		return this.airlineCode;
 	}
-	public void setAerolinea(Airline aerolinea) {
-		this.aerolinea = aerolinea;
+	public void setAirlineCode(String airlineCode) {
+		this.airlineCode = airlineCode;
 	}
 	
 	public int getFlightNumber() {
@@ -87,19 +99,19 @@ public class Flight implements Serializable {
 				+ "]";
 	}
 
-	public Airport getAirportDeparture() {
+	public String getAirportDeparture() {
 		return airportDeparture;
 	}
 
-	public void setAirportDeparture(Airport airportDeparture) {
+	public void setAirportDeparture(String airportDeparture) {
 		this.airportDeparture = airportDeparture;
 	}
 
-	public Airport getAirportArrival() {
+	public String getAirportArrival() {
 		return airportArrival;
 	}
 
-	public void setAirportArrival(Airport airportArrival) {
+	public void setAirportArrival(String airportArrival) {
 		this.airportArrival = airportArrival;
 	}
 

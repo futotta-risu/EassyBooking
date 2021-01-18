@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.SlavaLenin.EassyBooking.app.data.Airline;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
 import es.deusto.ingenieria.sd.sms.server.data.AirlineFlightDTO;
@@ -24,6 +26,10 @@ public class KoreanAirGateway implements AirlineGateway {
 			service = (IAirlineManager) java.rmi.Naming.lookup(name);
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
+		}
+		if(!DBManager.getInstance().hasAirline(AirlineEnum.KoreanAir.getCode())) {
+			Airline koreanAir = new Airline("KoreanAir", AirlineEnum.KoreanAir.getCode());
+			DBManager.getInstance().storeAirline(AirlineEnum.KoreanAir.getCode(), koreanAir);
 		}
 	}
 	
@@ -52,6 +58,9 @@ public class KoreanAirGateway implements AirlineGateway {
 				f.setDateDeparture(flightDTO.getDateDeparture());
 				f.setDateArrival(flightDTO.getDateArrival());
 				f.setTotalSeats(flightDTO.getFligthNumber());
+				f.setAirlineCode(AirlineEnum.KoreanAir.getCode());
+				f.setAirportDeparture(flightDTO.getAirportDeparture());
+				f.setAirportArrival(flightDTO.getAirportArrival());
 				flights.add(f);
 			}
 		} catch (RemoteException e) {

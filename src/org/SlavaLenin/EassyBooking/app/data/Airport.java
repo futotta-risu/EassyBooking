@@ -6,6 +6,11 @@ public class Airport {
 	private String airportCode;
 	private int gates;
 	
+	public Airport(String name, String airportCode) {
+		this.name = name;
+		this.airportCode = airportCode;
+	}
+	
 	public String getName() {
 		return name;
 	}
