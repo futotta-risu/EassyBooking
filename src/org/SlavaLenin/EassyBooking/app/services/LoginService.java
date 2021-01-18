@@ -25,12 +25,7 @@ public class LoginService {
 	
 	
 	public User login(String email, String password) throws LoginTypeNotFoundException{
-		LoginGateway logingateway;
-		logingateway = LoginGatewayFactory.create(LoginEnum.Google);
-		
-		UserDTO userDTO = logingateway.login(email, password);
-		User user = new User(userDTO.getUsername());
-		return user;
+		return LoginGatewayFactory.create(LoginEnum.Google).login(email, password);
 	}
 	
 	public User register(String email, String password) {

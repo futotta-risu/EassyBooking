@@ -2,12 +2,14 @@ package org.SlavaLenin.EassyBooking.app.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
+import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
 
 public class AirlineService {
@@ -26,6 +28,7 @@ public class AirlineService {
 	}
 	
 	public List<Flight> buscarVuelo(String id) throws AirlineTypeNotFoundException{
+		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirlineService: buscarVuelo con " + id);
 		
 		List<AirlineGateway> gateways = new ArrayList<AirlineGateway>();
 		

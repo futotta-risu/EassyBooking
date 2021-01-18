@@ -45,7 +45,7 @@
     </target>
 
 	<target name="4.run-example" description="Runs the example">
-        <java classname="org.SlavaLenin.EassyBooking.app.Main" classpathref="classpath" fork="true">
+        <java classname="org.SlavaLenin.EassyBooking.app.controller.ServerManagerController" classpathref="classpath" fork="true">
         	<jvmarg value="-Dlog4j.configuration=log4j.properties"/>
 		</java>
     </target>

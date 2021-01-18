@@ -1,16 +1,13 @@
 package org.SlavaLenin.EassyBooking.app.data;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.*;
-
-import org.SlavaLenin.EassyBooking.app.data.dto.AirlineFlightDTO;
-import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {
 
+	private static final long serialVersionUID = 89562850644839269L;
 	@Unique
 	private int flightNumber;
 	@NotPersistent
@@ -38,13 +35,7 @@ public class Flight implements Serializable {
 	private Airport airportArrival;
 	
 	
-	public Flight(AirlineFlightDTO afdto) {
-		this.aerolinea = DBManager.getInstance().getAirlinetByEnum(afdto.getAirline());
-		this.airportDeparture = DBManager.getInstance().getAirportByCode(afdto.getAirportDeparture());
-		this.airportArrival = DBManager.getInstance().getAirportByCode(afdto.getAirportDeparture());
-		this.dateArrival = afdto.getDateArrival();
-		this.dateDeparture = afdto.getDateDeparture();
-		this.flightNumber = afdto.getFligthNumber();
+	public Flight() {
 	}
 	
 	public Airline getAerolinea() {
@@ -92,7 +83,8 @@ public class Flight implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Flight [flightNumber=" + flightNumber + "]";
+		return "Flight [id=" + flightNumber + ", date=" + dateDeparture
+				+ "]";
 	}
 
 	public Airport getAirportDeparture() {

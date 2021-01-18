@@ -12,7 +12,7 @@ import es.deusto.ingenieria.sd.sms.server.remote.ILoginManager;
 
 public class GoogleGateway implements LoginGateway {
 
-	private String name =  "//" + "127.0.0.1" + ":" + 1079 + "/" + "Google";
+	private String name =  "//" + "127.0.0.1" + ":" + 1099 + "/" + "Google";
 	private ILoginManager service = null;
 	
 	public GoogleGateway() {
@@ -24,21 +24,14 @@ public class GoogleGateway implements LoginGateway {
 	}
 	
 	@Override
-	public UserDTO login(String email, String password) {
+	public User login(String email, String password) {
 		try {
 			LoginUserDTO loginUserDTO = service.login(email, password);
-			// Falta parte del DBManager
-			/*
-			 * if(!DBManager.userExists(user))
-			 * 		DBManager.createUser(loginUserDTO.email)
-			 */
-			
-			// Opción 2: LoginUserDTO -> UserDTO
-			/*
-			 * return UserDTO(loginUserDTO.email,loginUserDTO.password)
-			 */
+			if(loginUserDTO == null)
+				return null;
+			return new User(loginUserDTO.getUsername());
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		return null;
 	}

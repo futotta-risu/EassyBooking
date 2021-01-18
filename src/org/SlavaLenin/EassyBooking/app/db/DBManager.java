@@ -3,10 +3,7 @@ package org.SlavaLenin.EassyBooking.app.db;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
-import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.dao.FlightDAO;
 import org.SlavaLenin.EassyBooking.app.dao.FlightReservationDAO;
@@ -17,8 +14,6 @@ import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
-import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
-import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 public class DBManager {
 	

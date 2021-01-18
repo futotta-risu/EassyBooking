@@ -11,12 +11,9 @@ public class EntityDataService {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+/*
 	public FlightDTO getFlight(String id) {
-		
-		
 		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
-		
 	}
 	
 	public UserDTO getUser(String username) {
@@ -24,5 +21,5 @@ public class EntityDataService {
 		return LoginService.getInstance().getUser(username);
 
 	}
-	
+	*/
 }
