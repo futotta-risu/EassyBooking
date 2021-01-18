@@ -22,7 +22,7 @@ public class DBManager {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private HashMap<String, Airline> airlines = new HashMap<String, Airline>();
+	private HashMap<AirlineEnum, Airline> airlines = new HashMap<AirlineEnum, Airline>();
 	private HashMap<String, Airport> airports = new HashMap<String, Airport>();
 	
 	private static DBManager instance;
@@ -140,16 +140,16 @@ public class DBManager {
 		return null;
 	}
 	
-	public void storeAirline(String code, Airline airline) {
+	public void storeAirline(AirlineEnum code, Airline airline) {
 		if(!airlines.containsKey(code)) 
 			airlines.put(code, airline);
 	}
 	
-	public boolean hasAirline(String code) {
+	public boolean hasAirline(AirlineEnum code) {
 		return airlines.containsKey(code);
 	}
 	
-	public Airline getAirline(String code) {
+	public Airline getAirline(AirlineEnum code) {
 		if(airlines.containsKey(code))
 			return airlines.get(code);
 		return null;

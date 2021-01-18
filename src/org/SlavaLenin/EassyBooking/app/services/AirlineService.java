@@ -7,8 +7,6 @@ import java.util.logging.Logger;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
-import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
 
@@ -20,37 +18,30 @@ public class AirlineService {
 	}
 	
 	public static AirlineService getInstance() {
-		if (instance == null) {
+		if (instance == null) 
 			instance = new AirlineService();
-		}
-
+		
 		return instance;
 	}
 	
-	public List<Flight> buscarVuelo(String id) throws AirlineTypeNotFoundException{
-		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirlineService: buscarVuelo con " + id);
+	public List<Flight> buscarVuelo(String id) {
+		Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
+		logger.info("BuscarVuelo con " + id);
 		
-		List<AirlineGateway> gateways = new ArrayList<AirlineGateway>();
+		List<Flight> searchFlights = new ArrayList<Flight>();
 		
-		for (AirlineEnum airline : AirlineEnum.values()) {
-			gateways.add(AirlineGatewayFactory.create(airline));
-		}
+		for (AirlineEnum airline : AirlineEnum.values()) 
+			searchFlights.addAll(AirlineGatewayFactory.create(airline).buscar(id));
 		
-		List<Flight> result = new ArrayList<Flight>();
-		
-		for (AirlineGateway gateway : gateways) {
-			List<Flight> temp = gateway.buscar(id);
-			for (Flight flight : temp) {
-				result.add(flight);
-			}	
-		}
-		return result;
+		logger.info("Se han encontrado " + searchFlights.size() + " vuelos");
+		return searchFlights;
 	}
 	
 	
-	public void reservar(String id, AirlineEnum airline) throws AirlineTypeNotFoundException{
-		AirlineGateway gateway = AirlineGatewayFactory.create(airline);
-		gateway.reservar(id);
+	public void reservar(String id, AirlineEnum airline){
+		Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
+		logger.info("Reservando vuelo con id " + id + " en la aerolinea " + airline.getCode());
+		AirlineGatewayFactory.create(airline).reservar(id);
 	}
 	
 

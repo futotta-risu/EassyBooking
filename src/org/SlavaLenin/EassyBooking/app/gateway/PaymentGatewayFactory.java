@@ -5,22 +5,25 @@ import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaypalGateway;
 
-class PaymentTypeNotFoundException extends Exception {
-	public PaymentTypeNotFoundException(String errorMessage) {
-        super(errorMessage);
-    }
-}
 
 
 public class PaymentGatewayFactory {
-	public PaymentGateway create(PaymentEnum paymentType) throws PaymentTypeNotFoundException{
+	
+	/** 
+	 * Creates the PaymentGateway object.
+	 * 
+	 * The default gateway is Paypal.
+	 * 
+	 * @param paymentType PaymentEnum
+	 */
+	public PaymentGateway create(PaymentEnum paymentType){
 		switch(paymentType) {
 		case Paypal:
 			return new PaypalGateway();
 		case CreditCard:
 			return new CreditCardGateway();
 		default:
-			throw new PaymentTypeNotFoundException("The Payment Method: " + paymentType.toString() + " isn't implemented");
+			return new PaypalGateway();
 		}
 	}
 }

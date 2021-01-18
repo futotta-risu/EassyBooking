@@ -27,9 +27,9 @@ public class KoreanAirGateway implements AirlineGateway {
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			e.printStackTrace();
 		}
-		if(!DBManager.getInstance().hasAirline(AirlineEnum.KoreanAir.getCode())) {
-			Airline koreanAir = new Airline("KoreanAir", AirlineEnum.KoreanAir.getCode());
-			DBManager.getInstance().storeAirline(AirlineEnum.KoreanAir.getCode(), koreanAir);
+		if(!DBManager.getInstance().hasAirline(AirlineEnum.KoreanAir)) {
+			Airline koreanAir = new Airline("KoreanAir", AirlineEnum.KoreanAir);
+			DBManager.getInstance().storeAirline(AirlineEnum.KoreanAir, koreanAir);
 		}
 	}
 	
@@ -45,26 +45,24 @@ public class KoreanAirGateway implements AirlineGateway {
 
 	@Override
 	public List<Flight> buscar(String id) {
-		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: buscar con " + id);
+		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: Busqueda de id " + id);
 		List<Flight> flights = new ArrayList<Flight>();
 		try {
-			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: buscando " + id);
 			List<AirlineFlightDTO> flightsDTO = service.buscar(id);
-			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: busqueda acabada "
-					+ "con un total de " + flightsDTO.size() + " vuelos" );
+			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: La busqueda ha devuelto "
+					+ flightsDTO.size() + " vuelos." );
 			for(AirlineFlightDTO flightDTO : flightsDTO) {
 				Flight f = new Flight();
 				f.setFlightNumber(flightDTO.getFligthNumber());
 				f.setDateDeparture(flightDTO.getDateDeparture());
 				f.setDateArrival(flightDTO.getDateArrival());
 				f.setTotalSeats(flightDTO.getFligthNumber());
-				f.setAirlineCode(AirlineEnum.KoreanAir.getCode());
+				f.setAirline(AirlineEnum.KoreanAir);
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				flights.add(f);
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("El tamaño de vuelos es de " + flights.size());

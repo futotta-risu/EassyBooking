@@ -11,6 +11,7 @@ import javax.swing.event.ListSelectionListener;
 import org.SlavaLenin.EassyBooking.app.controller.ServerManagerController;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
@@ -22,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -29,6 +31,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
@@ -51,6 +55,8 @@ public class ServerManagerFrame extends JFrame {
 	
 	JLabel lblAirline, lblDateArrival, lblAirportArrival;
 	
+	Flight selectedFlight = null;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -64,12 +70,14 @@ public class ServerManagerFrame extends JFrame {
 			e1.printStackTrace();
 		}
 		LOGGER.addHandler(fileHandler);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\whiwho\\Documents\\GitHub\\EassyBooking\\img\\pengu2.png"));
 		
-		setTitle("EassyBooking Server");
 		this.smcontroller = smcontroller;
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\whiwho\\Documents\\GitHub\\EassyBooking\\img\\pengu2.png"));
+		setTitle("EassyBooking Server");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 450);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -179,19 +187,20 @@ public class ServerManagerFrame extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
                 Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
+                selectedFlight = f;
                 lblFlightNumber.setText(String.valueOf(f.getFlightNumber()));
                 
                 lblTotalSeats.setText(String.valueOf(f.getTotalSeats()));
                 lblRemainingSeats.setText(String.valueOf(f.getNumberRemainingSeats()));
                 
-                lblDateDeparture.setText(f.getDateDeparture().toString());
+                lblDateDeparture.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateDeparture()));
                 // TODO Airport Functions
                 lblAirportDeparture.setText(DBManager.getInstance().getAirport(f.getAirportDeparture()).getName());
                 
-                lblDateArrival.setText(f.getDateArrival().toString());
+                lblDateArrival.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateArrival()));
                 lblAirportArrival.setText(DBManager.getInstance().getAirport(f.getAirportArrival()).getName());
             	
-            	lblAirline.setText(DBManager.getInstance().getAirline(f.getAirlineCode()).getName());
+            	lblAirline.setText(DBManager.getInstance().getAirline(f.getAirline()).getName());
             	
                 
             }
@@ -308,6 +317,14 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirlinePanel.add(FlightInfoButtonsPanel);
 		
 		JButton btnReserval = new JButton("Reservar");
+		btnReserval.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(selectedFlight == null) 
+					JOptionPane.showMessageDialog(new JFrame(), "You have no flight selected.");
+				else
+					smcontroller.bookFlight(String.valueOf(selectedFlight.getFlightNumber()), selectedFlight.getAirline());
+			}
+		});
 		FlightInfoButtonsPanel.add(btnReserval);
 		
 		JPanel FlightSearchPanel = new JPanel();

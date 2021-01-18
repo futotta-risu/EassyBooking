@@ -1,11 +1,14 @@
 package org.SlavaLenin.EassyBooking.app.data;
 
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+
 public class Airline {
-	private String name, code;
+	private String name;
+	AirlineEnum enumVal;
 	
-	public Airline(String name, String code) {
+	public Airline(String name, AirlineEnum enumVal) {
 		this.name = name;
-		this.code = code;
+		this.enumVal = enumVal;
 	}
 
 	public String getName() {
@@ -14,11 +17,13 @@ public class Airline {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCode() {
-		return code;
+
+	public AirlineEnum getEnumVal() {
+		return enumVal;
 	}
-	public void setICAO(String code) {
-		this.code = code;
+
+	public void setEnumVal(AirlineEnum enumVal) {
+		this.enumVal = enumVal;
 	}
 	
 

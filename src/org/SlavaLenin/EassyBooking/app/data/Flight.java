@@ -1,8 +1,11 @@
 package org.SlavaLenin.EassyBooking.app.data;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.jdo.annotations.*;
+
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {
@@ -11,12 +14,10 @@ public class Flight implements Serializable {
 	@Unique
 	private int flightNumber;
 	@NotPersistent
-	private String airlineCode;
+	private AirlineEnum airline;
 
 	@NotPersistent
-	private Date dateDeparture;
-	@NotPersistent
-	private Date dateArrival;
+	private Date dateDeparture, dateArrival;
 	@NotPersistent
 	private int totalSeats;
 	@NotPersistent
@@ -31,30 +32,22 @@ public class Flight implements Serializable {
 	private int numberPassengers;
 	
 	/**
-	 * ICAO of the Departure Airport.
+	 * ICAO of the Airports.
 	 * 
 	 * We can get the Airport object through the DBManager and the getAiport(String code) method
 	 */
 	@NotPersistent
-	private String airportDeparture;
-	
-	/**
-	 * ICAO of the Arrival Airport.
-	 * 
-	 * We can get the Airport object through the DBManager and the getAiport(String code) method
-	 */
-	@NotPersistent
-	private String airportArrival;
+	private String airportDeparture, airportArrival;
 	
 	
 	public Flight() {
 	}
 	
-	public String getAirlineCode() {
-		return this.airlineCode;
+	public AirlineEnum getAirline() {
+		return this.airline;
 	}
-	public void setAirlineCode(String airlineCode) {
-		this.airlineCode = airlineCode;
+	public void setAirline(AirlineEnum airlineCode) {
+		this.airline = airlineCode;
 	}
 	
 	public int getFlightNumber() {
@@ -95,8 +88,8 @@ public class Flight implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Flight [id=" + flightNumber + ", date=" + dateDeparture
-				+ "]";
+		String dateFormat = new SimpleDateFormat("dd/MM hh:mm").format(this.getDateArrival());
+		return airportDeparture + "/" + airportArrival+ "\t " + dateFormat;
 	}
 
 	public String getAirportDeparture() {

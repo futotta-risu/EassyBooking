@@ -7,8 +7,6 @@ import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
@@ -34,7 +32,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		return instance;
 	}
 
-	public void login(String email, String password) throws LoginTypeNotFoundException, RemoteException {
+	public void login(String email, String password) throws RemoteException {
 		System.out.println(" *RemoteFacade LOGIN: " + email + "/" + password);
 		this.user = LoginService.getInstance().login(email, password);
 	}
@@ -45,7 +43,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 	}
 
 
-	public void reservarVuelo(String id, AirlineEnum airline) throws AirlineTypeNotFoundException , RemoteException {
+	public void reservarVuelo(String id, AirlineEnum airline) throws RemoteException {
 		if (user != null) {
 			System.out.println(" *RemoteFacade RESERVA de vuelo: " + id + "/" + airline);
 			AirlineService.getInstance().reservar(id, airline);
@@ -53,7 +51,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		
 	}
 
-	public List<FlightDTO> buscarVuelo(String id) throws AirlineTypeNotFoundException , RemoteException {
+	public List<FlightDTO> buscarVuelo(String id) throws RemoteException {
 		System.out.println(" *RemoteFacade BUSCAR Vuelo: " + id);
 		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
 	}

@@ -4,7 +4,6 @@ import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.LoginGatewayFactory;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
@@ -24,8 +23,8 @@ public class LoginService {
 	}
 	
 	
-	public User login(String email, String password) throws LoginTypeNotFoundException{
-		return LoginGatewayFactory.create(LoginEnum.Google).login(email, password);
+	public User login(String email, String password, LoginEnum loginType){
+		return LoginGatewayFactory.create(loginType).login(email, password);
 	}
 	
 	public User register(String email, String password) {

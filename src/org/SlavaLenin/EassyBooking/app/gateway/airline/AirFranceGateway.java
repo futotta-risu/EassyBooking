@@ -12,9 +12,9 @@ import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 public class AirFranceGateway implements AirlineGateway {
 
 	public AirFranceGateway() {
-		if(!DBManager.getInstance().hasAirline(AirlineEnum.AirFrance.getCode())) {
-			Airline koreanAir = new Airline("AirFrance", AirlineEnum.AirFrance.getCode());
-			DBManager.getInstance().storeAirline(AirlineEnum.AirFrance.getCode(), koreanAir);
+		if(!DBManager.getInstance().hasAirline(AirlineEnum.AirFrance)) {
+			Airline koreanAir = new Airline("AirFrance", AirlineEnum.AirFrance);
+			DBManager.getInstance().storeAirline(AirlineEnum.AirFrance, koreanAir);
 		}
 	}
 	

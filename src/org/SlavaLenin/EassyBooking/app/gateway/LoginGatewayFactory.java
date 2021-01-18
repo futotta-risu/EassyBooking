@@ -4,17 +4,22 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.GoogleGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.*;
-
-
 
 public class LoginGatewayFactory {
-	public static LoginGateway create(LoginEnum loginType) throws LoginTypeNotFoundException{
+	
+	/** 
+	 * Creates the LoginGateway object.
+	 * 
+	 * The default gateway is Google.
+	 * 
+	 * @param loginType LoginEnum
+	 */
+	public static LoginGateway create(LoginEnum loginType) {
 		switch(loginType) {
 		case Google:
 			return new GoogleGateway();
 		default:
-			throw new LoginTypeNotFoundException("The Login Method: " + loginType.toString() + " isn't implemented");
+			return new GoogleGateway();
 		}
 	}
 }

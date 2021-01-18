@@ -1,7 +1,5 @@
 package org.SlavaLenin.EassyBooking.app.controller;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +12,8 @@ import org.SlavaLenin.EassyBooking.app.data.Airport;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.AirlineTypeNotFoundException;
-import org.SlavaLenin.EassyBooking.app.gateway.exceptions.LoginTypeNotFoundException;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
@@ -29,42 +27,39 @@ public class ServerManagerController {
 	}
 	
     public String login(String username, String password){
-    	System.out.println("------------");
-    	try {
-			User user = LoginService.getInstance().login(username, password);
-			System.out.println("Todo salio a pedir de milhouse");
-			if(user == null) {
-				System.out.println("El user no existe");
-				
-			}else {
-				System.out.println("El user es " + user.getUsername());
-				return user.getUsername();
-			}
-		} catch (LoginTypeNotFoundException e) {
-			System.err.println("Error escogiendo el tipo de login");
-		} 
-    	System.out.println("------------");
-    	return null;
+    	Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
+    	logger.info("ServerManagerController: Login de " + username);
+    	
+    	User user = LoginService.getInstance().login(username, password, LoginEnum.Google);
+    	
+    	if(user == null) {
+    		logger.info("ServerManagerController: Login fallido con el user " + username);
+    		return null;
+    	}
+    	
+    	logger.info("ServerManagerController: Logeado con el user " + username);
+		return user.getUsername();
     }
     
     public List<Flight> searchFlight(String id){
-    	Logger.getLogger(ServerManagerFrame.class.getName()).info("Controller: SearchFlight con " + id);
-    	flightSearchResult = new ArrayList<Flight>();
-		try {
-			flightSearchResult = AirlineService.getInstance().buscarVuelo(id);
-		} catch (AirlineTypeNotFoundException e) {
-			e.printStackTrace();
-		} 	
+    	Logger.getLogger(ServerManagerFrame.class.getName()).info("ServerManagerController: SearchFlight con " + id);
+    	
+    	flightSearchResult = AirlineService.getInstance().buscarVuelo(id);
+    	
     	return flightSearchResult;
     }
     
-    public Flight getFlightFromSearch(int index) {
-    	if(index>=0 && index < flightSearchResult.size())
-    		return flightSearchResult.get(index);
-		return null;
+    public void bookFlight(String id, AirlineEnum airline) {
+    	Logger.getLogger(ServerManagerFrame.class.getName()).info("Controller: BookFlight con " + id + " and Airline " + airline.getCode());
+    	
+		AirlineService.getInstance().reservar(id, airline);
+			
     }
     
-  
+    public Flight getFlightFromSearch(int index) {
+    	return flightSearchResult.get(index);
+    }
+    
     public void exit(){
     	System.exit(0);
     }
