@@ -34,13 +34,10 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id) {
-		try {
-			service.reservar(id);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void reservar(String id) throws RemoteException {
+		// TODO Maybe change exception handling
+		service.reservar(id);
+		
 	}
 
 	@Override

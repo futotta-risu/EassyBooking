@@ -1,5 +1,6 @@
 package org.SlavaLenin.EassyBooking.app.gateway.airline;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ public class AirFranceGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id) {
+	public void reservar(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 	}
 

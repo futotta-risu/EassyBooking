@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jdo.annotations.*;
 
+import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
+
 
 @PersistenceCapable(detachable = "true")
 public class User implements Serializable {
@@ -14,7 +16,7 @@ public class User implements Serializable {
 	private String username;
 	private String name;
 	private String email;
-	private int loginSystemType;
+	private LoginEnum loginSystemType;
 	
 	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")
 	@Join
