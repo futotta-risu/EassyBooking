@@ -27,8 +27,8 @@ public class LoginService {
 		return LoginGatewayFactory.create(loginType).login(email, password);
 	}
 	
-	public User register(String email, String password) {
-		User user = DBManager.getInstance().getUser(email);
+	public User register(String email, String password, LoginEnum registerType) {
+		User user = LoginGatewayFactory.create(registerType).login(email, password);
 		
 		if(user == null) {
 			user = new User(email);
