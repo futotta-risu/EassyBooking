@@ -6,8 +6,14 @@ import javax.jdo.PersistenceManagerFactory;
 
 
 public class GenericDAO {
-
-	public static PersistenceManagerFactory pmf = null;
+	
+	private static PersistenceManagerFactory pmf = null;
+	
+	public static PersistenceManagerFactory getPMF() {
+		if(pmf == null)
+			pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		return pmf;
+	}
 
 	public GenericDAO() {
 		if(pmf == null)

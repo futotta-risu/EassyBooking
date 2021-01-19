@@ -105,6 +105,19 @@ public class ServerManagerFrame extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnNewButton_1 = new JButton("REgister");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserDTO user = smcontroller.register(textUsername.getText(), textPassword.getText());
+				if(user == null) {
+					lblUsernameActual.setText("%None%");
+				}else {
+					lblUsernameActual.setText(user.getUsername());
+				}
+			}
+		});
+		LobinButtonPanel.add(btnNewButton_1);
 		LobinButtonPanel.add(btnNewButton);
 		
 		JPanel LoginFieldsPanel = new JPanel();
@@ -290,6 +303,12 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirlineInfoPanel.add(lblAirline);
 		
 		JButton btnReserval = new JButton("Reservar");
+		btnReserval.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
+				smcontroller.bookFlight(String.valueOf(f.getFlightID()));
+			}
+		});
 		btnReserval.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		btnReserval.setForeground(Color.WHITE);
 		btnReserval.setBackground(SystemColor.textHighlight);

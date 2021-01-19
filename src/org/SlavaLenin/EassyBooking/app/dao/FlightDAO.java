@@ -17,7 +17,8 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public static void storeFlight(Flight flight) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		System.out.println("Guardando vuelo");
+		PersistenceManager pm = getPMF().getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
 		try{
@@ -36,7 +37,7 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public static List<Flight> getFlights() {
-			PersistenceManager pm = pmf.getPersistenceManager();
+			PersistenceManager pm = getPMF().getPersistenceManager();
 			pm.getFetchPlan().setMaxFetchDepth(3);
 
 			Transaction tx = pm.currentTransaction();
@@ -68,7 +69,7 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public static Flight getFlight(String flightID) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
@@ -97,7 +98,7 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public static void updateFlight(Flight flight) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		try {
@@ -119,7 +120,7 @@ public class FlightDAO extends GenericDAO{
 	@Deprecated
 	public void deleteAllFligths() {
 		System.out.println("- Cleaning the DB...");
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
 		try {

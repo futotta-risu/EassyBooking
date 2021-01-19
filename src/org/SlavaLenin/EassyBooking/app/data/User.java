@@ -35,6 +35,7 @@ public class User implements Serializable {
 	public User() {
 		this.flightReservations = new ArrayList<>();
 		this.pagos = new ArrayList<>();
+		this.sessionKey = "123456789";
 	}
 	
 	public User(String email) {
@@ -42,6 +43,8 @@ public class User implements Serializable {
 		this.username = email;
 		this.flightReservations = new ArrayList<>();
 		this.pagos = new ArrayList<>();
+		
+		this.sessionKey = "123456789";
 	}
 	
 	public List<FlightReservation> getFlightReservations() {
@@ -105,7 +108,7 @@ public class User implements Serializable {
 	}
 	
 	public boolean checkSessionKey(String sessionKey) {
-		return sessionKey == this.sessionKey;
+		return sessionKey.equals(this.sessionKey);
 	}
 	
 	@Override

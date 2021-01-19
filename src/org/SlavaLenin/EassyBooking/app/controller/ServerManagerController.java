@@ -34,9 +34,20 @@ public class ServerManagerController {
 		new ServerManagerFrame(this);
 	}
 	
+	public UserDTO register(String username, String password) {
+		Logger logger = ServerLogger.getLogger();
+    	logger.info("Register user " + username);
+    	user = LoginService.getInstance().register(username, password, LoginEnum.Google);
+    	if(user == null) {
+    		logger.info("Registro fallido " + username);
+    		return null;
+    	}
+    	return user;
+	}
+	
     public UserDTO login(String username, String password){
     	Logger logger = ServerLogger.getLogger();
-    	logger.info("ServerManagerController: Login de " + username);
+    	logger.info("Login de " + username);
     	
     	UserDTO user = LoginService.getInstance().login(username, password, LoginEnum.Google);
     	
@@ -61,12 +72,15 @@ public class ServerManagerController {
     	Logger logger = ServerLogger.getLogger();
     	logger.info("BookFlight with " + id );
     	
-    	Flight f = DBManager.getInstance().getFlight(id);
     	
     	if(user == null) {
-    		logger.severe("No user available on id " + id + " and Airline " + f.getAirline().getCode());
+    		logger.severe("No user currently logged");
     		return;
     	}
+    	
+    	Flight f = DBManager.getInstance().getFlight(id);
+    	System.out.println("--------------");
+    	System.out.println(f);
 		AirlineService.getInstance().reservar(id, user.getUsername(), user.getSessionKey());
 		
 		

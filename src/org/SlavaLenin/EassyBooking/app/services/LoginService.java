@@ -25,18 +25,24 @@ public class LoginService {
 	
 	
 	public UserDTO login(String email, String password, LoginEnum loginType){
+		/*
+		 * Si login con google bien, sacar de base de datos si existe.
+		 */
 		UserAssembler userAssembler = new UserAssembler();
 		return userAssembler.assemble(LoginGatewayFactory.getInstance().create(loginType).login(email, password));
 	}
 	
-	public User register(String email, String password, LoginEnum registerType) {
+	public UserDTO register(String email, String password, LoginEnum registerType) {
+		// Si login bien, crear en db.
 		User user = LoginGatewayFactory.getInstance().create(registerType).login(email, password);
-		
-		if(user == null) {
-			user = new User(email);
+		if(DBManager.getInstance().getUser(user.getUsername()) == null) {
+			
 			DBManager.getInstance().storeUser(user);
+			
+			user = DBManager.getInstance().getUser(email);
 		}
-		return user;
+		UserAssembler userAssembler = new UserAssembler();
+		return userAssembler.assemble(user);
 
 	}
 

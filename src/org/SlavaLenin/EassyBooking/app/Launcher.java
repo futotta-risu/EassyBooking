@@ -23,7 +23,7 @@ import org.SlavaLenin.EassyBooking.app.data.PassengerInfo;
 import org.SlavaLenin.EassyBooking.app.data.User;
 
 
-public class Main {
+public class Launcher {
 	
 	public static void printAll(FlightDAO flightDAO, FlightReservationDAO flightReservationDAO, PagoDAO pagoDAO, UserDAO userDAO) {
 		System.out.println("---------SELECT ALL --------");
@@ -65,7 +65,7 @@ public class Main {
 	    PassengerInfo passengerInfo = new PassengerInfo();
 
 	    List<FlightReservation> listaReservas = new ArrayList<FlightReservation>();
-	    Pago pago = new Pago();
+	    Pago pago = new Pago(null, 0, null, null);
 	    Flight flight = new Flight();
 	    FlightReservation flightReservation = new FlightReservation();
 	    User user = new User();
@@ -107,9 +107,7 @@ public class Main {
 
 		// -------- USER ---------------
 	    user.setEmail("kfjeejw@gmail.com");
-	    user.setLoginSystemType(2);
 	    user.setName("NombreUser");
-	    user.setOAuth("djofndspfmmfp83yr8y2gf293fh");
 	    user.setUsername("Username1234");
 	    userDAO.storeUser(user);
 	    
@@ -174,7 +172,6 @@ public class Main {
 
 
 }*/
-
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.Random;
@@ -234,4 +231,5 @@ public class Launcher {
 		}
     	
     }
+
 }

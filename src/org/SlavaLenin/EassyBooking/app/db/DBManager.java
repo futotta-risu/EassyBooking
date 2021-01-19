@@ -58,9 +58,15 @@ public class DBManager {
 	}
 	
 	public User getUserWithKey(String username, String sessionKey) {
+		System.out.println("1-1");
 		User user = this.getUser(username);
+		System.out.println("JIJJIIJJ 2-1" + user);
+		if(user == null) return null;
+		
+		System.out.println("31-1");
 		if(!user.checkSessionKey(sessionKey))
 			return null;
+		System.out.println("41-1");
 		return user;
 	}
 	
@@ -93,6 +99,11 @@ public class DBManager {
 	// -------------- FLIGHT -----------------
 	public void storeFlight(Flight flight) {
 		FlightDAO.storeFlight(flight);
+	}
+	
+	public void storeFlights(List<Flight> flights) {
+		for(Flight f : flights)
+			storeFlight(f);
 	}
 	
 	public List<Flight> getFlights() {

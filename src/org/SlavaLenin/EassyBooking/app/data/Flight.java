@@ -21,7 +21,6 @@ public class Flight implements Serializable {
 	@NotPersistent
 	private int price;
 	
-	@NotPersistent
 	private AirlineEnum airline;
 
 	@NotPersistent
@@ -132,7 +131,10 @@ public class Flight implements Serializable {
 	
 	@Override
 	public String toString() {
+		if(this.getDateArrival() == null) return "NULL1";
 		String dateFormat = new SimpleDateFormat("dd/MM hh:mm").format(this.getDateArrival());
+		if(airportDeparture == null) return "NULL2";
+		if(airportArrival == null) return "NULL3";
 		return airportDeparture + "/" + airportArrival+ "\t " + dateFormat;
 	}
 

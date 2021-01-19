@@ -16,7 +16,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public static void storePago(Pago pago) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
 		try{
@@ -35,7 +35,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public static List<Pago> getPagos() {
-			PersistenceManager pm = pmf.getPersistenceManager();
+			PersistenceManager pm = getPMF().getPersistenceManager();
 			pm.getFetchPlan().setMaxFetchDepth(3);
 
 			Transaction tx = pm.currentTransaction();
@@ -67,7 +67,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public static Pago getPago(String id_pago) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
@@ -96,7 +96,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public static void updatePago(Pago pago) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		try {
@@ -117,7 +117,7 @@ public class PagoDAO extends GenericDAO{
 	}
 	
 	public static void deletePago(String id_pago) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 
 		Transaction tx = pm.currentTransaction();
 		Pago pago = null;
@@ -149,7 +149,7 @@ public class PagoDAO extends GenericDAO{
 	
 	public static void deleteAllPagos() {
 		System.out.println("- Cleaning the DB...");
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		List<String> IDs = new ArrayList<String>();
 		try {

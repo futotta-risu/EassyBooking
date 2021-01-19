@@ -16,13 +16,18 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public static void storeUser(User user) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
 		try{
+			System.out.println("JOJJOJOJ1");
+			System.out.println(user);
 	        tx.begin();
+	        System.out.println("JOJJOJOJ2");
 	        pm.makePersistent(user);
+	        System.out.println("JOJJOJOJ3");
 	        tx.commit();
+	        System.out.println("JOJJOJOJ4");
 	    }catch(Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -35,7 +40,7 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public static List<User> getUsers() {
-			PersistenceManager pm = pmf.getPersistenceManager();
+			PersistenceManager pm = getPMF().getPersistenceManager();
 			/*
 			 * By default only 1 level is retrieved from the db so if we wish to fetch more
 			 * than one level, we must indicate it
@@ -71,7 +76,7 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public static User getUser(String username) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 
 		Transaction tx = pm.currentTransaction();
 		User user = null;
@@ -99,7 +104,7 @@ public class UserDAO extends GenericDAO{
 	}
 	
 	public static void updateUser(User user) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		try {

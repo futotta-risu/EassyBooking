@@ -17,7 +17,7 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	public static void storeFlightReservation(FlightReservation flightreservation) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
 
 		try{
@@ -36,7 +36,7 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	public static List<FlightReservation> getFlightReservations() {
-			PersistenceManager pm = pmf.getPersistenceManager();
+			PersistenceManager pm = getPMF().getPersistenceManager();
 
 			Transaction tx = pm.currentTransaction();
 			List<FlightReservation> products = new ArrayList<>();
@@ -67,7 +67,7 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	public static FlightReservation getFlightReservation(String flightReservationID) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
@@ -97,7 +97,7 @@ public class FlightReservationDAO extends GenericDAO{
 	}
 	
 	public static void updateFlightReservation(FlightReservation flightreservation) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		try {
@@ -118,7 +118,7 @@ public class FlightReservationDAO extends GenericDAO{
 	
 	
 	public static void deleteFlightReservation(String flightReservationID) {
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 
 		Transaction tx = pm.currentTransaction();
 		FlightReservation flightReservation = null;
@@ -149,7 +149,7 @@ public class FlightReservationDAO extends GenericDAO{
 	
 	public static void deleteAllFlightReservations() {
 		System.out.println("- Cleaning the DB...");
-		PersistenceManager pm = pmf.getPersistenceManager();
+		PersistenceManager pm = getPMF().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		List<String> IDs = new ArrayList<String>();
 		try {

@@ -25,7 +25,12 @@ public class PaypalGateway implements PaymentGateway {
 	
 	@Override
 	public void pay(String user, int amount) {
-		service.pay(user, amount);
+		try {
+			service.pay(user, amount);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

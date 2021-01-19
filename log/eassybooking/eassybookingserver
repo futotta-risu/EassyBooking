@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="windows-1252" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
+<record>
+  <date>2021-01-19T17:14:59.125560800Z</date>
+  <millis>1611076499125</millis>
+  <nanos>560800</nanos>
+  <sequence>0</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Register user erik@gmail.com</message>
+</record>
 </log>

@@ -49,7 +49,7 @@
     </target>
 
 	<target name="4.run-example" description="Runs the example">
-        <java classname="org.SlavaLenin.EassyBooking.app.controller.ServerManagerController" classpathref="classpath" fork="true">
+        <java classname="org.SlavaLenin.EassyBooking.app.Launcher" classpathref="classpath" fork="true">
         	<jvmarg value="-Dlog4j.configuration=log4j.properties"/>
         	<jvmarg value="-Djava.rmi.server.codebase=file:${build.dir}/"/>
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			

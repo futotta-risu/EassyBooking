@@ -45,9 +45,13 @@ public class AirlineService {
 		
 		List<Flight> searchFlights = new ArrayList<Flight>();
 		
-		for (AirlineEnum airline : AirlineEnum.values()) 
-			searchFlights.addAll(AirlineGatewayFactory.create(airline).buscar(id));
-		
+		for (AirlineEnum airline : AirlineEnum.values()) {
+			List<Flight> airlineSearchFlights= AirlineGatewayFactory.create(airline).buscar(id);
+			List<Flight> airlineSearchFlightsCopy = new ArrayList<Flight>(airlineSearchFlights);
+			searchFlights.addAll(airlineSearchFlightsCopy);
+			DBManager.getInstance().storeFlights(airlineSearchFlights);
+		}
+			
 		logger.info("Se han encontrado " + searchFlights.size() + " vuelos");
 		return searchFlights;
 	}
@@ -73,16 +77,21 @@ public class AirlineService {
 		
 		User user = DBManager.getInstance().getUserWithKey(username, sessionKey);
 		if(user == null) {
+			// TODO cambiar este warning
 			logger.warning("Alguien ha intentado acceder a la cuenta de " + username + " con la clave.");
 			return;
 		}
 		
 		try {
+			logger.info("iniciando reserva " );
 			// TODO Cambiar esto de String a Integer
 			AirlineGatewayFactory.create(flight.getAirline()).reservar(String.valueOf(flight.getFlightNumber()));
-			PaymentMethod paymentType = user.getPaymentMethod();
-			PaymentGatewayFactory.getInstance().create(user.getPaymentMethod().getPaymentType()).pay(username, flight.getPrice());
-			
+			PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
+			logger.info("iniciando pago" );
+			if(flight.getPrice()==null) return; // TODO
+				
+			PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
+			logger.info("Processo de pago correcto" );
 		} catch (RemoteException e) {
 			logger.severe("Error al intentar hacer la reserva con id  " + flightID + " en la aerolinea " + flight.getAirline().getCode());
 		}
