@@ -36,6 +36,8 @@ import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 
 public class ServerManagerFrame extends JFrame {
 
@@ -47,13 +49,12 @@ public class ServerManagerFrame extends JFrame {
 	private JTextField textPassword;
 	private JTextField textUsername;
 	private JLabel lblUsernameActual, lblFlightNumber;
-	private JTextField textField;
 	private JTextField flightIdSearch;
 	private DefaultListModel<String> flightModel = new DefaultListModel<String>();
 
 	JLabel lblAirportDeparture, lblTotalSeats, lblRemainingSeats, lblDateDeparture;
 	
-	JLabel lblAirline, lblDateArrival, lblAirportArrival;
+	JLabel lblDateArrival, lblAirportArrival, lblAirline;
 	
 	Flight selectedFlight = null;
 	
@@ -74,28 +75,33 @@ public class ServerManagerFrame extends JFrame {
 		this.smcontroller = smcontroller;
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\whiwho\\Documents\\GitHub\\EassyBooking\\img\\pengu2.png"));
-		setTitle("EassyBooking Server");
+		setTitle("EassyBooking Server Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 450);
 		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(null);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JLabel lblServerName = new JLabel("EassyBooking Server");
-		lblServerName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JLabel lblServerName = new JLabel("EassyBooking Server Manager");
+		lblServerName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblServerName.setFont(new Font("Dubai", Font.BOLD, 18));
 		contentPane.add(lblServerName, BorderLayout.NORTH);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBorder(null);
+		tabbedPane.setBackground(SystemColor.menu);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel LoginPanel = new JPanel();
 		tabbedPane.addTab("Login", null, LoginPanel, null);
 		LoginPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_3 = new JPanel();
-		LoginPanel.add(panel_3, BorderLayout.SOUTH);
+		JPanel LobinButtonPanel = new JPanel();
+		LobinButtonPanel.setBackground(new Color(255, 250, 250));
+		LoginPanel.add(LobinButtonPanel, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -108,14 +114,15 @@ public class ServerManagerFrame extends JFrame {
 				}
 			}
 		});
-		panel_3.add(btnNewButton);
+		LobinButtonPanel.add(btnNewButton);
 		
-		JPanel panel_4 = new JPanel();
-		LoginPanel.add(panel_4, BorderLayout.CENTER);
-		panel_4.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel LoginFieldsPanel = new JPanel();
+		LoginPanel.add(LoginFieldsPanel, BorderLayout.CENTER);
+		LoginFieldsPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_5 = new JPanel();
-		panel_4.add(panel_5);
+		panel_5.setBackground(new Color(255, 250, 250));
+		LoginFieldsPanel.add(panel_5);
 		
 		JLabel lblUserName = new JLabel("Username");
 		panel_5.add(lblUserName);
@@ -125,7 +132,8 @@ public class ServerManagerFrame extends JFrame {
 		textUsername.setColumns(10);
 		
 		JPanel panel_6 = new JPanel();
-		panel_4.add(panel_6);
+		panel_6.setBackground(new Color(255, 250, 250));
+		LoginFieldsPanel.add(panel_6);
 		
 		JLabel lblPassword = new JLabel("Password");
 		panel_6.add(lblPassword);
@@ -134,45 +142,8 @@ public class ServerManagerFrame extends JFrame {
 		panel_6.add(textPassword);
 		textPassword.setColumns(10);
 		
-		JPanel PaymentPanel = new JPanel();
-		tabbedPane.addTab("Pagos", null, PaymentPanel, null);
-		PaymentPanel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel SouthPaymentPanel = new JPanel();
-		PaymentPanel.add(SouthPaymentPanel, BorderLayout.SOUTH);
-		
-		JButton btnNewButton_1 = new JButton("Make Payment");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		SouthPaymentPanel.add(btnNewButton_1);
-		
-		JPanel CenterPaymentPanel = new JPanel();
-		PaymentPanel.add(CenterPaymentPanel, BorderLayout.CENTER);
-		CenterPaymentPanel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel OptionCenterPaymentPanel = new JPanel();
-		CenterPaymentPanel.add(OptionCenterPaymentPanel, BorderLayout.NORTH);
-		
-		JRadioButton rdbtnPaypal = new JRadioButton("Paypal");
-		OptionCenterPaymentPanel.add(rdbtnPaypal);
-		
-		JRadioButton rdbtnCreditCard = new JRadioButton("CreditCard");
-		OptionCenterPaymentPanel.add(rdbtnCreditCard);
-		
-		JPanel InfoCenterPaymentPanel = new JPanel();
-		CenterPaymentPanel.add(InfoCenterPaymentPanel, BorderLayout.CENTER);
-		
-		JLabel lblPayAmount = new JLabel("PaymentAmount");
-		InfoCenterPaymentPanel.add(lblPayAmount);
-		
-		textField = new JTextField();
-		InfoCenterPaymentPanel.add(textField);
-		textField.setColumns(10);
-		
 		JPanel FlightPanel = new JPanel();
-		tabbedPane.addTab("Vuelos", null, FlightPanel, null);
+		tabbedPane.addTab("Flights", null, FlightPanel, null);
 		FlightPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel FlightCenterPanel = new JPanel();
@@ -180,6 +151,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightCenterPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JList FlightList = new JList(flightModel);
+		FlightList.setBorder(null);
 		FlightCenterPanel.add(FlightList);
 
 		FlightList.addListSelectionListener(new ListSelectionListener() {
@@ -206,6 +178,7 @@ public class ServerManagerFrame extends JFrame {
             }
         });
 		JPanel FlightInfoPanel = new JPanel();
+		FlightInfoPanel.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(0, 0, 0)));
 		FlightCenterPanel.add(FlightInfoPanel);
 		FlightInfoPanel.setLayout(new GridLayout(4, 0, 0, 0));
 		
@@ -214,6 +187,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoFlightDataPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel FlightInfoFlightNumberPanel = new JPanel();
+		FlightInfoFlightNumberPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoFlightDataPanel.add(FlightInfoFlightNumberPanel);
 		
 		JLabel lblFlightNumberInfo = new JLabel("Flightnumber:");
@@ -227,6 +201,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoSeatsPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel FlightInfoTotalSeatsPanel = new JPanel();
+		FlightInfoTotalSeatsPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoSeatsPanel.add(FlightInfoTotalSeatsPanel);
 		
 		JLabel lblTotalSeatsInfo = new JLabel("Seats:");
@@ -236,6 +211,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoTotalSeatsPanel.add(lblTotalSeats);
 		
 		JPanel FlightInfoRemainingSeatsPanel = new JPanel();
+		FlightInfoRemainingSeatsPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoSeatsPanel.add(FlightInfoRemainingSeatsPanel);
 		
 		JLabel lblRemainingSeatsInfo = new JLabel("Remaining:");
@@ -245,11 +221,12 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoRemainingSeatsPanel.add(lblRemainingSeats);
 		
 		JPanel FlightInfoDeparturePanel = new JPanel();
-		FlightInfoDeparturePanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		FlightInfoDeparturePanel.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		FlightInfoPanel.add(FlightInfoDeparturePanel);
 		FlightInfoDeparturePanel.setLayout(new GridLayout(3, 0, 0, 0));
 		
 		JPanel FlightInfoDepartureTitlePanel = new JPanel();
+		FlightInfoDepartureTitlePanel.setBackground(new Color(255, 250, 250));
 		FlightInfoDeparturePanel.add(FlightInfoDepartureTitlePanel);
 		
 		JLabel lblDepartureTitle = new JLabel("Departure");
@@ -257,6 +234,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoDepartureTitlePanel.add(lblDepartureTitle);
 		
 		JPanel FlightInfoDateDeparturePanel = new JPanel();
+		FlightInfoDateDeparturePanel.setBackground(new Color(255, 250, 250));
 		FlightInfoDeparturePanel.add(FlightInfoDateDeparturePanel);
 		
 		JLabel lblDateDepartureInfo = new JLabel("Date:");
@@ -266,6 +244,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoDateDeparturePanel.add(lblDateDeparture);
 		
 		JPanel FlightInfoAirportDeparturePanel = new JPanel();
+		FlightInfoAirportDeparturePanel.setBackground(new Color(255, 250, 250));
 		FlightInfoDeparturePanel.add(FlightInfoAirportDeparturePanel);
 		
 		JLabel lblAirportDepartureInfo = new JLabel("Airport:");
@@ -275,10 +254,12 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirportDeparturePanel.add(lblAirportDeparture);
 		
 		JPanel FlightInfoArrivalPanel = new JPanel();
+		FlightInfoArrivalPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		FlightInfoPanel.add(FlightInfoArrivalPanel);
 		FlightInfoArrivalPanel.setLayout(new GridLayout(3, 0, 0, 0));
 		
 		JPanel FlightInfoArrivalTitlePanel = new JPanel();
+		FlightInfoArrivalTitlePanel.setBackground(new Color(255, 250, 250));
 		FlightInfoArrivalPanel.add(FlightInfoArrivalTitlePanel);
 		
 		JLabel FlightInfoArrivalTitle = new JLabel("Arrival");
@@ -286,6 +267,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoArrivalTitlePanel.add(FlightInfoArrivalTitle);
 		
 		JPanel FlightInfoDateArrivalPanel = new JPanel();
+		FlightInfoDateArrivalPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoArrivalPanel.add(FlightInfoDateArrivalPanel);
 		
 		JLabel lblDateArrivalInfo = new JLabel("Date:");
@@ -295,6 +277,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoDateArrivalPanel.add(lblDateArrival);
 		
 		JPanel FlightInfoAirportArrivalPanel = new JPanel();
+		FlightInfoAirportArrivalPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoArrivalPanel.add(FlightInfoAirportArrivalPanel);
 		
 		JLabel lblAirportArrivalInfo = new JLabel("Airport:");
@@ -308,24 +291,18 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirlinePanel.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		JPanel FlightInfoAirlineInfoPanel = new JPanel();
+		FlightInfoAirlineInfoPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		FlightInfoAirlineInfoPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoAirlinePanel.add(FlightInfoAirlineInfoPanel);
 		
 		lblAirline = new JLabel("Airline");
 		FlightInfoAirlineInfoPanel.add(lblAirline);
 		
-		JPanel FlightInfoButtonsPanel = new JPanel();
-		FlightInfoAirlinePanel.add(FlightInfoButtonsPanel);
-		
 		JButton btnReserval = new JButton("Reservar");
-		btnReserval.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(selectedFlight == null) 
-					JOptionPane.showMessageDialog(new JFrame(), "You have no flight selected.");
-				else
-					smcontroller.bookFlight(String.valueOf(selectedFlight.getFlightNumber()), selectedFlight.getAirline());
-			}
-		});
-		FlightInfoButtonsPanel.add(btnReserval);
+		btnReserval.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		btnReserval.setForeground(Color.WHITE);
+		btnReserval.setBackground(SystemColor.textHighlight);
+		FlightInfoAirlinePanel.add(btnReserval);
 		
 		JPanel FlightSearchPanel = new JPanel();
 		FlightPanel.add(FlightSearchPanel, BorderLayout.NORTH);
@@ -336,6 +313,9 @@ public class ServerManagerFrame extends JFrame {
 		flightIdSearch.setColumns(10);
 		
 		JButton btnSearchFlight = new JButton("Buscar");
+		btnSearchFlight.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		btnSearchFlight.setForeground(Color.WHITE);
+		btnSearchFlight.setBackground(SystemColor.textHighlight);
 		btnSearchFlight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Logger.getLogger(ServerManagerFrame.class.getName()).info("Ha clickado el boton buscar");
@@ -348,12 +328,13 @@ public class ServerManagerFrame extends JFrame {
 		FlightSearchPanel.add(btnSearchFlight, BorderLayout.EAST);
 		
 		JPanel serverInfoPanel = new JPanel();
+		serverInfoPanel.setBackground(Color.WHITE);
 		contentPane.add(serverInfoPanel, BorderLayout.SOUTH);
 		
-		JLabel lblNewLabel = new JLabel("Usuario Actual:");
+		JLabel lblNewLabel = new JLabel("Actual User:");
 		serverInfoPanel.add(lblNewLabel);
 		
-		lblUsernameActual = new JLabel("%None%");
+		lblUsernameActual = new JLabel("None");
 		serverInfoPanel.add(lblUsernameActual);
 		setVisible(true);
 	}

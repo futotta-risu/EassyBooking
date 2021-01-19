@@ -7,6 +7,7 @@ import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
@@ -32,9 +33,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 		return instance;
 	}
 
-	public void login(String email, String password) throws RemoteException {
+	public void login(String email, String password, LoginEnum loginType) throws RemoteException {
 		System.out.println(" *RemoteFacade LOGIN: " + email + "/" + password);
-		this.user = LoginService.getInstance().login(email, password);
+		this.user = LoginService.getInstance().login(email, password, loginType);
 	}
 
 	public void register(String email, String password) throws RemoteException {

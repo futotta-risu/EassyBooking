@@ -57,7 +57,7 @@ public class ServerManagerController {
     }
     
     public Flight getFlightFromSearch(int index) {
-    	return flightSearchResult.get(index);
+    	return flightSearchResult.get(index);   
     }
     
     public void exit(){
