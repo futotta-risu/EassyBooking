@@ -12,6 +12,7 @@ import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.PaymentGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
+import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
@@ -82,19 +83,17 @@ public class AirlineService {
 			return;
 		}
 		
-		try {
-			logger.info("iniciando reserva " );
-			// TODO Cambiar esto de String a Integer
-			AirlineGatewayFactory.create(flight.getAirline()).reservar(String.valueOf(flight.getFlightNumber()));
-			PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
-			logger.info("iniciando pago" );
-			if(flight.getPrice()==null) return; // TODO
-				
-			PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
-			logger.info("Processo de pago correcto" );
-		} catch (RemoteException e) {
-			logger.severe("Error al intentar hacer la reserva con id  " + flightID + " en la aerolinea " + flight.getAirline().getCode());
-		}
+		
+		logger.info("iniciando reserva " );
+		// TODO Cambiar esto de String a Integer
+		AirlineGateway gateway = AirlineGatewayFactory.create(AirlineEnum.getEnum(flight.getAirline()));
+		gateway.reservar(String.valueOf(flight.getFlightNumber()));
+		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
+		logger.info("iniciando pago" );
+		flight = gateway.buscarVuelo(String.valueOf(flight.getFlightNumber()));
+		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
+		logger.info("Processo de pago correcto" );
+		
 		
 	}
 	
