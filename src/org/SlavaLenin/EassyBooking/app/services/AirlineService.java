@@ -46,6 +46,9 @@ public class AirlineService {
 		
 		for (AirlineEnum airline : AirlineEnum.values()) {
 			List<Flight> airlineSearchFlights= AirlineGatewayFactory.create(airline).buscar(id);
+			
+			System.out.println("AirlineService : Hemos recivido " + airlineSearchFlights.size() + " con " + airline);
+			
 			List<Flight> airlineSearchFlightsCopy = new ArrayList<Flight>(airlineSearchFlights);
 			searchFlights.addAll(airlineSearchFlightsCopy);
 			DBManager.getInstance().storeFlights(airlineSearchFlights);

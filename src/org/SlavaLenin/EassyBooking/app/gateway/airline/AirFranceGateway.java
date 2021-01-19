@@ -1,6 +1,7 @@
 package org.SlavaLenin.EassyBooking.app.gateway.airline;
 
 
+import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -12,6 +13,9 @@ import org.SlavaLenin.EassyBooking.app.data.Airline;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
+import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightDTO;
+
+import es.deusto.ingenieria.sd.sms.server.data.AirlineFlightDTO;
 
 public class AirFranceGateway implements AirlineGateway {
 	
@@ -27,10 +31,14 @@ public class AirFranceGateway implements AirlineGateway {
 	
 	@Override
 	public void reservar(String id){
-		try (Socket tcpSocket = new Socket(IP, PORT);
+		try {
+			Socket tcpSocket = new Socket(IP, PORT);
+			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress());
+		
+				
 			 //Streams to send and receive information are created from the Socket
 		     ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
-			 ObjectOutputStream out = new ObjectOutputStream(tcpSocket.getOutputStream())){
+			 ObjectOutputStream out = new ObjectOutputStream(tcpSocket.getOutputStream());
 			
 			out.writeUTF("RESERVAR "+ id);
 			
@@ -46,22 +54,42 @@ public class AirFranceGateway implements AirlineGateway {
 	@Override
 	public List<Flight> buscar(String id) {
 		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirFranceGateway: buscar con " + id);
-		try (Socket tcpSocket = new Socket(IP, PORT);
+		System.out.println("AirFrance se esta ejecuntando ");
+		List<Flight> flights = new ArrayList<Flight>();
+		try{
+			System.out.println("AirFrance se esta ejecuntando 2");
+			Socket tcpSocket = new Socket(IP, PORT);
+		
 			//Streams to send and receive information are created from the Socket
 			ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
-			ObjectOutputStream out = new ObjectOutputStream(tcpSocket.getOutputStream())){
-			
+			DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
+			System.out.println("AirFrance se esta ejecuntando 3");
 			out.writeUTF("BUSCAR "+ id);
 			
 			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> 'BUSCAR " + id + "'");	
 			@SuppressWarnings("unchecked")
-			List<Flight> data = (List<Flight>) in.readObject();
-			return data;
+			List<SocketAirlineFlightDTO> dataDTO = (List<SocketAirlineFlightDTO>) in.readObject();
+			System.out.println("AirFrance ha recivido " + dataDTO.size());
+			for(SocketAirlineFlightDTO flightDTO : dataDTO) {
+				Flight f = new Flight();
+				f.setFlightNumber(flightDTO.getFligthNumber());
+				f.setDateDeparture(flightDTO.getDateDeparture());
+				f.setDateArrival(flightDTO.getDateArrival());
+				f.setTotalSeats(flightDTO.getFligthNumber());
+				f.setAirline(AirlineEnum.AirFrance.getCode());
+				f.setAirportDeparture(flightDTO.getAirportDeparture());
+				f.setAirportArrival(flightDTO.getAirportArrival());
+				flights.add(f);
+			}
+			System.out.println("SASJDSADOASWJDJOASo vuelos SOCKET" + dataDTO.size());
+			
+			return flights;
 		}catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("# EchoClient: Error: " + e.getMessage());
 		}		
 		
-		return new ArrayList<Flight>();
+		return flights;
 	}
 
 	@Override

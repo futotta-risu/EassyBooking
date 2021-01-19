@@ -166,25 +166,23 @@ public class ServerManagerFrame extends JFrame {
 
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
-            	System.out.println("OLAAA");
+            	System.out.println("Cambiando el valor en la JList");
                 Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
-                System.out.println("OLAAA3");
+                
                 selectedFlight = f;
                 lblFlightNumber.setText(String.valueOf(f.getFlightNumber()));
-                System.out.println("OLAAA31");
+                
                 lblTotalSeats.setText(String.valueOf(f.getTotalSeats()));
                 lblRemainingSeats.setText(String.valueOf(f.getNumberRemainingSeats()));
-                System.out.println("OLAAA32");
+                
                 lblDateDeparture.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateDeparture()));
                 // TODO Airport Functions
                 lblAirportDeparture.setText(DBManager.getInstance().getAirport(f.getAirportDeparture()).getName());
-                System.out.println("OLAAA33");
+                
                 lblDateArrival.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateArrival()));
                 lblAirportArrival.setText(DBManager.getInstance().getAirport(f.getAirportArrival()).getName());
-                System.out.println("OLAAA34");
             	lblAirline.setText(DBManager.getInstance().getAirline(AirlineEnum.getEnum(f.getAirline())).getName());
             	
-            	System.out.println("OLAAA35");
             }
         });
 		JPanel FlightInfoPanel = new JPanel();

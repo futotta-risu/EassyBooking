@@ -106,8 +106,13 @@ public class Flight implements Serializable {
 	public String getAirportArrival() {
 		return airportArrival;
 	}
-
+	
 	public void setAirportArrival(String airportArrival) {
+		this.airportArrival = airportArrival;
+	}
+
+
+	public void flights(String airportArrival) {
 		this.airportArrival = airportArrival;
 	}
 

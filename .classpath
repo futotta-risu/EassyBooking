@@ -16,5 +16,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/framework/log4j-1.2.14.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/framework/mysql-connector-java-8.0.21.jar"/>
 	<classpathentry kind="lib" path="lib/locals/PaymentManager.jar"/>
+	<classpathentry kind="lib" path="lib/locals/AirlineSocketManager.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="windows-1252" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
+<record>
+  <date>2021-01-19T23:21:10.957570900Z</date>
+  <millis>1611098470957</millis>
+  <nanos>570900</nanos>
+  <sequence>7</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>bookFlight</method>
+  <thread>20</thread>
+  <message>BookFlight with 0</message>
+</record>
+<record>
+  <date>2021-01-19T23:21:10.958567300Z</date>
+  <millis>1611098470958</millis>
+  <nanos>567300</nanos>
+  <sequence>8</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>SEVERE</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>bookFlight</method>
+  <thread>20</thread>
+  <message>No user currently logged</message>
+</record>
 </log>
