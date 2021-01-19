@@ -12,4 +12,12 @@ public enum AirlineEnum {
 	public String getCode() {
 		return this.code;
 	}
+	
+	public static AirlineEnum getEnum(String code) {
+		for(AirlineEnum a : AirlineEnum.values())
+			if(a.getCode().equals(code))
+				return a;
+		return null;
+		
+	}
 }

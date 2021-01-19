@@ -34,9 +34,13 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id) throws RemoteException {
+	public void reservar(String id) {
 		// TODO Maybe change exception handling
-		service.reservar(id);
+		try {
+			service.reservar(id);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -54,7 +58,7 @@ public class KoreanAirGateway implements AirlineGateway {
 				f.setDateDeparture(flightDTO.getDateDeparture());
 				f.setDateArrival(flightDTO.getDateArrival());
 				f.setTotalSeats(flightDTO.getFligthNumber());
-				f.setAirline(AirlineEnum.KoreanAir);
+				f.setAirline(AirlineEnum.KoreanAir.getCode());
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				flights.add(f);
@@ -64,6 +68,28 @@ public class KoreanAirGateway implements AirlineGateway {
 		}
 		System.out.println("El tamaño de vuelos es de " + flights.size());
 		return flights;
+	}
+	
+	@Override
+	public Flight buscarVuelo(String id) {
+		Flight f = null;
+		try {
+			AirlineFlightDTO flightDTO = service.buscarVuelo(id);
+			
+			f = new Flight();
+			
+			f.setFlightNumber(flightDTO.getFligthNumber());
+			f.setDateDeparture(flightDTO.getDateDeparture());
+			f.setDateArrival(flightDTO.getDateArrival());
+			f.setTotalSeats(flightDTO.getFligthNumber());
+			f.setAirline(AirlineEnum.KoreanAir.getCode());
+			f.setAirportDeparture(flightDTO.getAirportDeparture());
+			f.setAirportArrival(flightDTO.getAirportArrival());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return f;
+		
 	}
 
 }

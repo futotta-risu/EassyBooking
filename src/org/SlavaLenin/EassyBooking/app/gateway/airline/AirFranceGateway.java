@@ -20,7 +20,7 @@ public class AirFranceGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id) throws RemoteException {
+	public void reservar(String id) {
 		// TODO Auto-generated method stub
 	}
 
@@ -29,6 +29,12 @@ public class AirFranceGateway implements AirlineGateway {
 		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirFranceGateway: buscar con " + id);
 		// TODO Auto-generated method stub
 		return new ArrayList<Flight>();
+	}
+
+	@Override
+	public Flight buscarVuelo(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

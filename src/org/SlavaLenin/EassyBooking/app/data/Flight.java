@@ -21,7 +21,7 @@ public class Flight implements Serializable {
 	@NotPersistent
 	private int price;
 	
-	private AirlineEnum airline;
+	private String airline;
 
 	@NotPersistent
 	private Date dateDeparture, dateArrival;
@@ -52,10 +52,10 @@ public class Flight implements Serializable {
 		flightIDCounter++;
 	}
 	
-	public AirlineEnum getAirline() {
+	public String getAirline() {
 		return this.airline;
 	}
-	public void setAirline(AirlineEnum airlineCode) {
+	public void setAirline(String airlineCode) {
 		this.airline = airlineCode;
 	}
 	

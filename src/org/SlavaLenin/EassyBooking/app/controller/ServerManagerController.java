@@ -64,7 +64,7 @@ public class ServerManagerController {
     	Logger.getLogger(ServerManagerFrame.class.getName()).info("ServerManagerController: SearchFlight con " + id);
     	
     	flightSearchResult = AirlineService.getInstance().buscarVuelo(id);
-    	
+    	System.out.println("HEMOS SABEADO " + flightSearchResult.size());
     	return flightSearchResult;
     }
     
@@ -79,8 +79,9 @@ public class ServerManagerController {
     	}
     	
     	Flight f = DBManager.getInstance().getFlight(id);
-    	System.out.println("--------------");
+    	System.out.println("------ESTA ES IMPORTANTE--------");
     	System.out.println(f);
+    	System.out.println("------ESTA ES IMPORTANTE--------");
 		AirlineService.getInstance().reservar(id, user.getUsername(), user.getSessionKey());
 		
 		

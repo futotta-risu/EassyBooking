@@ -25,6 +25,7 @@ public class User implements Serializable {
 	
 	@Persistent
 	private PaymentMethod paymentMethod;
+	
 	@Persistent
 	private LoginEnum loginSystemType;
 	

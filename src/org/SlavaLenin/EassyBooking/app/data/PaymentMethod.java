@@ -6,7 +6,7 @@ import javax.jdo.annotations.PersistenceCapable;
 
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 
-@PersistenceCapable
+@PersistenceCapable(detachable = "true")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class PaymentMethod {
 	protected PaymentEnum paymentType = null;

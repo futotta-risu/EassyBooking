@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import org.SlavaLenin.EassyBooking.app.data.PaymentMethod;
 import org.SlavaLenin.EassyBooking.app.data.User;
 
 public class UserDAO extends GenericDAO{
@@ -20,14 +21,9 @@ public class UserDAO extends GenericDAO{
 	    Transaction tx=pm.currentTransaction();
 
 		try{
-			System.out.println("JOJJOJOJ1");
-			System.out.println(user);
 	        tx.begin();
-	        System.out.println("JOJJOJOJ2");
 	        pm.makePersistent(user);
-	        System.out.println("JOJJOJOJ3");
 	        tx.commit();
-	        System.out.println("JOJJOJOJ4");
 	    }catch(Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -77,10 +73,10 @@ public class UserDAO extends GenericDAO{
 	
 	public static User getUser(String username) {
 		PersistenceManager pm = getPMF().getPersistenceManager();
-
+		pm.getFetchPlan().setMaxFetchDepth(3);
 		Transaction tx = pm.currentTransaction();
 		User user = null;
-
+		pm.setDetachAllOnCommit(true);
 		try {
 			System.out.println("   * Querying a User: " + username);
 
@@ -88,6 +84,7 @@ public class UserDAO extends GenericDAO{
 			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE username == '" + username +"'");
 			query.setUnique(true);
 			user = (User) pm.detachCopy((User) query.execute());
+			System.out.println("   * Querying a User: " + user);
 			tx.commit();
 
 		} catch (Exception ex) {
