@@ -8,6 +8,10 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(detachable = "true")
 public class Pago implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date date;
 	@Unique
 	private int paymentID;

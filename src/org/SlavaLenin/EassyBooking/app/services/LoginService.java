@@ -6,7 +6,6 @@ import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.LoginGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
-import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
 public class LoginService {
 	

@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Airline;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
-import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 

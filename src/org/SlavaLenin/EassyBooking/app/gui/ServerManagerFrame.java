@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -21,27 +20,30 @@ import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 
 import java.awt.Toolkit;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+
 import java.awt.SystemColor;
 
 public class ServerManagerFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unused")
 	private ServerManagerController smcontroller;
 	
 	private JPanel contentPane;
@@ -67,7 +69,7 @@ public class ServerManagerFrame extends JFrame {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\whiwho\\Documents\\GitHub\\EassyBooking\\img\\pengu2.png"));
 		setTitle("EassyBooking Server Manager");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 450);
 		
 		contentPane = new JPanel();
@@ -81,7 +83,7 @@ public class ServerManagerFrame extends JFrame {
 		lblServerName.setFont(new Font("Dubai", Font.BOLD, 18));
 		contentPane.add(lblServerName, BorderLayout.NORTH);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.setBorder(null);
 		tabbedPane.setBackground(SystemColor.menu);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
@@ -96,6 +98,7 @@ public class ServerManagerFrame extends JFrame {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserDTO user = smcontroller.login(textUsername.getText(), textPassword.getText());
 				if(user == null) {
@@ -108,6 +111,7 @@ public class ServerManagerFrame extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("REgister");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserDTO user = smcontroller.register(textUsername.getText(), textPassword.getText());
 				if(user == null) {
@@ -154,7 +158,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightPanel.add(FlightCenterPanel);
 		FlightCenterPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JList FlightList = new JList(flightModel);
+		JList<String> FlightList = new JList<String>(flightModel);
 		FlightList.setBorder(null);
 		FlightCenterPanel.add(FlightList);
 
@@ -184,7 +188,7 @@ public class ServerManagerFrame extends JFrame {
             }
         });
 		JPanel FlightInfoPanel = new JPanel();
-		FlightInfoPanel.setBorder(new MatteBorder(0, 1, 0, 0, (Color) new Color(0, 0, 0)));
+		FlightInfoPanel.setBorder(new MatteBorder(0, 1, 0, 0, new Color(0, 0, 0)));
 		FlightCenterPanel.add(FlightInfoPanel);
 		FlightInfoPanel.setLayout(new GridLayout(4, 0, 0, 0));
 		
@@ -227,7 +231,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoRemainingSeatsPanel.add(lblRemainingSeats);
 		
 		JPanel FlightInfoDeparturePanel = new JPanel();
-		FlightInfoDeparturePanel.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		FlightInfoDeparturePanel.setBorder(new MatteBorder(1, 0, 1, 0, new Color(0, 0, 0)));
 		FlightInfoPanel.add(FlightInfoDeparturePanel);
 		FlightInfoDeparturePanel.setLayout(new GridLayout(3, 0, 0, 0));
 		
@@ -260,7 +264,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirportDeparturePanel.add(lblAirportDeparture);
 		
 		JPanel FlightInfoArrivalPanel = new JPanel();
-		FlightInfoArrivalPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		FlightInfoArrivalPanel.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 		FlightInfoPanel.add(FlightInfoArrivalPanel);
 		FlightInfoArrivalPanel.setLayout(new GridLayout(3, 0, 0, 0));
 		
@@ -297,7 +301,7 @@ public class ServerManagerFrame extends JFrame {
 		FlightInfoAirlinePanel.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		JPanel FlightInfoAirlineInfoPanel = new JPanel();
-		FlightInfoAirlineInfoPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		FlightInfoAirlineInfoPanel.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 		FlightInfoAirlineInfoPanel.setBackground(new Color(255, 250, 250));
 		FlightInfoAirlinePanel.add(FlightInfoAirlineInfoPanel);
 		
@@ -306,6 +310,7 @@ public class ServerManagerFrame extends JFrame {
 		
 		JButton btnReserval = new JButton("Reservar");
 		btnReserval.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
 				smcontroller.bookFlight(String.valueOf(f.getFlightID()));
@@ -329,6 +334,7 @@ public class ServerManagerFrame extends JFrame {
 		btnSearchFlight.setForeground(Color.WHITE);
 		btnSearchFlight.setBackground(SystemColor.textHighlight);
 		btnSearchFlight.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Logger.getLogger(ServerManagerFrame.class.getName()).info("Ha clickado el boton buscar");
 				List<Flight> flights = smcontroller.searchFlight(flightIdSearch.getText());

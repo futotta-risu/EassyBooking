@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.jdo.annotations.*;
 
-import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 @PersistenceCapable(detachable = "true")
 public class Flight implements Serializable {

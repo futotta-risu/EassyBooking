@@ -1,16 +1,19 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
+import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
 public class PaymentService {
 
 	
 	private static PaymentService instance;
 	private static int contador = 0;
-	
+	private Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
 		
 	private PaymentService(){
 	}
@@ -23,6 +26,7 @@ public class PaymentService {
 	}
 	
 	public void pay(int amount){
+		logger.log(Level.INFO,"Cantidad a pagar: "+ amount);
 		String confCode = contador + 23572037886777807L + "";
 		Calendar c = Calendar.getInstance();
 		Pago pago = new Pago( c.getTime(), contador, confCode, "Info =" + contador);
@@ -30,6 +34,7 @@ public class PaymentService {
 		
 		if(pago != null) {
 			DBManager.getInstance().storePago(pago);
+			logger.log(Level.INFO,"Pago guardado");
 		}
 
 	}

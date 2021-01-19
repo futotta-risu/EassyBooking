@@ -8,7 +8,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import org.SlavaLenin.EassyBooking.app.data.PaymentMethod;
 import org.SlavaLenin.EassyBooking.app.data.User;
 
 public class UserDAO extends GenericDAO{

@@ -4,10 +4,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import org.SlavaLenin.EassyBooking.app.data.Airline;
-import org.SlavaLenin.EassyBooking.app.db.DBManager;
-import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
-
 import es.deusto.ingenieria.sd.sms.server.remote.IPaymentManager;
 
 public class PaypalGateway implements PaymentGateway {
