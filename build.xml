@@ -6,6 +6,10 @@
    	<property name="build.dir" location="bin"/>
 	<property name="lib.dir" location="lib"/>
 	<property name="resources.dir" location="resources"/>
+
+	<property name="rmiregistry.port" value="1099"/> 
+	<property name="rmiregistry.IP" value="127.0.0.1"/> 
+	<property name="eassybooking.server.name" value="EassyBooking"/>
 		
     <path id="classpath">
         <fileset dir="${lib.dir}">
@@ -47,8 +51,14 @@
 	<target name="4.run-example" description="Runs the example">
         <java classname="org.SlavaLenin.EassyBooking.app.controller.ServerManagerController" classpathref="classpath" fork="true">
         	<jvmarg value="-Dlog4j.configuration=log4j.properties"/>
+        	<jvmarg value="-Djava.rmi.server.codebase=file:${build.dir}/"/>
+			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
+        	<arg value="${rmiregistry.IP}"/> 
+	 		<arg value="${rmiregistry.port}"/> 
+			<arg value="${eassybooking.server.name}"/> 
 		</java>
     </target>
+	  
 	
 	<target name="5.delete-db-schema" depends="2.enhance-classes" description="Drops DB sechema from the DB Server">
 		<taskdef name="schematool" classpathref="classpath" classname="org.datanucleus.store.schema.SchemaToolTask"/>

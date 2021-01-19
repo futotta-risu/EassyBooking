@@ -82,33 +82,6 @@ public class ServerManagerController {
     		DBManager.getInstance().storeAirport(airportCodes[i],a);
     	}
     	
-    	Thread t = new Thread(new Runnable() {
-			public void run() {
-				if (args.length < 3) {
-					System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
-					System.exit(0);
-				}
-
-				if (System.getSecurityManager() == null) {
-					System.setSecurityManager(new SecurityManager());
-				}
-
-				String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
-
-				try {		
-					IRemoteFacade objServer = RemoteFacade.getInstance();
-					Naming.rebind(name, objServer);
-					System.out.println("* Server '" + name + "' active and waiting...");
-				} catch (Exception e) {
-					System.err.println("- Exception running the server: " + e.getMessage());
-					e.printStackTrace();
-				}
-			}
-		});
-    	t.run();
-		
-		
-    	
     	SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
     	      // Here, we can safely update the GUI
@@ -123,6 +96,27 @@ public class ServerManagerController {
 				}
     	    }
     	  });
+    	
+		if (args.length < 3) {
+			System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
+			System.exit(0);
+		}
+
+		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
+
+		try {		
+			IRemoteFacade objServer = RemoteFacade.getInstance();
+			Naming.rebind(name, objServer);
+			System.out.println("* Server '" + name + "' active and waiting...");
+		} catch (Exception e) {
+			System.err.println("- Exception running the server: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		
+    	
+    	
     	
     }
 }
