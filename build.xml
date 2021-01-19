@@ -3,6 +3,10 @@
     <property name="src.dir" location="src"/>
     <property name="bin.dir" location="bin"/>
 
+
+	<property name="dist.dir" location="dist"/>
+	<property name="export.file" value="EassyBooking.jar"/>
+	
    	<property name="build.dir" location="bin"/>
 	<property name="lib.dir" location="lib"/>
 	<property name="resources.dir" location="resources"/>
@@ -73,12 +77,16 @@
 	<target name="6.build" description="Builds the project">
 			<delete dir="${build.dir}"/>
 			<mkdir dir="${build.dir}"/>
-			<javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+			<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
 	    </target>
 	
 	<target name="7.export" depends="6.build" description="Export classes into a .jar file">
-			<delete dir="${dist.dir}"/>
-			<mkdir dir="${dist.dir}"/>
-			<jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="*.class"/>
-		</target>	
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${export.file}" >
+			<fileset dir="${build.dir}">
+				<include name="**/*.class"/>
+			</fileset>
+		</jar>
+	</target>	
 </project>

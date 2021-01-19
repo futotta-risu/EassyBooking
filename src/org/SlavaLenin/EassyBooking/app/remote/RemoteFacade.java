@@ -37,8 +37,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
 	public UserDTO login(String email, String password, LoginEnum loginType) throws RemoteException {
 		System.out.println(" *RemoteFacade LOGIN: " + email + "/" + password + "/" + loginType);
-		
-		return LoginService.getInstance().login(email, password, loginType);
+		UserDTO user = LoginService.getInstance().login(email, password, loginType);
+		System.out.println(user);
+		return user;
 	}
 
 	public void register(String email, String password, LoginEnum registerType) throws RemoteException {

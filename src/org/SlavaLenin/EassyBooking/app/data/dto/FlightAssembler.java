@@ -16,7 +16,7 @@ public class FlightAssembler {
 		super();
 		
 	}
-
+	
 	public static List<FlightDTO> assemble(List<Flight> flights) {
 		List<FlightDTO> flightDTOList = new ArrayList<FlightDTO>();
 		
@@ -28,7 +28,7 @@ public class FlightAssembler {
 	}
 	
 	public static FlightDTO assemble(Flight flight) {
-
+	
 		FlightDTO result = new FlightDTO( flight.getFlightNumber(),flight.getDateArrival(),flight.getDateDeparture(),flight.getNumberPassengers(),flight.getNumberRemainingSeats(),flight.getTotalSeats());
 		return result;
 	}
