@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 
 import org.SlavaLenin.EassyBooking.app.controller.ServerManagerController;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
@@ -41,8 +42,6 @@ import java.awt.SystemColor;
 
 public class ServerManagerFrame extends JFrame {
 
-	private final static Logger LOGGER = Logger.getLogger(ServerManagerFrame.class.getName());
-	
 	private ServerManagerController smcontroller;
 	
 	private JPanel contentPane;
@@ -62,15 +61,7 @@ public class ServerManagerFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ServerManagerFrame(ServerManagerController smcontroller) {
-		FileHandler fileHandler = null;
-		try {
-			fileHandler = new FileHandler("log/eassybooking/eassybookingserver");
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		LOGGER.addHandler(fileHandler);
+		
 		
 		this.smcontroller = smcontroller;
 		
@@ -106,11 +97,11 @@ public class ServerManagerFrame extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String user = smcontroller.login(textUsername.getText(), textPassword.getText());
+				UserDTO user = smcontroller.login(textUsername.getText(), textPassword.getText());
 				if(user == null) {
 					lblUsernameActual.setText("%None%");
 				}else {
-					lblUsernameActual.setText(user);
+					lblUsernameActual.setText(user.getUsername());
 				}
 			}
 		});

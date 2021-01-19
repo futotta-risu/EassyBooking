@@ -12,7 +12,15 @@ public class Flight implements Serializable {
 
 	private static final long serialVersionUID = 89562850644839269L;
 	@Unique
+	private int flightID;
+	
+	@NotPersistent
+	private static int flightIDCounter = 1;
 	private int flightNumber;
+	
+	@NotPersistent
+	private int price;
+	
 	@NotPersistent
 	private AirlineEnum airline;
 
@@ -41,6 +49,8 @@ public class Flight implements Serializable {
 	
 	
 	public Flight() {
+		flightID = flightIDCounter;
+		flightIDCounter++;
 	}
 	
 	public AirlineEnum getAirline() {
@@ -86,12 +96,7 @@ public class Flight implements Serializable {
 	public void setNumberPassengers(int numberPassengers) {
 		this.numberPassengers = numberPassengers;
 	}
-	@Override
-	public String toString() {
-		String dateFormat = new SimpleDateFormat("dd/MM hh:mm").format(this.getDateArrival());
-		return airportDeparture + "/" + airportArrival+ "\t " + dateFormat;
-	}
-
+	
 	public String getAirportDeparture() {
 		return airportDeparture;
 	}
@@ -108,6 +113,30 @@ public class Flight implements Serializable {
 		this.airportArrival = airportArrival;
 	}
 
+	public int getFlightID() {
+		return flightID;
+	}
+
+	public void setFlightID(int flightID) {
+		this.flightID = flightID;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	
+	@Override
+	public String toString() {
+		String dateFormat = new SimpleDateFormat("dd/MM hh:mm").format(this.getDateArrival());
+		return airportDeparture + "/" + airportArrival+ "\t " + dateFormat;
+	}
+
+	
 
 	
 }

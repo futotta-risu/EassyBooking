@@ -9,6 +9,19 @@ import org.SlavaLenin.EassyBooking.app.gateway.payment.PaypalGateway;
 
 public class PaymentGatewayFactory {
 	
+	private static PaymentGatewayFactory instance;
+	
+	private PaymentGatewayFactory() {
+		super();
+	}
+	
+	public static PaymentGatewayFactory getInstance() {
+		if (instance == null) 
+			instance = new PaymentGatewayFactory();
+		return instance;
+	}
+		
+	
 	/** 
 	 * Creates the PaymentGateway object.
 	 * 

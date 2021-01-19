@@ -9,6 +9,17 @@ import org.SlavaLenin.EassyBooking.app.gateway.airline.KoreanAirGateway;
 
 public class AirlineGatewayFactory {
 	
+	private static AirlineGatewayFactory instance;
+	
+	private AirlineGatewayFactory() {
+		super();
+	}
+	
+	public AirlineGatewayFactory getInstance() {
+		if (instance == null) 
+			instance = new AirlineGatewayFactory();
+		return instance;
+	}
 	/** 
 	 * Creates the AirlineGateway object.
 	 * 

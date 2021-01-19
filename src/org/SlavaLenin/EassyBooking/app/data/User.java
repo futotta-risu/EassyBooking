@@ -16,7 +16,8 @@ public class User implements Serializable {
 	private String username;
 	private String name;
 	private String email;
-	private LoginEnum loginSystemType;
+	
+	private String sessionKey;
 	
 	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")
 	@Join
@@ -24,6 +25,8 @@ public class User implements Serializable {
 	
 	@Persistent
 	private PaymentMethod paymentMethod;
+	@Persistent
+	private LoginEnum loginSystemType;
 	
 	@Persistent(defaultFetchGroup = "true", mappedBy = "user", dependentElement = "true")
 	@Join
@@ -70,10 +73,10 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getLoginSystemType() {
+	public LoginEnum getLoginSystemType() {
 		return loginSystemType;
 	}
-	public void setLoginSystemType(int loginSystemType) {
+	public void setLoginSystemType(LoginEnum loginSystemType) {
 		this.loginSystemType = loginSystemType;
 	}
 	public PaymentMethod getPaymentMethod() {
@@ -95,6 +98,14 @@ public class User implements Serializable {
 	
 	public void removeFlightReservation(FlightReservation flightReservation) {
 		this.flightReservations.remove(flightReservation);
+	}
+	
+	public String getSessionKey() {
+		return this.sessionKey;
+	}
+	
+	public boolean checkSessionKey(String sessionKey) {
+		return sessionKey == this.sessionKey;
 	}
 	
 	@Override

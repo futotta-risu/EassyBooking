@@ -4,13 +4,7 @@ public class CreditCardGateway implements PaymentGateway {
 
 
 	@Override
-	public void validateUser(String user, String key) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pay(String user, String key, int amount) {
+	public void pay(String user,  int amount) {
 		// TODO Auto-generated method stub
 		
 	}

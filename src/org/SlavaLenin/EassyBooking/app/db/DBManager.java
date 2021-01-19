@@ -57,6 +57,13 @@ public class DBManager {
 		UserDAO.updateUser(user);
 	}
 	
+	public User getUserWithKey(String username, String sessionKey) {
+		User user = this.getUser(username);
+		if(!user.checkSessionKey(sessionKey))
+			return null;
+		return user;
+	}
+	
 	
 	// -------------- PAGO -----------------
 	public void storePago(Pago pago) {
@@ -92,8 +99,8 @@ public class DBManager {
 		return FlightDAO.getFlights();
 	}
 	
-	public Flight getFlight(String flightNumber) {
-		return FlightDAO.getFlight(flightNumber);
+	public Flight getFlight(String flightID) {
+		return FlightDAO.getFlight(flightID);
 	}
 	
 	public void updateFlight(Flight flight) {

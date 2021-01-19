@@ -4,16 +4,12 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable {
 	private String username;
-	private String key;
+	private String sessionKey;
 	
-	public UserDTO() {
-		super();
-	}
-	
-	public UserDTO(String username, String password) {
+	public UserDTO(String username, String sessionKey) {
 		super();
 		this.username = username;
-		this.key = password;
+		this.sessionKey = sessionKey;
 	}
 	
 	public String getUsername() {
@@ -22,11 +18,9 @@ public class UserDTO implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
-		return key;
-	}
-	public void setPassword(String password) {
-		this.key = password;
+
+	public String getSessionKey() {
+		return this.sessionKey;
 	}
 
 

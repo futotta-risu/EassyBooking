@@ -1,6 +1,7 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
+import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.LoginGatewayFactory;
@@ -23,12 +24,13 @@ public class LoginService {
 	}
 	
 	
-	public User login(String email, String password, LoginEnum loginType){
-		return LoginGatewayFactory.create(loginType).login(email, password);
+	public UserDTO login(String email, String password, LoginEnum loginType){
+		UserAssembler userAssembler = new UserAssembler();
+		return userAssembler.assemble(LoginGatewayFactory.getInstance().create(loginType).login(email, password));
 	}
 	
 	public User register(String email, String password, LoginEnum registerType) {
-		User user = LoginGatewayFactory.create(registerType).login(email, password);
+		User user = LoginGatewayFactory.getInstance().create(registerType).login(email, password);
 		
 		if(user == null) {
 			user = new User(email);

@@ -67,7 +67,7 @@ public class FlightDAO extends GenericDAO{
 		
 	}
 	
-	public static Flight getFlight(String flightNumber) {
+	public static Flight getFlight(String flightID) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -75,10 +75,10 @@ public class FlightDAO extends GenericDAO{
 		Flight product = null;
 
 		try {
-			System.out.println("   * Querying a Flight: " + flightNumber);
+			System.out.println("   * Querying a Flight: " + flightID);
 
 			tx.begin();
-			Query<?> query = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightNumber == " + flightNumber );
+			Query<?> query = pm.newQuery("SELECT FROM " + Flight.class.getName() + " WHERE flightID == " + flightID );
 			query.setUnique(true);
 			product = (Flight) pm.detachCopy((Flight) query.execute());
 			tx.commit();

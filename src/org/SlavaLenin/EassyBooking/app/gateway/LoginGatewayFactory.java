@@ -7,6 +7,18 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
 public class LoginGatewayFactory {
 	
+	private static LoginGatewayFactory instance;
+	
+	private LoginGatewayFactory() {
+		super();
+	}
+	
+	public static LoginGatewayFactory getInstance() {
+		if (instance == null) 
+			instance = new LoginGatewayFactory();
+		return instance;
+	}
+	
 	/** 
 	 * Creates the LoginGateway object.
 	 * 
@@ -14,7 +26,7 @@ public class LoginGatewayFactory {
 	 * 
 	 * @param loginType LoginEnum
 	 */
-	public static LoginGateway create(LoginEnum loginType) {
+	public LoginGateway create(LoginEnum loginType) {
 		switch(loginType) {
 		case Google:
 			return new GoogleGateway();
