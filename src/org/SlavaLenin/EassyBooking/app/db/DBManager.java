@@ -20,13 +20,11 @@ import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
 public class DBManager {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private HashMap<AirlineEnum, Airline> airlines = new HashMap<AirlineEnum, Airline>();
 	private HashMap<String, Airport> airports = new HashMap<String, Airport>();
 	
 	private static DBManager instance;
-	private PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+	private PersistenceManagerFactory pmf;
 	
 	public static DBManager getInstance() {
 		if(instance == null ) {

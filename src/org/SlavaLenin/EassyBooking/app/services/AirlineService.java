@@ -1,12 +1,10 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
-import org.SlavaLenin.EassyBooking.app.data.PaymentMethod;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;

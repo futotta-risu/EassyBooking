@@ -5,7 +5,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
-import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 
 import es.deusto.ingenieria.sd.sms.server.data.LoginUserDTO;
 import es.deusto.ingenieria.sd.sms.server.remote.ILoginManager;
@@ -27,8 +26,7 @@ public class GoogleGateway implements LoginGateway {
 	public User login(String email, String password) {
 		try {
 			LoginUserDTO loginUserDTO = service.login(email, password);
-			if(loginUserDTO == null)
-				return null;
+			if(loginUserDTO == null) return null;
 			return new User(loginUserDTO.getUsername());
 		} catch (RemoteException e) {
 			System.err.println(e.getMessage());

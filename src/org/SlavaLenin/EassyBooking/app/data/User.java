@@ -12,6 +12,10 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 @PersistenceCapable(detachable = "true")
 public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Unique
 	private String username;
 	private String name;

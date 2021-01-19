@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
-import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
 public class ServerLogger {
 	private final static Logger LOGGER = Logger.getLogger(ServerLogger.class.getName());

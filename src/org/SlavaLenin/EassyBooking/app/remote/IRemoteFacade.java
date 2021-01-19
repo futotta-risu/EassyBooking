@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.util.List;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
-import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 
 
