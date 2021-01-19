@@ -1,5 +1,6 @@
 package org.SlavaLenin.EassyBooking.app.controller;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
+import org.SlavaLenin.EassyBooking.app.remote.IRemoteFacade;
+import org.SlavaLenin.EassyBooking.app.remote.RemoteFacade;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
@@ -78,6 +81,33 @@ public class ServerManagerController {
     		a.setLocation(airportLocations[i]);
     		DBManager.getInstance().storeAirport(airportCodes[i],a);
     	}
+    	
+    	Thread t = new Thread(new Runnable() {
+			public void run() {
+				if (args.length < 3) {
+					System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
+					System.exit(0);
+				}
+
+				if (System.getSecurityManager() == null) {
+					System.setSecurityManager(new SecurityManager());
+				}
+
+				String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
+
+				try {		
+					IRemoteFacade objServer = RemoteFacade.getInstance();
+					Naming.rebind(name, objServer);
+					System.out.println("* Server '" + name + "' active and waiting...");
+				} catch (Exception e) {
+					System.err.println("- Exception running the server: " + e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		});
+    	t.run();
+		
+		
     	
     	SwingUtilities.invokeLater(new Runnable() {
     	    public void run() {
