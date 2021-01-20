@@ -63,6 +63,7 @@ public class KoreanAirGateway implements AirlineGateway {
 				f.setAirline(AirlineEnum.KoreanAir.getCode());
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
+				f.setPrice(flightDTO.getPrice());
 				flights.add(f);
 			}
 		} catch (RemoteException e) {
@@ -87,6 +88,7 @@ public class KoreanAirGateway implements AirlineGateway {
 			f.setAirline(AirlineEnum.KoreanAir.getCode());
 			f.setAirportDeparture(flightDTO.getAirportDeparture());
 			f.setAirportArrival(flightDTO.getAirportArrival());
+			f.setPrice(flightDTO.getPrice());
 			System.out.println("The flight search has finished: "+ f);
 		} catch (RemoteException e) {
 			e.printStackTrace();

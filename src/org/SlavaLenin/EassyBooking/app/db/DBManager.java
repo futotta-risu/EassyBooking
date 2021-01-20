@@ -64,7 +64,6 @@ public class DBManager {
 	
 		if(!user.checkSessionKey(sessionKey))
 			return null;
-	s
 		return user;
 	}
 	

@@ -105,6 +105,8 @@ public class AirlineService {
 		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
 		
 		logger.info("Processo de pago correcto" );
+		
+		//Hacer FlightReservation
 	}
 	
 

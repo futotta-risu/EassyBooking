@@ -78,6 +78,7 @@ public class AirFranceGateway implements AirlineGateway {
 				f.setAirline(AirlineEnum.AirFrance.getCode());
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
+				f.setPrice(flightDTO.getPrice());
 				flights.add(f);
 				System.out.println("Has add fligth: "+f+"to flights: "+flights);
 				
@@ -121,6 +122,7 @@ public class AirFranceGateway implements AirlineGateway {
 			f.setAirline(AirlineEnum.AirFrance.getCode());
 			f.setAirportDeparture(flightDTO.getAirportDeparture());
 			f.setAirportArrival(flightDTO.getAirportArrival());
+			f.setPrice(flightDTO.getPrice());
 			flights.add(f);
 			System.out.println("El Airline es " + f.getAirline());
 			
