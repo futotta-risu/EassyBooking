@@ -349,4 +349,3 @@
   <thread>32</thread>
   <message># EchoClient: Error: null</message>
 </record>
-</log>

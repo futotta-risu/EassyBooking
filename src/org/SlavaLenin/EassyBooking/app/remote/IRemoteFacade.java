@@ -9,46 +9,20 @@ import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 
 /**
- * Remote interface that contains the methods that give functionality to our EassyBooking server.
+ * <strong> IRemoteFaçade </strong>
+ * Interface remota que contiene los metodos que dan funcionalidad a nuestro servidor EassyBookin.
+ * @see RemoteFacade
  * 
  * <strong>Patterns</strong>
  * <ul>
- * 		<li>Facade</li>
+ * 		<li>Façade</li>
  *	</ul>
- *
- * @see {@link RemoteFacade}
  */
 public interface IRemoteFacade extends Remote{
 	
-	/**
-	 * Login function.
-	 * 
-	 * @param email User email.
-	 * @param password User password.
-	 * @param loginType {@link LoginEnum} type based on the external server used.
-	 * @return UserDTO of the user if correctly logged, null otherwise.
-	 * @throws RemoteException
-	 */
 	public UserDTO login(String email, String password, LoginEnum loginType) throws RemoteException;
-	
-	/**
-	 * Register function.
-	 * 
-	 * @param email User email.
-	 * @param password User password.
-	 * @param registerType {@link LoginEnum} type based on the external server used.
-	 * @return UserDTO of the user if correctly registered, null otherwise.
-	 * @throws RemoteException
-	 */
 	public void register(String email, String password, LoginEnum registerType)throws RemoteException;
-	
-	/**
-	 * Flight search function.
-	 * @param flightID ID of the flight to be searched
-	 * @return List of flights which hold the criteria
-	 * @throws RemoteException
-	 */
-	public List<FlightDTO> buscarVuelo(String flightID) throws RemoteException;
+	public List<FlightDTO> buscarVuelo(String id) throws RemoteException;
 	
 	/**
 	 * Flight booking method.

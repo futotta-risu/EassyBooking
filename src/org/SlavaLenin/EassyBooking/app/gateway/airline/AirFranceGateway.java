@@ -41,9 +41,7 @@ public class AirFranceGateway implements AirlineGateway {
 		logger.info("Flight booking for id " + flightID);
 		try {
 			Socket tcpSocket = new Socket(IP, PORT);
-			String address = tcpSocket.getInetAddress().getHostAddress();
-			
-			logger.info("- EchoClient: Sent data to '" + address);
+			logger.info("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress());
 		
 		    ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
 		    DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
@@ -51,10 +49,10 @@ public class AirFranceGateway implements AirlineGateway {
 		    String command = "RESERVAR " + flightID; 
 		     
 			out.writeUTF(command);
-			logger.info("- Sent data to '" + address + ":" + tcpSocket.getPort() + "' -> '" + command + "'");	
 			
+			logger.info("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + command + "'");	
 			String data = in.readUTF();			
-			logger.info("- Received data from '" + address + ":" + tcpSocket.getPort() + "' -> '" + data + "'");
+			logger.info("- EchoClient: Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");
 		
 		}catch (Exception e) {
 			logger.info("# EchoClient: Error: " + e.getMessage());
@@ -86,7 +84,6 @@ public class AirFranceGateway implements AirlineGateway {
 			System.out.println("AirFrance has recived:  " + dataDTO.size());
 			for(SocketAirlineFlightDTO flightDTO : dataDTO) {
 				Flight f = new Flight();
-				// TODO Maybe set an adapter for the SocketAirlineFlightDTO -> Flight 
 				f.setFlightNumber(flightDTO.getFligthNumber());
 				f.setDateDeparture(flightDTO.getDateDeparture());
 				f.setDateArrival(flightDTO.getDateArrival());
@@ -96,6 +93,8 @@ public class AirFranceGateway implements AirlineGateway {
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				f.setPrice(flightDTO.getPrice());
 				flights.add(f);
+				logger.info("Has add fligth: "+f+"to flights: "+flights);
+				
 			}
 			
 			return flights;
