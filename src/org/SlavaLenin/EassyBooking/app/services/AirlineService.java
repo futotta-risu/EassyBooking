@@ -37,6 +37,11 @@ public class AirlineService {
 		return instance;
 	}
 	
+	/**
+	 * This method creates a gateway of each airline and the adds the result flights to the list.
+	 * @param flightID ID for searching flights
+	 * @return List<Flight> List with the result of all the flights
+	 */
 	public List<Flight> buscarVuelo(String flightID) {
 		Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
 		logger.info("BuscarVuelo con " + flightID);
@@ -45,17 +50,12 @@ public class AirlineService {
 		
 		for (AirlineEnum airline : AirlineEnum.values()) {
 			for(Flight flight : AirlineGatewayFactory.create(airline).buscar(flightID)) {
-				
 				searchFlights.add(new Flight(flight));
-				System.out.println("Primero: vuelo tiene como airline " + searchFlights.get(searchFlights.size() - 1).getAirline());
 				DBManager.getInstance().storeFlight(flight);
-				
-				System.out.println("Segundo:El vuelo tiene como airline " + searchFlights.get(searchFlights.size() - 1).getAirline());
-			}
+				}
 		}
 			
 		logger.info("Se han encontrado " + searchFlights.size() + " vuelos");
-		System.out.println("El Airline es _13_ " + searchFlights.get(0).getAirline());
 		return searchFlights;
 	}
 	
@@ -80,21 +80,19 @@ public class AirlineService {
 		logger.info("Obtenido el vuelo" + flight );
 		User user = DBManager.getInstance().getUserWithKey(username, sessionKey);
 		if(user == null) {
-			// TODO cambiar este warning
 			logger.warning("Alguien ha intentado acceder a la cuenta de " + username + " con la clave.");
 			return;
 		}
-		//We are currently only holding the ID's, we need to get the info from the server
+		
 		logger.info("iniciando reserva con vuelo: " + flight.getFlightID() + " : con airline " + flight.getAirline() );
-		
-		
+				
 		AirlineGateway gateway = AirlineGatewayFactory.create(AirlineEnum.getEnum(flight.getAirline()));
 		logger.info("Gateway created: " + gateway);
 		
 		gateway.reservar(String.valueOf(flight.getFlightNumber()));
 		logger.info("Getting Payment Method " + user.getPaymentMethod());
 		
-		
+	
 		logger.info("iniciando pago " + user.getPaymentMethod());
 		flight = gateway.buscarVuelo(String.valueOf(flight.getFlightNumber()));
 		System.out.println("Precio:" + flight.getPrice());

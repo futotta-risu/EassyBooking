@@ -32,9 +32,16 @@ public class PaymentService {
 		return instance;
 	}
 	
+	/**
+	 * This method gets the user from the db and creates a gateway depending of the payment method that the user
+	 * have configured. Finally the Payment is stored in the db.
+	 * @param username Name of user that is paying for the flight
+	 * @param amount Price that is payed for the flight
+	 */
 	public void pay(String username, int amount){
 		
 		User user = DBManager.getInstance().getUser(username);
+		
 		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
 		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, amount);
 		

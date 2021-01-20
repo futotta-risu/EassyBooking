@@ -36,6 +36,14 @@ public class LoginService {
 	}
 	
 	
+	/**
+	 * This method creates a gateway depending of the loginType and calls the login function of the gateway.
+	 * If the user returned from the gateway is not null we will pick the user from the db.
+	 * @param email Email of the user
+	 * @param password Password of the user
+	 * @param loginType Login type that the user wants to use
+	 * @return UserDTO object that contains basic info about the loged user
+	 */
 	public UserDTO login(String email, String password, LoginEnum loginType){
 		Logger logger = ServerLogger.getLogger();
 		logger.info("Iniciando login");
@@ -54,6 +62,15 @@ public class LoginService {
 		return UserAssembler.getInstance().assemble(user);
 	}
 	
+	
+	/**
+	 * This method creates a gateway depending of the loginType and calls the login function of the gateway.
+	 * If the user is not null we will try to pick that user from the db and if it is null again, the user will be stored in the db.
+	 * @param email Email of the user
+	 * @param password Password of the user
+	 * @param registerType Register type that the user wants to use
+	 * @return UserDTO object that contains basic info about the loged user
+	 */
 	public UserDTO register(String email, String password, LoginEnum registerType) {
 		Logger logger = ServerLogger.getLogger();
 		logger.info("Iniciando login");
