@@ -2,7 +2,6 @@ package org.SlavaLenin.EassyBooking.app.data;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.jdo.annotations.*;
 
 @PersistenceCapable(detachable = "true")
@@ -13,27 +12,43 @@ public class Pago implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Date date;
+	@Unique
+	private long paymentID;
 	private String confirmationCode;
 	private String extraInfo;
 	
 	
 	public Pago() {
 		super();
+		this.paymentID= System.currentTimeMillis();
 		// TODO Auto-generated constructor stub
 	}
 	public Pago(Date date, String confCode, String extraInfo) {
 		this.date = date;
+		this.paymentID = System.currentTimeMillis();
 		this.confirmationCode = confCode;
 		this.extraInfo = extraInfo;
 	}
 	
 	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public long getPaymentID() {
+		return paymentID;
+	}
+	public void setPaymentID(int paymentID) {
+		this.paymentID = paymentID;
 	}
 	public String getConfirmationCode() {
 		return confirmationCode;

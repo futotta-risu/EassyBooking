@@ -1,22 +1,16 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
-
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
-import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
-import org.SlavaLenin.EassyBooking.app.gateway.PaymentGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
-import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
-
 
 
 /**
@@ -100,33 +94,17 @@ public class AirlineService {
 		gateway.reservar(String.valueOf(flight.getFlightNumber()));
 		logger.info("Getting Payment Method " + user.getPaymentMethod());
 		
-		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
 		
-		logger.info("iniciando pago " + paymentType);
-		
+		logger.info("iniciando pago " + user.getPaymentMethod());
 		flight = gateway.buscarVuelo(String.valueOf(flight.getFlightNumber()));
-		
 		System.out.println("Precio:" + flight.getPrice());
 		
-		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
-		
+		PaymentService.getInstance().pay(username, flight.getPrice());
 		logger.info("Processo de pago correcto" );
 		
-		Pago pago=new Pago();
-		
-		pago.setDate(Calendar.getInstance().getTime());
-		pago.setExtraInfo(String.valueOf(flight.getPrice()));
-		
-		DBManager.getInstance().storePago(pago);
-		
-		
-		
-		//Hacer FlightReservation
 		FlightReservation fReservation=new FlightReservation();
-		
 		fReservation.setFlight(flight);
 		fReservation.setUser(user);
-		
 		DBManager.getInstance().storeFlightReservation(fReservation);
 		System.out.println("Proceso de guardados de vuelos completado");
 	}
