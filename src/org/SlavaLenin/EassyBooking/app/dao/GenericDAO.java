@@ -4,7 +4,12 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>DAO</li>
+ * </ul>
+ */
 public class GenericDAO {
 	
 	private static PersistenceManagerFactory pmf = null;

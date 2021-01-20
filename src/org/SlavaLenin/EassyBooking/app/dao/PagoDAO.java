@@ -10,6 +10,13 @@ import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 
+
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>DAO</li>
+ * </ul>
+ */
 public class PagoDAO extends GenericDAO{
 	public PagoDAO() {
 		super();
