@@ -17,10 +17,17 @@ public class FlightDAO extends GenericDAO{
 	}
 	
 	public static void storeFlight(Flight flight) {
-		System.out.println("Guardando vuelo");
+		System.out.println("Saving the flight");
+		
+		if(getFlight(String.valueOf(flight.getFlightID())) != null) {
+			System.out.println("Flight Alredy in DB");
+			return;
+		}
+		
 		PersistenceManager pm = getPMF().getPersistenceManager();
 	    Transaction tx=pm.currentTransaction();
-
+	    
+	    
 		try{
 	        tx.begin();
 	        pm.makePersistent(flight);

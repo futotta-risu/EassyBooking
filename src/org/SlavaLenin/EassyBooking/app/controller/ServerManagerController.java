@@ -26,11 +26,14 @@ public class ServerManagerController {
 	public UserDTO register(String username, String password) {
 		Logger logger = ServerLogger.getLogger();
     	logger.info("Register user " + username);
+    	
     	user = LoginService.getInstance().register(username, password, LoginEnum.Google);
+    	
     	if(user == null) {
     		logger.info("Registro fallido " + username);
     		return null;
     	}
+    	
     	return user;
 	}
 	
@@ -68,9 +71,9 @@ public class ServerManagerController {
     	}
     	
     	Flight f = DBManager.getInstance().getFlight(id);
-    	System.out.println("------ESTA ES IMPORTANTE--------");
-    	System.out.println(f);
-    	System.out.println("------ESTA ES IMPORTANTE--------");
+    	
+    	System.out.println("------ESTA ES IMPORTANTE-------||||" +f.getFlightID() + "|||||-");
+    	
 		AirlineService.getInstance().reservar(id, user.getUsername(), user.getSessionKey());
 		
 		

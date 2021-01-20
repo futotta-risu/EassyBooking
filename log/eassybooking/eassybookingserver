@@ -2,27 +2,74 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2021-01-19T23:21:10.957570900Z</date>
-  <millis>1611098470957</millis>
-  <nanos>570900</nanos>
-  <sequence>7</sequence>
+  <date>2021-01-20T12:29:06.373433400Z</date>
+  <millis>1611145746373</millis>
+  <nanos>433400</nanos>
+  <sequence>0</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Login de erik@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T12:29:06.380414600Z</date>
+  <millis>1611145746380</millis>
+  <nanos>414600</nanos>
+  <sequence>1</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Iniciando login</message>
+</record>
+<record>
+  <date>2021-01-20T12:29:06.441275300Z</date>
+  <millis>1611145746441</millis>
+  <nanos>275300</nanos>
+  <sequence>2</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Hemos recivido el user del gateway User [username=erik@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T12:29:06.806918900Z</date>
+  <millis>1611145746806</millis>
+  <nanos>918900</nanos>
+  <sequence>3</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Hemos recivido el user del db User [username=erik@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T12:29:06.808910200Z</date>
+  <millis>1611145746808</millis>
+  <nanos>910200</nanos>
+  <sequence>4</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>ServerManagerController: Logeado con el user erik@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T12:29:12.356291400Z</date>
+  <millis>1611145752356</millis>
+  <nanos>291400</nanos>
+  <sequence>12</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
   <method>bookFlight</method>
   <thread>20</thread>
-  <message>BookFlight with 0</message>
+  <message>BookFlight with 6</message>
 </record>
-<record>
-  <date>2021-01-19T23:21:10.958567300Z</date>
-  <millis>1611098470958</millis>
-  <nanos>567300</nanos>
-  <sequence>8</sequence>
-  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
-  <level>SEVERE</level>
-  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
-  <method>bookFlight</method>
-  <thread>20</thread>
-  <message>No user currently logged</message>
-</record>
-</log>

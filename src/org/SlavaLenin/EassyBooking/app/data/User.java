@@ -27,7 +27,7 @@ public class User implements Serializable {
 	@Join
 	private List<FlightReservation> flightReservations;
 	
-	@Persistent
+	@Persistent(defaultFetchGroup = "true")
 	private PaymentMethod paymentMethod;
 	
 	@Persistent
