@@ -2,75 +2,362 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2021-01-20T16:24:51.342387100Z</date>
-  <millis>1611159891342</millis>
-  <nanos>387100</nanos>
+  <date>2021-01-20T19:48:38.270537100Z</date>
+  <millis>1611172118270</millis>
+  <nanos>537100</nanos>
   <sequence>0</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
-  <method>login</method>
+  <method>register</method>
   <thread>30</thread>
   <message>Iniciando login</message>
 </record>
 <record>
-  <date>2021-01-20T16:24:51.418220300Z</date>
-  <millis>1611159891418</millis>
-  <nanos>220300</nanos>
+  <date>2021-01-20T19:48:38.352353700Z</date>
+  <millis>1611172118352</millis>
+  <nanos>353700</nanos>
   <sequence>1</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
-  <method>login</method>
+  <method>register</method>
   <thread>30</thread>
-  <message>Hemos recivido el user del gateway User [username=amaia@gmail.com]</message>
+  <message>Hemos recivido el user del gateway User [username=erik@gmail.com]</message>
 </record>
 <record>
-  <date>2021-01-20T16:24:51.763770800Z</date>
-  <millis>1611159891763</millis>
-  <nanos>770800</nanos>
+  <date>2021-01-20T19:48:38.704327800Z</date>
+  <millis>1611172118704</millis>
+  <nanos>327800</nanos>
   <sequence>2</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
-  <method>login</method>
+  <method>register</method>
   <thread>30</thread>
-  <message>Hemos recivido el user del db User [username=amaia@gmail.com]</message>
+  <message>Hemos recivido el user del db null</message>
 </record>
 <record>
-  <date>2021-01-20T16:26:33.821796Z</date>
-  <millis>1611159993821</millis>
-  <nanos>796000</nanos>
-  <sequence>8</sequence>
+  <date>2021-01-20T19:48:38.743223700Z</date>
+  <millis>1611172118743</millis>
+  <nanos>223700</nanos>
+  <sequence>3</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>30</thread>
+  <message>Hemos almacenado el usuario</message>
+</record>
+<record>
+  <date>2021-01-20T19:48:38.754194200Z</date>
+  <millis>1611172118754</millis>
+  <nanos>194200</nanos>
+  <sequence>4</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>30</thread>
+  <message>Hemos recuperado el User [username=erik@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T19:48:40.059999200Z</date>
+  <millis>1611172120059</millis>
+  <nanos>999200</nanos>
+  <sequence>5</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
   <method>login</method>
-  <thread>33</thread>
+  <thread>30</thread>
   <message>Iniciando login</message>
 </record>
 <record>
-  <date>2021-01-20T16:26:33.827780Z</date>
-  <millis>1611159993827</millis>
-  <nanos>780000</nanos>
-  <sequence>9</sequence>
+  <date>2021-01-20T19:48:40.067035700Z</date>
+  <millis>1611172120067</millis>
+  <nanos>35700</nanos>
+  <sequence>6</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
   <method>login</method>
-  <thread>33</thread>
+  <thread>30</thread>
+  <message>Hemos recivido el user del gateway User [username=erik@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T19:48:40.072024100Z</date>
+  <millis>1611172120072</millis>
+  <nanos>24100</nanos>
+  <sequence>7</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>30</thread>
+  <message>Hemos recivido el user del db User [username=erik@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:16.868095700Z</date>
+  <millis>1611174556868</millis>
+  <nanos>95700</nanos>
+  <sequence>28</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>bookFlight</method>
+  <thread>20</thread>
+  <message>BookFlight with 62</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:16.869092600Z</date>
+  <millis>1611174556869</millis>
+  <nanos>92600</nanos>
+  <sequence>29</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>SEVERE</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>bookFlight</method>
+  <thread>20</thread>
+  <message>No user currently logged</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:28.900169500Z</date>
+  <millis>1611174568900</millis>
+  <nanos>169500</nanos>
+  <sequence>30</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Login de amaia@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:28.901166Z</date>
+  <millis>1611174568901</millis>
+  <nanos>166000</nanos>
+  <sequence>31</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Iniciando login</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:28.905155Z</date>
+  <millis>1611174568905</millis>
+  <nanos>155000</nanos>
+  <sequence>32</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
   <message>Hemos recivido el user del gateway User [username=amaia@gmail.com]</message>
 </record>
 <record>
-  <date>2021-01-20T16:26:33.831769600Z</date>
-  <millis>1611159993831</millis>
-  <nanos>769600</nanos>
-  <sequence>10</sequence>
+  <date>2021-01-20T20:29:28.911144700Z</date>
+  <millis>1611174568911</millis>
+  <nanos>144700</nanos>
+  <sequence>33</sequence>
   <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
   <level>INFO</level>
   <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
   <method>login</method>
-  <thread>33</thread>
+  <thread>20</thread>
+  <message>Hemos recivido el user del db null</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:28.912169700Z</date>
+  <millis>1611174568912</millis>
+  <nanos>169700</nanos>
+  <sequence>34</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>ServerManagerController: Login fallido con el user amaia@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.627493900Z</date>
+  <millis>1611174570627</millis>
+  <nanos>493900</nanos>
+  <sequence>35</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Register user amaia@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.627493900Z</date>
+  <millis>1611174570627</millis>
+  <nanos>493900</nanos>
+  <sequence>36</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Iniciando login</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.629489600Z</date>
+  <millis>1611174570629</millis>
+  <nanos>489600</nanos>
+  <sequence>37</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Hemos recivido el user del gateway User [username=amaia@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.631485400Z</date>
+  <millis>1611174570631</millis>
+  <nanos>485400</nanos>
+  <sequence>38</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Hemos recivido el user del db null</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.644449Z</date>
+  <millis>1611174570644</millis>
+  <nanos>449000</nanos>
+  <sequence>39</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Hemos almacenado el usuario</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:30.650435400Z</date>
+  <millis>1611174570650</millis>
+  <nanos>435400</nanos>
+  <sequence>40</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>register</method>
+  <thread>20</thread>
+  <message>Hemos recuperado el User [username=amaia@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:31.883666800Z</date>
+  <millis>1611174571883</millis>
+  <nanos>666800</nanos>
+  <sequence>41</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Login de amaia@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:31.884674800Z</date>
+  <millis>1611174571884</millis>
+  <nanos>674800</nanos>
+  <sequence>42</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Iniciando login</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:31.885647Z</date>
+  <millis>1611174571885</millis>
+  <nanos>647000</nanos>
+  <sequence>43</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>Hemos recivido el user del gateway User [username=amaia@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:31.889636500Z</date>
+  <millis>1611174571889</millis>
+  <nanos>636500</nanos>
+  <sequence>44</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>20</thread>
   <message>Hemos recivido el user del db User [username=amaia@gmail.com]</message>
 </record>
-</log>
+<record>
+  <date>2021-01-20T20:29:31.889636500Z</date>
+  <millis>1611174571889</millis>
+  <nanos>636500</nanos>
+  <sequence>45</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>login</method>
+  <thread>20</thread>
+  <message>ServerManagerController: Logeado con el user amaia@gmail.com</message>
+</record>
+<record>
+  <date>2021-01-20T20:29:33.419330700Z</date>
+  <millis>1611174573419</millis>
+  <nanos>330700</nanos>
+  <sequence>46</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.controller.ServerManagerController</class>
+  <method>bookFlight</method>
+  <thread>20</thread>
+  <message>BookFlight with 62</message>
+</record>
+<record>
+  <date>2021-01-20T20:31:33.733937900Z</date>
+  <millis>1611174693733</millis>
+  <nanos>937900</nanos>
+  <sequence>54</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>54</thread>
+  <message>Iniciando login</message>
+</record>
+<record>
+  <date>2021-01-20T20:31:33.737954900Z</date>
+  <millis>1611174693737</millis>
+  <nanos>954900</nanos>
+  <sequence>55</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>54</thread>
+  <message>Hemos recivido el user del gateway User [username=amaia@gmail.com]</message>
+</record>
+<record>
+  <date>2021-01-20T20:31:33.742914400Z</date>
+  <millis>1611174693742</millis>
+  <nanos>914400</nanos>
+  <sequence>56</sequence>
+  <logger>org.SlavaLenin.EassyBooking.app.log.ServerLogger</logger>
+  <level>INFO</level>
+  <class>org.SlavaLenin.EassyBooking.app.services.LoginService</class>
+  <method>login</method>
+  <thread>54</thread>
+  <message>Hemos recivido el user del db User [username=amaia@gmail.com]</message>
+</record>

@@ -12,7 +12,9 @@ import org.SlavaLenin.EassyBooking.app.data.Airline;
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
+import org.SlavaLenin.EassyBooking.app.log.ServerLogger;
 import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightDTO;
+
 
 /**
  * <strong>Pattern</strong>
@@ -22,8 +24,8 @@ import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightD
  */
 public class AirFranceGateway implements AirlineGateway {
 	
-	private static final String IP = "127.0.0.1";
-	private static final int PORT = 8001;
+	private static final String 	IP 		= 	"127.0.0.1";
+	private static final int 		PORT 	= 	8001;
 
 	public AirFranceGateway() {
 		if(!DBManager.getInstance().hasAirline(AirlineEnum.AirFrance)) {
@@ -34,30 +36,35 @@ public class AirFranceGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id){
+	public void reservar(String flightID){
+		Logger logger = ServerLogger.getLogger();
+		logger.info("Flight booking for id " + flightID);
 		try {
 			Socket tcpSocket = new Socket(IP, PORT);
-			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress());
+			logger.info("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress());
 		
-				
-			 //Streams to send and receive information are created from the Socket
-		     ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
-		     DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
+		    ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
+		    DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
 			
-			out.writeUTF("RESERVAR "+ id);
+		    String command = "RESERVAR" + flightID; 
+		     
+			out.writeUTF(command);
 			
-			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> 'RESERVAR " + id + "'");	
+			logger.info("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + command + "'");	
 			String data = in.readUTF();			
-			System.out.println("- EchoClient: Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");
+			logger.info("- EchoClient: Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");
+		
 		}catch (Exception e) {
-			System.out.println("# EchoClient: Error: " + e.getMessage());
+			logger.info("# EchoClient: Error: " + e.getMessage());
 		}
 		
 	}
 
 	@Override
 	public List<Flight> buscar(String id) {
-		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirFranceGateway: buscar con " + id);
+		Logger logger = ServerLogger.getLogger();
+		logger.info("AirFranceGateway: buscar con " + id);
+		
 		List<Flight> flights = new ArrayList<Flight>();
 		try{
 			
@@ -66,10 +73,12 @@ public class AirFranceGateway implements AirlineGateway {
 			//Streams to send and receive information are created from the Socket
 			ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
 			DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
-			System.out.println("AirFrance has inicied conexion");
-			out.writeUTF("BUSCAR "+ id);
+			logger.info("Connection with AirFrance");
 			
-			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> 'BUSCAR " + id + "'");	
+			String command = "BUSCAR" + id;
+			out.writeUTF(command);
+			
+			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> ' " + command + "'");	
 			@SuppressWarnings("unchecked")
 			List<SocketAirlineFlightDTO> dataDTO = (List<SocketAirlineFlightDTO>) in.readObject();
 			System.out.println("AirFrance has recived:  " + dataDTO.size());
@@ -84,7 +93,7 @@ public class AirFranceGateway implements AirlineGateway {
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				f.setPrice(flightDTO.getPrice());
 				flights.add(f);
-				System.out.println("Has add fligth: "+f+"to flights: "+flights);
+				logger.info("Has add fligth: "+f+"to flights: "+flights);
 				
 			}
 			

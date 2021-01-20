@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import es.deusto.ingenieria.sd.sms.server.remote.IPaymentManager;
 
 
+
 /**
  * <strong>Pattern</strong>
  * <ul>

@@ -43,19 +43,21 @@ public class AirlineService {
 		return instance;
 	}
 	
-	public List<Flight> buscarVuelo(String id) {
+	public List<Flight> buscarVuelo(String flightID) {
 		Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
-		logger.info("BuscarVuelo con " + id);
+		logger.info("BuscarVuelo con " + flightID);
 		
 		List<Flight> searchFlights = new ArrayList<Flight>();
 		
 		for (AirlineEnum airline : AirlineEnum.values()) {
-			List<Flight> airlineSearchFlights= AirlineGatewayFactory.create(airline).buscar(id);
-			
-			List<Flight> airlineSearchFlightsCopy = new ArrayList<Flight>(airlineSearchFlights);
-			searchFlights.addAll(airlineSearchFlightsCopy);
-			
-			DBManager.getInstance().storeFlights(airlineSearchFlights);
+			for(Flight flight : AirlineGatewayFactory.create(airline).buscar(flightID)) {
+				
+				searchFlights.add(new Flight(flight));
+				System.out.println("Primero: vuelo tiene como airline " + searchFlights.get(searchFlights.size() - 1).getAirline());
+				DBManager.getInstance().storeFlight(flight);
+				
+				System.out.println("Segundo:El vuelo tiene como airline " + searchFlights.get(searchFlights.size() - 1).getAirline());
+			}
 		}
 			
 		logger.info("Se han encontrado " + searchFlights.size() + " vuelos");
@@ -81,14 +83,13 @@ public class AirlineService {
 		logger.info("Reservando vuelo con id " + flightID );
 		
 		Flight flight = DBManager.getInstance().getFlight(flightID);
-		
+		logger.info("Obtenido el vuelo" + flight );
 		User user = DBManager.getInstance().getUserWithKey(username, sessionKey);
 		if(user == null) {
 			// TODO cambiar este warning
 			logger.warning("Alguien ha intentado acceder a la cuenta de " + username + " con la clave.");
 			return;
 		}
-		
 		//We are currently only holding the ID's, we need to get the info from the server
 		logger.info("iniciando reserva con vuelo: " + flight.getFlightID() + " : con airline " + flight.getAirline() );
 		
@@ -127,7 +128,7 @@ public class AirlineService {
 		fReservation.setUser(user);
 		
 		DBManager.getInstance().storeFlightReservation(fReservation);
-		System.out.println("Proceso de guardados de vuelos completado"+fReservation);
+		System.out.println("Proceso de guardados de vuelos completado");
 	}
 	
 

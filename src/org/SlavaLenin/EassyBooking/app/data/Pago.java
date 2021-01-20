@@ -13,25 +13,18 @@ public class Pago implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Date date;
-	@Unique
-	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
-	private static int contador;
 	
 	
 	public Pago() {
 		super();
-		contador++;
-		this.paymentID=contador;
 		// TODO Auto-generated constructor stub
 	}
 	public Pago(Date date, String confCode, String extraInfo) {
 		this.date = date;
-		this.paymentID = contador;
 		this.confirmationCode = confCode;
 		this.extraInfo = extraInfo;
-		contador++;
 	}
 	
 	private User user;
@@ -41,12 +34,6 @@ public class Pago implements Serializable {
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	public int getPaymentID() {
-		return paymentID;
-	}
-	public void setPaymentID(int paymentID) {
-		this.paymentID = paymentID;
 	}
 	public String getConfirmationCode() {
 		return confirmationCode;
@@ -64,15 +51,9 @@ public class Pago implements Serializable {
 	public void borrarPago() {
 		this.user = null;
 	}
-	public int getContador() {
-		return contador;
-	}
-	public void setContador(int contador) {
-		this.contador = contador;
-	}
 	@Override
 	public String toString() {
-		return "Pago [paymentID=" + paymentID + ", date=" + date + "]";
+		return "Pago [paymentID=" + (int)(date.getTime()) + ", date=" + date + "]";
 	}
 	
 	

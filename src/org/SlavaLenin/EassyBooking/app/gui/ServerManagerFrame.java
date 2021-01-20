@@ -178,7 +178,7 @@ public class ServerManagerFrame extends JFrame {
                 lblAirportArrival.setText(DBManager.getInstance().getAirport(f.getAirportArrival()).getName());
                 System.out.println("Cambiando el airline number" + f.getAirline());
             	lblAirline.setText(DBManager.getInstance().getAirline(AirlineEnum.getEnum(f.getAirline())).getName());
-            	System.out.println("Todo vool");
+            	
             	
             }
         });
@@ -307,7 +307,10 @@ public class ServerManagerFrame extends JFrame {
 		btnReserval.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Boton Reserbar");
 				Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
+				System.out.println(f);
+				System.out.println("La reserva sera de " + f.getFlightID());
 				smcontroller.bookFlight(String.valueOf(f.getFlightID()));
 			}
 		});

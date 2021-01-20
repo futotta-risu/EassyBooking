@@ -2,6 +2,7 @@ package org.SlavaLenin.EassyBooking.app.data;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.annotations.*;
 
@@ -29,10 +30,9 @@ public class Flight implements Serializable {
 	@NotPersistent
 	private int numberRemainingSeats;
 	
-	/*
 	@Join
 	@Persistent(mappedBy="flight", dependentElement="true")
-	private List<FlightReservation> flightReservations;*/
+	private List<FlightReservation> flightReservations;
 	
 	@NotPersistent
 	private int numberPassengers;
@@ -50,6 +50,21 @@ public class Flight implements Serializable {
 		flightID = flightIDCounter;
 		flightIDCounter++;
 	}
+	
+	public Flight(Flight flight) {
+		this.flightNumber = flight.getFlightNumber();
+		this.flightID = flight.getFlightID();
+		this.price = flight.getPrice();
+		this.airline = flight.getAirline();
+
+		this.dateDeparture = flight.getDateDeparture();
+		this.dateArrival = flight.getDateArrival();
+		this.totalSeats =  flight.getTotalSeats();
+		this.airportDeparture = flight.getAirportDeparture();
+		this.airportArrival = flight.getAirportArrival();
+		this.numberRemainingSeats = flight.getNumberRemainingSeats();
+	}
+	
 	
 	public String getAirline() {
 		return this.airline;

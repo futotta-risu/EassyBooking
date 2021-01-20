@@ -151,7 +151,7 @@ public class FlightReservationDAO extends GenericDAO{
 		}
 
 	}
-	
+	/*
 	public static void deleteAllFlightReservations() {
 		System.out.println("- Cleaning the DB...");
 		PersistenceManager pm = getPMF().getPersistenceManager();
@@ -177,6 +177,6 @@ public class FlightReservationDAO extends GenericDAO{
 		}
 		for(String id : IDs)
 			deleteFlightReservation(id);
-	}
+	}*/
 	
 }

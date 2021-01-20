@@ -34,9 +34,9 @@ public class DBManager {
 	private PersistenceManagerFactory pmf;
 	
 	public static DBManager getInstance() {
-		if(instance == null ) {
+		if(instance == null )
 			instance = new DBManager();
-		}
+	
 		return instance;
 	}
 	
@@ -92,13 +92,14 @@ public class DBManager {
 		PagoDAO.updatePago(pago);
 	}
 	
+	/*
 	public void deletePago(String id_pago) {
 		PagoDAO.deletePago(id_pago);
 	}
 	
 	public void deleteAllPagos() {
 		PagoDAO.deleteAllPagos();
-	}
+	}*/
 	
 	// -------------- FLIGHT -----------------
 	public void storeFlight(Flight flight) {
@@ -143,9 +144,6 @@ public class DBManager {
 		FlightReservationDAO.deleteFlightReservation(flightNumber);
 	}
 	
-	public void deleteAllFlightReservations() {
-		FlightReservationDAO.deleteAllFlightReservations();
-	}
 	
 	public void storeAirport(String code, Airport airport) {
 		if(!airports.containsKey(code)) 

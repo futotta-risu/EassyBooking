@@ -3,6 +3,7 @@ package org.SlavaLenin.EassyBooking.app.data.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 
 /**

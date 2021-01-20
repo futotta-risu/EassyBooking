@@ -122,7 +122,7 @@ public class PagoDAO extends GenericDAO{
 			pm.close();
 		}
 	}
-	
+	/*
 	public static void deletePago(String id_pago) {
 		PersistenceManager pm = getPMF().getPersistenceManager();
 
@@ -179,6 +179,6 @@ public class PagoDAO extends GenericDAO{
 		}
 		for(String id : IDs)
 			deletePago(id);
-	}
+	}*/
 	
 }

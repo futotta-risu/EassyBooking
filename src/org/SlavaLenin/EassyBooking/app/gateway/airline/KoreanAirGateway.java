@@ -15,6 +15,7 @@ import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 import es.deusto.ingenieria.sd.sms.server.data.AirlineFlightDTO;
 import es.deusto.ingenieria.sd.sms.server.remote.IAirlineManager;
 
+
 /**
  * <strong>Pattern</strong>
  * <ul>

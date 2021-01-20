@@ -1,5 +1,6 @@
 package org.SlavaLenin.EassyBooking.app.remote;
 
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;

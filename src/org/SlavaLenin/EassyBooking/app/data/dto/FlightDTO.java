@@ -109,4 +109,9 @@ public class FlightDTO implements Serializable {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "Flight " + fligthNumber + ": " + airportDeparture + " "+ dateDeparture ;
+	}
 }
