@@ -17,7 +17,21 @@ public class Pago implements Serializable {
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
+	private int contador;
 	
+	
+	
+	
+	public Pago() {
+		super();
+		contador++;
+		paymentID=contador;
+		
+		
+		
+		
+		// TODO Auto-generated constructor stub
+	}
 	public Pago(Date date, int id, String confCode, String extraInfo) {
 		this.date = date;
 		this.paymentID = id;
@@ -55,7 +69,12 @@ public class Pago implements Serializable {
 	public void borrarPago() {
 		this.user = null;
 	}
-	
+	public int getContador() {
+		return contador;
+	}
+	public void setContador(int contador) {
+		this.contador = contador;
+	}
 	@Override
 	public String toString() {
 		return "Pago [paymentID=" + paymentID + ", date=" + date + "]";
