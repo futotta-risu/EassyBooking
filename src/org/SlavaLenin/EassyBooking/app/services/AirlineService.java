@@ -114,6 +114,7 @@ public class AirlineService {
 		fReservation.setUser(user);
 		
 		DBManager.getInstance().storeFlightReservation(fReservation);
+		System.out.println("Proceso de guardados de vuelos completado"+fReservation);
 	}
 	
 
