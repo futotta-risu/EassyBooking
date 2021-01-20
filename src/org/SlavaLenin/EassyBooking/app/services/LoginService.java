@@ -39,8 +39,7 @@ public class LoginService {
 		
 		if(user == null) return null;
 
-		UserAssembler userAssembler = new UserAssembler();
-		return userAssembler.assemble(user);
+		return UserAssembler.getInstance().assemble(user);
 	}
 	
 	public UserDTO register(String email, String password, LoginEnum registerType) {

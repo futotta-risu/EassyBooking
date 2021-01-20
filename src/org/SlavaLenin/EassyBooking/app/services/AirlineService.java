@@ -84,19 +84,27 @@ public class AirlineService {
 			return;
 		}
 		
+		//We are currently only holding the ID's, we need to get the info from the server
+		logger.info("iniciando reserva con vuelo: " + flight.getFlightID() + " : con airline " + flight.getAirline() );
 		
-		logger.info("iniciando reserva con vuelo: " + flight + " :" );
-		// TODO Cambiar esto de String a Integer
+		
 		AirlineGateway gateway = AirlineGatewayFactory.create(AirlineEnum.getEnum(flight.getAirline()));
+		logger.info("Gateway created: " + gateway);
+		
 		gateway.reservar(String.valueOf(flight.getFlightNumber()));
+		logger.info("Getting Payment Method " + user.getPaymentMethod());
+		
 		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
-		logger.info("iniciando pago" );
+		
+		logger.info("iniciando pago " + paymentType);
+		
 		flight = gateway.buscarVuelo(String.valueOf(flight.getFlightNumber()));
+		
 		System.out.println("Precio:" + flight.getPrice());
+		
 		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
+		
 		logger.info("Processo de pago correcto" );
-		
-		
 	}
 	
 

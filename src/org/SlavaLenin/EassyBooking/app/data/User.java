@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.jdo.annotations.*;
 
+import org.SlavaLenin.EassyBooking.app.data.payment.Paypal;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 
 
@@ -41,6 +42,7 @@ public class User implements Serializable {
 		this.flightReservations = new ArrayList<>();
 		this.pagos = new ArrayList<>();
 		this.sessionKey = "123456789";
+		this.paymentMethod = new Paypal();
 	}
 	
 	public User(String email) {
@@ -48,6 +50,8 @@ public class User implements Serializable {
 		this.username = email;
 		this.flightReservations = new ArrayList<>();
 		this.pagos = new ArrayList<>();
+		
+		this.paymentMethod = new Paypal();
 		
 		this.sessionKey = "123456789";
 	}

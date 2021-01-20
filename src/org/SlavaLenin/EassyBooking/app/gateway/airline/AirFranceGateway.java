@@ -106,7 +106,7 @@ public class AirFranceGateway implements AirlineGateway {
 			ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
 			DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
 			System.out.println("AirFrance se esta ejecuntando 3");
-			out.writeUTF("BUSCAR "+ id);
+			out.writeUTF("BUSCARVUELO "+ id);
 			
 			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> 'BUSCAR " + id + "'");	
 			@SuppressWarnings("unchecked")
