@@ -8,26 +8,27 @@ public class FlightDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int fligthNumber;
-	private Date dateDeparture;
-	private Date dateArrival;
-	private int airlineNumber;
-	private int airportDeparture;
-	private int airportArrival;
+	private int seats, price;
+	
+	private Date dateDeparture,dateArrival;
+	private String airline, airportDeparture,  airportArrival;
 	
 	
 	public FlightDTO() {
 	    super();
 	}
 	
-	public FlightDTO(int fligthNumber, Date dateDeparture, Date dateArrival, int airlineNumber,
-	        int airportDeparture, int airportArrival) {
+	public FlightDTO(int fligthNumber, Date dateDeparture, Date dateArrival, String airlineNumber,
+	        String airportDeparture, String airportArrival, int seats, int price) {
 	    super();
 	    this.fligthNumber = fligthNumber;
 	    this.dateDeparture = dateDeparture;
 	    this.dateArrival = dateArrival;
-	    this.airlineNumber = airlineNumber;
+	    this.airline = airlineNumber;
 	    this.airportDeparture = airportDeparture;
 	    this.airportArrival = airportArrival;
+	    this.seats = seats;
+	    this.price = price;
 	}
 	
 	public int getFligthNumber() {
@@ -54,27 +55,52 @@ public class FlightDTO implements Serializable {
 	    this.dateArrival = dateArrival;
 	}
 	
-	public int getAirlineNumber() {
-	    return airlineNumber;
+	public String getAirlineNumber() {
+	    return airline;
 	}
 	
-	public void setAirlineNumber(int airlineNumber) {
-	    this.airlineNumber = airlineNumber;
+	public void setAirlineNumber(String airlineNumber) {
+	    this.airline = airlineNumber;
 	}
 	
-	public int getAirportDeparture() {
+	public String getAirportDeparture() {
 	    return airportDeparture;
 	}
 	
-	public void setAirportDeparture(int airportDeparture) {
+	public void setAirportDeparture(String airportDeparture) {
 	    this.airportDeparture = airportDeparture;
 	}
 	
-	public int getAirportArrival() {
+	public String getAirportArrival() {
 	    return airportArrival;
 	}
 	
-	public void setAirportArrival(int airportArrival) {
+	public void setAirportArrival(String airportArrival) {
 	    this.airportArrival = airportArrival;
+	}
+
+	public String getAirline() {
+		return airline;
+	}
+
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
+
+	public int getSeats() {
+		return seats;
+	}
+
+	public void setSeats(int seats) {
+		this.seats = seats;
+	}
+
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

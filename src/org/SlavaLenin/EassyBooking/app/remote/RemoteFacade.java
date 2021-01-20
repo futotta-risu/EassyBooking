@@ -46,7 +46,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
 
 	public void bookFlight(String id, String username, String userKey) throws RemoteException {
-		
+		System.out.println("Fachada: Iniciando reserva del vuelo " + id + " del username " + username + " con la session " + userKey);
 		AirlineService.getInstance().reservar(id,  username, userKey);
 	}
 
