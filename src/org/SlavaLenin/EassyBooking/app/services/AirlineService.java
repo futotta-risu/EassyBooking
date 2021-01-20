@@ -1,11 +1,13 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
+import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
@@ -14,6 +16,8 @@ import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
+
+
 
 /**
  * Application Service for Airlines
@@ -106,6 +110,15 @@ public class AirlineService {
 		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
 		
 		logger.info("Processo de pago correcto" );
+		
+		Pago pago=new Pago();
+		
+		pago.setDate(Calendar.getInstance().getTime());
+		pago.setExtraInfo(String.valueOf(flight.getPrice()));
+		
+		DBManager.getInstance().storePago(pago);
+		
+		
 		
 		//Hacer FlightReservation
 		FlightReservation fReservation=new FlightReservation();
