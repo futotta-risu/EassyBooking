@@ -28,8 +28,10 @@ public class KoreanAirGateway implements AirlineGateway {
 			e.printStackTrace();
 		}
 		if(!DBManager.getInstance().hasAirline(AirlineEnum.KoreanAir)) {
+			System.out.println("Saved KoreanAir");
 			Airline koreanAir = new Airline("KoreanAir", AirlineEnum.KoreanAir);
 			DBManager.getInstance().storeAirline(AirlineEnum.KoreanAir, koreanAir);
+			System.out.println("Saved Not Saved");
 		}
 	}
 	

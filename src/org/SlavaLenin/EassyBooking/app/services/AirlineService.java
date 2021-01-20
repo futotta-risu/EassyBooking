@@ -47,14 +47,14 @@ public class AirlineService {
 		for (AirlineEnum airline : AirlineEnum.values()) {
 			List<Flight> airlineSearchFlights= AirlineGatewayFactory.create(airline).buscar(id);
 			
-			System.out.println("AirlineService : Hemos recivido " + airlineSearchFlights.size() + " con " + airline);
-			
 			List<Flight> airlineSearchFlightsCopy = new ArrayList<Flight>(airlineSearchFlights);
 			searchFlights.addAll(airlineSearchFlightsCopy);
+			
 			DBManager.getInstance().storeFlights(airlineSearchFlights);
 		}
 			
 		logger.info("Se han encontrado " + searchFlights.size() + " vuelos");
+		System.out.println("El Airline es _13_ " + searchFlights.get(0).getAirline());
 		return searchFlights;
 	}
 	
@@ -85,13 +85,14 @@ public class AirlineService {
 		}
 		
 		
-		logger.info("iniciando reserva " );
+		logger.info("iniciando reserva con vuelo: " + flight + " :" );
 		// TODO Cambiar esto de String a Integer
 		AirlineGateway gateway = AirlineGatewayFactory.create(AirlineEnum.getEnum(flight.getAirline()));
 		gateway.reservar(String.valueOf(flight.getFlightNumber()));
 		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
 		logger.info("iniciando pago" );
 		flight = gateway.buscarVuelo(String.valueOf(flight.getFlightNumber()));
+		System.out.println("Precio:" + flight.getPrice());
 		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, flight.getPrice());
 		logger.info("Processo de pago correcto" );
 		

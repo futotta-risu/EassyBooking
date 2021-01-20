@@ -168,20 +168,17 @@ public class ServerManagerFrame extends JFrame {
             public void valueChanged(ListSelectionEvent arg0) {
             	System.out.println("Cambiando el valor en la JList");
                 Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
-                
                 selectedFlight = f;
                 lblFlightNumber.setText(String.valueOf(f.getFlightNumber()));
-                
                 lblTotalSeats.setText(String.valueOf(f.getTotalSeats()));
                 lblRemainingSeats.setText(String.valueOf(f.getNumberRemainingSeats()));
-                
                 lblDateDeparture.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateDeparture()));
-                // TODO Airport Functions
                 lblAirportDeparture.setText(DBManager.getInstance().getAirport(f.getAirportDeparture()).getName());
-                
                 lblDateArrival.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(f.getDateArrival()));
                 lblAirportArrival.setText(DBManager.getInstance().getAirport(f.getAirportArrival()).getName());
+                System.out.println("Cambiando el airline number" + f.getAirline());
             	lblAirline.setText(DBManager.getInstance().getAirline(AirlineEnum.getEnum(f.getAirline())).getName());
+            	System.out.println("Todo vool");
             	
             }
         });
