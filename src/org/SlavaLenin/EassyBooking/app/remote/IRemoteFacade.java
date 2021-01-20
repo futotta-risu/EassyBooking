@@ -7,7 +7,16 @@ import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 
-
+/**
+ * <strong> IRemoteFaçade </strong>
+ * Interface remota que contiene los metodos que dan funcionalidad a nuestro servidor EassyBookin.
+ * @see RemoteFacade
+ * 
+ * <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Façade</li>
+ *	</ul>
+ */
 public interface IRemoteFacade extends Remote{
 	
 	public UserDTO login(String email, String password, LoginEnum loginType) throws RemoteException;

@@ -13,6 +13,12 @@ import org.SlavaLenin.EassyBooking.app.log.ServerLogger;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>Controller</li>
+ * </ul>
+ */
 public class ServerManagerController {
 
 	List<Flight> flightSearchResult;

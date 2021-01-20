@@ -2,6 +2,12 @@ package org.SlavaLenin.EassyBooking.app.data.dto;
 
 import java.io.Serializable;
 
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>DTO</li>
+ * </ul>
+ */
 public class UserDTO implements Serializable {
 	/**
 	 * 

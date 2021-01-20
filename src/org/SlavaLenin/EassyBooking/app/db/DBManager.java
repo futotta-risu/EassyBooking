@@ -18,6 +18,13 @@ import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineEnum;
 
+/**
+ * <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Singleton</li>
+ *      <li>DAO</li>
+ * </ul>
+ */
 public class DBManager {
 	
 	private HashMap<AirlineEnum, Airline> airlines = new HashMap<AirlineEnum, Airline>();

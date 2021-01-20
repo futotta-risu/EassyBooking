@@ -9,6 +9,14 @@ import org.SlavaLenin.EassyBooking.app.data.User;
 import es.deusto.ingenieria.sd.sms.server.data.LoginUserDTO;
 import es.deusto.ingenieria.sd.sms.server.remote.ILoginManager;
 
+
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ * 		<li>Gateway</li>
+ * </ul>
+ *
+ */
 public class GoogleGateway implements LoginGateway {
 
 	private String name =  "//" + "127.0.0.1" + ":" + 1099 + "/" + "Google";

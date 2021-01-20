@@ -26,7 +26,7 @@ import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
  * <strong>Patterns</strong>
  * <ul>
  * 		<li>Singleton</li>
- * 		<li>Aplication Service</li>
+ * 		<li>Application Service</li>
  *	</ul>
  *
  */

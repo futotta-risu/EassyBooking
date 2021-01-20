@@ -4,6 +4,13 @@ import org.SlavaLenin.EassyBooking.app.data.User;
 
 import java.io.Serializable;
 
+
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>Assembler</li>
+ * </ul>
+ */
 public class UserAssembler implements Serializable{
 
 	private static final long serialVersionUID = 1L;
