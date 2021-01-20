@@ -2,11 +2,14 @@ package org.SlavaLenin.EassyBooking.app.services;
 
 
 import java.util.Calendar;
+import java.util.logging.Logger;
+
 import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.PaymentGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
+import org.SlavaLenin.EassyBooking.app.log.ServerLogger;
 
 /**
  * Application Service for Payment Services
@@ -39,11 +42,16 @@ public class PaymentService {
 	 * @param amount Price that is payed for the flight
 	 */
 	public void pay(String username, int amount){
-		
+		Logger logger = ServerLogger.getLogger();
 		User user = DBManager.getInstance().getUser(username);
 		
 		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
-		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, amount);
+		try{
+			PaymentGatewayFactory.getInstance().create(paymentType).pay(username, amount);
+		}catch(Exception e) {
+			logger.info("Payment error happened. Probably since not enought balance. Check your account.");
+		}
+		
 		
 		Pago pago=new Pago();
 		pago.setDate(Calendar.getInstance().getTime());

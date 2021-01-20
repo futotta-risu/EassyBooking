@@ -42,10 +42,10 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public void reservar(String id) {
+	public void reservar(String flightID) {
 		// TODO Maybe change exception handling
 		try {
-			service.reservar(id);
+			service.reservar(flightID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -53,11 +53,11 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 
 	@Override
-	public List<Flight> buscar(String id) {
-		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: id search " + id);
+	public List<Flight> buscar(String flightID) {
+		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: id search " + flightID);
 		List<Flight> flights = new ArrayList<Flight>();
 		try {
-			List<AirlineFlightDTO> flightsDTO = service.buscar(id);
+			List<AirlineFlightDTO> flightsDTO = service.buscar(flightID);
 			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: the search has returned "
 					+ flightsDTO.size() + " flights." );
 			for(AirlineFlightDTO flightDTO : flightsDTO) {
@@ -80,10 +80,10 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 	
 	@Override
-	public Flight buscarVuelo(String id) {
+	public Flight buscarVuelo(String flightID) {
 		Flight f = null;
 		try {
-			AirlineFlightDTO flightDTO = service.buscarVuelo(id);
+			AirlineFlightDTO flightDTO = service.buscarVuelo(flightID);
 			
 			f = new Flight();
 			
@@ -101,6 +101,16 @@ public class KoreanAirGateway implements AirlineGateway {
 		}
 		return f;
 		
+	}
+
+	@Override
+	public void cancelReservation(String flightID, int amount) {
+		// TODO Auto-generated method stub
+		try {
+			service.cancelReservation(flightID, amount);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
