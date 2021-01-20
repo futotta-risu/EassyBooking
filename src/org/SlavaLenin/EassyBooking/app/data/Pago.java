@@ -17,26 +17,21 @@ public class Pago implements Serializable {
 	private int paymentID;
 	private String confirmationCode;
 	private String extraInfo;
-	private int contador;
-	
-	
+	private static int contador;
 	
 	
 	public Pago() {
 		super();
 		contador++;
-		paymentID=contador;
-		
-		
-		
-		
+		this.paymentID=contador;
 		// TODO Auto-generated constructor stub
 	}
-	public Pago(Date date, int id, String confCode, String extraInfo) {
+	public Pago(Date date, String confCode, String extraInfo) {
 		this.date = date;
-		this.paymentID = id;
+		this.paymentID = contador;
 		this.confirmationCode = confCode;
 		this.extraInfo = extraInfo;
+		contador++;
 	}
 	
 	private User user;
