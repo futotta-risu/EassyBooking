@@ -1,6 +1,7 @@
 package org.SlavaLenin.EassyBooking.app.controller;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,7 +27,7 @@ public class ServerManagerController {
 	/**
 	 * Flight list for the last user flight search.
 	 */
-	List<Flight> flightSearchResult;
+	List<Flight> flightSearchResult = new ArrayList<Flight>();
 	
 	/**
 	 * UserDTO for the logged user. The user is null if the user is not logged.
@@ -93,7 +94,9 @@ public class ServerManagerController {
     	Logger logger = ServerLogger.getLogger();
     	logger.info("SearchFlight con " + flightID);
     	
-    	return AirlineService.getInstance().buscarVuelo(flightID);
+    	flightSearchResult = AirlineService.getInstance().buscarVuelo(flightID);
+    	
+    	return flightSearchResult;
     }
     
     /**
@@ -107,7 +110,11 @@ public class ServerManagerController {
     	logger.info("BookFlight with " + flightID );
     	
     	if(user == null) logger.severe("No user currently logged");
-    	else AirlineService.getInstance().reservar(flightID, user.getUsername(), user.getSessionKey());
+		else try { 
+				AirlineService.getInstance().reservar(flightID, user.getUsername(), user.getSessionKey());
+			 }catch (Exception e) {
+				System.err.println("Error during payment."); 
+			 }
     }
     
     /**
@@ -118,6 +125,7 @@ public class ServerManagerController {
      * @see {@link AirlineService},{@link Flight}
      */
     public Flight getFlightFromSearch(int index) {
+    	System.out.println("Cogiendo el index "+ index + " de " +flightSearchResult.size() );
     	return flightSearchResult.get(index);   
     }
   

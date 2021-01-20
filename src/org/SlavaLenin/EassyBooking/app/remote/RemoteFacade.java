@@ -51,8 +51,14 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 	}
 
 
-	public void bookFlight(String id, String username, String userKey) throws RemoteException {
-		AirlineService.getInstance().reservar(id,  username, userKey);
+	public void bookFlight(String id, String username, String userKey, int amount) throws RemoteException {
+		for(int i = 0; i < amount; i++)
+			try {
+				AirlineService.getInstance().reservar(id,  username, userKey);
+			} catch (Exception e) {
+				System.err.println("Error durante el pago");
+				break;
+			}
 	}
 
 	public List<FlightDTO> buscarVuelo(String flightID) throws RemoteException {

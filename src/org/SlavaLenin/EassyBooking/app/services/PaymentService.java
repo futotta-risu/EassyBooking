@@ -41,7 +41,7 @@ public class PaymentService {
 	 * @param username Name of user that is paying for the flight
 	 * @param amount Price that is payed for the flight
 	 */
-	public void pay(String username, int amount){
+	public void pay(String username, int amount) throws Exception{
 		Logger logger = ServerLogger.getLogger();
 		User user = DBManager.getInstance().getUser(username);
 		
@@ -50,6 +50,7 @@ public class PaymentService {
 			PaymentGatewayFactory.getInstance().create(paymentType).pay(username, amount);
 		}catch(Exception e) {
 			logger.info("Payment error happened. Probably since not enought balance. Check your account.");
+			throw new Exception("Payment not fullfilled");
 		}
 		
 		

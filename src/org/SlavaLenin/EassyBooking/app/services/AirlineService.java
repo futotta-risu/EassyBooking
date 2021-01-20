@@ -71,10 +71,12 @@ public class AirlineService {
 	 * @param flightID General ID of the flight
 	 * @param username Username of the petitioner user
 	 * @param sessionKey SessionKey of the client to verify his identity
+	 * @throws Exception 
 	 */
-	public void reservar(String flightID, String username, String sessionKey){
+	public void reservar(String flightID, String username, String sessionKey) throws Exception{
 		Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
 		logger.info("Reservando vuelo con id " + flightID );
+		logger.info("\n\n" );
 		
 		Flight flight = DBManager.getInstance().getFlight(flightID);
 		logger.info("Obtenido el vuelo" + flight );

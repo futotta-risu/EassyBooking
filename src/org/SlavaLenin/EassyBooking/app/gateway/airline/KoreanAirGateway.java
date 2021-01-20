@@ -104,10 +104,10 @@ public class KoreanAirGateway implements AirlineGateway {
 	}
 
 	@Override
-	public void cancelReservation(String flightID, int amount) {
+	public void cancelReservation(String flightID) {
 		// TODO Auto-generated method stub
 		try {
-			service.cancelReservation(flightID, amount);
+			service.cancelReservation(flightID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

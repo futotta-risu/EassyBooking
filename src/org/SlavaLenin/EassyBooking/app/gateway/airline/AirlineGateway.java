@@ -8,5 +8,5 @@ public interface AirlineGateway {
 	public void reservar(String flightID);
 	public List<Flight> buscar(String flightID);
 	public Flight buscarVuelo(String flightID);
-	public void cancelReservation(String flightID, int amount);
+	public void cancelReservation(String flightID);
 }

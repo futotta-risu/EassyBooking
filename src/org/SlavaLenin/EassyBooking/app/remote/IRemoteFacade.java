@@ -59,5 +59,5 @@ public interface IRemoteFacade extends Remote{
 	 * 
 	 * @throws RemoteException
 	 */
-	public void bookFlight(String flightID, String username, String sessionKey) throws RemoteException;
+	public void bookFlight(String flightID, String username, String sessionKey, int amount) throws RemoteException;
 }

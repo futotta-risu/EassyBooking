@@ -152,7 +152,7 @@ public class AirFranceGateway implements AirlineGateway {
 	}
 
 	@Override
-	public void cancelReservation(String flightID, int amount) {
+	public void cancelReservation(String flightID) {
 		Logger logger = ServerLogger.getLogger();
 		logger.info("Flight booking for id " + flightID);
 		try {
@@ -164,7 +164,7 @@ public class AirFranceGateway implements AirlineGateway {
 		    ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
 		    DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
 			
-		    String command = "CANCELARRESERVA " + flightID + " " + amount; 
+		    String command = "CANCELAR " + flightID; 
 		     
 			out.writeUTF(command);
 			logger.info("- Sent data to '" + address + ":" + tcpSocket.getPort() + "' -> '" + command + "'");	
