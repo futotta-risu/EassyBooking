@@ -78,8 +78,9 @@ public class AirFranceGateway implements AirlineGateway {
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				flights.add(f);
+				System.out.println("Has add fligth: "+f+"to flights: "+flights);
+				
 			}
-			System.out.println("Has send flights: "+flights);
 			
 			return flights;
 		}catch (Exception e) {
