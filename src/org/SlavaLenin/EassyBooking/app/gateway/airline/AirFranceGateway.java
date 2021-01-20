@@ -15,7 +15,6 @@ import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightDTO;
 
-import es.deusto.ingenieria.sd.sms.server.data.AirlineFlightDTO;
 
 public class AirFranceGateway implements AirlineGateway {
 	

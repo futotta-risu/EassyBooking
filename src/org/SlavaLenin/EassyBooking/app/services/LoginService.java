@@ -25,11 +25,10 @@ public class LoginService {
 	
 	public UserDTO login(String email, String password, LoginEnum loginType){
 		System.out.println("LoginService: login");
-		UserAssembler userAssembler = new UserAssembler();
 		User user = LoginGatewayFactory.getInstance().create(loginType).login(email, password);
 		if(user == null)
 			return null;
-		return userAssembler.assemble(user);
+		return UserAssembler.getInstance().assemble(user);
 	}
 	
 	public UserDTO register(String email, String password, LoginEnum registerType) {
@@ -38,11 +37,9 @@ public class LoginService {
 		if(DBManager.getInstance().getUser(user.getUsername()) == null) {
 			
 			DBManager.getInstance().storeUser(user);
-			
 			user = DBManager.getInstance().getUser(email);
 		}
-		UserAssembler userAssembler = new UserAssembler();
-		return userAssembler.assemble(user);
+		return UserAssembler.getInstance().assemble(user);
 
 	}
 

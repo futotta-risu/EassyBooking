@@ -1,25 +1,41 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
-import org.SlavaLenin.EassyBooking.app.data.Flight;
+import java.util.List;
+
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.FlightDTO;
+import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
+import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
 public class EntityDataService {
 
-	public EntityDataService() {
-		super();
-		// TODO Auto-generated constructor stub
+	private static EntityDataService instance;
+	
+	private EntityDataService() {}
+	
+	public static EntityDataService getInstance() {
+		if (instance == null) 
+			instance = new EntityDataService();
+		
+		return instance;
 	}
-/*
+	
+	
 	public FlightDTO getFlight(String id) {
-		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
+		
+		return FlightAssembler.getInstance().assemble(DBManager.getInstance().getFlight(id));
+	}
+	
+	public List<FlightDTO> getFlights(String id) {
+		
+		return FlightAssembler.getInstance().assemble(DBManager.getInstance().getFlights());
 	}
 	
 	public UserDTO getUser(String username) {
 		
-		return LoginService.getInstance().getUser(username);
+		return UserAssembler.getInstance().assemble(DBManager.getInstance().getUser(username));
 
 	}
-	*/
+	
 }
