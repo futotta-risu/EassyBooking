@@ -166,7 +166,7 @@ public class ServerManagerFrame extends JFrame {
 
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
-            	System.out.println("Cambiando el valor en la JList");
+            	System.out.println("Changeing the value of JList");
                 Flight f = smcontroller.getFlightFromSearch(FlightList.getSelectedIndex());
                 selectedFlight = f;
                 lblFlightNumber.setText(String.valueOf(f.getFlightNumber()));

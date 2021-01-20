@@ -61,9 +61,7 @@ public class LoginService {
 			user = DBManager.getInstance().getUser(email);
 			logger.info("Hemos recuperado el " + user);
 		}
-		
-		UserAssembler userAssembler = new UserAssembler();
-		return userAssembler.assemble(user);
+		return UserAssembler.getInstance().assemble(user);
 
 	}
 

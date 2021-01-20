@@ -52,7 +52,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
 	public List<FlightDTO> buscarVuelo(String id) throws RemoteException {
 		System.out.println(" *RemoteFacade BUSCAR Vuelo: " + id);
-		return FlightAssembler.assemble(AirlineService.getInstance().buscarVuelo(id));
+		return FlightAssembler.getInstance().assemble(AirlineService.getInstance().buscarVuelo(id));
 	}
 
 }

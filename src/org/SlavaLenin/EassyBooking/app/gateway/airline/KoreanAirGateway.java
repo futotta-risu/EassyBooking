@@ -48,12 +48,12 @@ public class KoreanAirGateway implements AirlineGateway {
 
 	@Override
 	public List<Flight> buscar(String id) {
-		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: Busqueda de id " + id);
+		Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: id search " + id);
 		List<Flight> flights = new ArrayList<Flight>();
 		try {
 			List<AirlineFlightDTO> flightsDTO = service.buscar(id);
-			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: La busqueda ha devuelto "
-					+ flightsDTO.size() + " vuelos." );
+			Logger.getLogger(ServerManagerFrame.class.getName()).info("KoreanAirGateway: the search has returned "
+					+ flightsDTO.size() + " flights." );
 			for(AirlineFlightDTO flightDTO : flightsDTO) {
 				Flight f = new Flight();
 				f.setFlightNumber(flightDTO.getFligthNumber());
@@ -68,7 +68,7 @@ public class KoreanAirGateway implements AirlineGateway {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		System.out.println("El tamaño de vuelos es de " + flights.size());
+		System.out.println("Fligth size is: " + flights.size());
 		return flights;
 	}
 	
@@ -87,6 +87,7 @@ public class KoreanAirGateway implements AirlineGateway {
 			f.setAirline(AirlineEnum.KoreanAir.getCode());
 			f.setAirportDeparture(flightDTO.getAirportDeparture());
 			f.setAirportArrival(flightDTO.getAirportArrival());
+			System.out.println("The flight search has finished: "+ f);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

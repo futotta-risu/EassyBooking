@@ -15,7 +15,6 @@ import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightDTO;
 
-import es.deusto.ingenieria.sd.sms.server.data.AirlineFlightDTO;
 
 public class AirFranceGateway implements AirlineGateway {
 	
@@ -55,22 +54,21 @@ public class AirFranceGateway implements AirlineGateway {
 	@Override
 	public List<Flight> buscar(String id) {
 		Logger.getLogger(ServerManagerFrame.class.getName()).info("AirFranceGateway: buscar con " + id);
-		System.out.println("AirFrance se esta ejecuntando ");
 		List<Flight> flights = new ArrayList<Flight>();
 		try{
-			System.out.println("AirFrance se esta ejecuntando 2");
+			
 			Socket tcpSocket = new Socket(IP, PORT);
 		
 			//Streams to send and receive information are created from the Socket
 			ObjectInputStream in = new ObjectInputStream(tcpSocket.getInputStream());
 			DataOutputStream out = new DataOutputStream(tcpSocket.getOutputStream());
-			System.out.println("AirFrance se esta ejecuntando 3");
+			System.out.println("AirFrance has inicied conexion");
 			out.writeUTF("BUSCAR "+ id);
 			
 			System.out.println("- EchoClient: Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> 'BUSCAR " + id + "'");	
 			@SuppressWarnings("unchecked")
 			List<SocketAirlineFlightDTO> dataDTO = (List<SocketAirlineFlightDTO>) in.readObject();
-			System.out.println("AirFrance ha recivido " + dataDTO.size());
+			System.out.println("AirFrance has recived:  " + dataDTO.size());
 			for(SocketAirlineFlightDTO flightDTO : dataDTO) {
 				Flight f = new Flight();
 				f.setFlightNumber(flightDTO.getFligthNumber());
@@ -81,9 +79,9 @@ public class AirFranceGateway implements AirlineGateway {
 				f.setAirportDeparture(flightDTO.getAirportDeparture());
 				f.setAirportArrival(flightDTO.getAirportArrival());
 				flights.add(f);
-				System.out.println("El Airline es " + f.getAirline());
+				System.out.println("Has add fligth: "+f+"to flights: "+flights);
+				
 			}
-			System.out.println("AirFrance: Hemos obtenido" + dataDTO.size());
 			
 			return flights;
 		}catch (Exception e) {
