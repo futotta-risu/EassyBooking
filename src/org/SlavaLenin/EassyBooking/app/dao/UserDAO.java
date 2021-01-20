@@ -10,6 +10,13 @@ import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.User;
 
+
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>DAO</li>
+ * </ul>
+ */
 public class UserDAO extends GenericDAO{
 	public UserDAO() {
 		super();

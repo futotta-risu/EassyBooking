@@ -8,6 +8,18 @@ import org.SlavaLenin.EassyBooking.app.data.Pago;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 
+
+/**
+ * Application Service for Payment Services
+ * </br>
+ * 
+ * <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Singleton</li>
+ * 		<li>Application Service</li>
+ *	</ul>
+ *
+ */
 public class PaymentService {
 
 	

@@ -3,7 +3,6 @@ package org.SlavaLenin.EassyBooking.app.gateway.airline;
 
 import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,12 @@ import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
 import org.SlavaLenin.SocketAirline.socket.echo.server.data.SocketAirlineFlightDTO;
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ * 		<li>Gateway</li>
+ * </ul>
+ */
 public class AirFranceGateway implements AirlineGateway {
 	
 	private static final String IP = "127.0.0.1";

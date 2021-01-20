@@ -10,7 +10,12 @@ import javax.jdo.Transaction;
 
 import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>DAO</li>
+ * </ul>
+ */
 public class FlightReservationDAO extends GenericDAO{
 	public FlightReservationDAO() {
 		super();

@@ -5,7 +5,12 @@ import java.util.List;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ *      <li>Assembler</li>
+ * </ul>
+ */
 public class FlightAssembler {
 
 	

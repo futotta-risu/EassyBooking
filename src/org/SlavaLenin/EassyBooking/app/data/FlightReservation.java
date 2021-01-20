@@ -15,7 +15,14 @@ public class FlightReservation implements Serializable {
 	private int flightReservationID;
 	private int price;
 	private int numberOfSeats;
+	private static int contador;
 	
+	
+	public FlightReservation() {
+		super();
+		// TODO Auto-generated constructor stub
+		this.flightReservationID=contador++;
+	}
 	@NotPersistent
 	private List<PassengerInfo> passengersInfo;
 	
