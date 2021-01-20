@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.SlavaLenin.EassyBooking.app.data.Flight;
+import org.SlavaLenin.EassyBooking.app.data.FlightReservation;
 import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 import org.SlavaLenin.EassyBooking.app.gateway.AirlineGatewayFactory;
@@ -107,6 +108,12 @@ public class AirlineService {
 		logger.info("Processo de pago correcto" );
 		
 		//Hacer FlightReservation
+		FlightReservation fReservation=new FlightReservation();
+		
+		fReservation.setFlight(flight);
+		fReservation.setUser(user);
+		
+		DBManager.getInstance().storeFlightReservation(fReservation);
 	}
 	
 
