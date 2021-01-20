@@ -1,13 +1,11 @@
 package org.SlavaLenin.EassyBooking.app.services;
 
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.SlavaLenin.EassyBooking.app.data.Pago;
+import org.SlavaLenin.EassyBooking.app.data.User;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
-import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
-
+import org.SlavaLenin.EassyBooking.app.gateway.PaymentGatewayFactory;
+import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentEnum;
 
 /**
  * Application Service for Payment Services
@@ -18,14 +16,10 @@ import org.SlavaLenin.EassyBooking.app.gui.ServerManagerFrame;
  * 		<li>Singleton</li>
  * 		<li>Application Service</li>
  *	</ul>
- *
  */
 public class PaymentService {
 
-	
 	private static PaymentService instance;
-	private static int contador = 0;
-	private Logger logger = Logger.getLogger(ServerManagerFrame.class.getName());
 		
 	private PaymentService(){
 	}
@@ -37,18 +31,17 @@ public class PaymentService {
 		return instance;
 	}
 	
-	public void pay(int amount){
-		logger.log(Level.INFO,"Cantidad a pagar: "+ amount);
-		String confCode = contador + 23572037886777807L + "";
-		Calendar c = Calendar.getInstance();
-		Pago pago = new Pago( c.getTime(), contador, confCode, "Info =" + contador);
-		contador++;
+	public void pay(String username, int amount){
 		
-		if(pago != null) {
-			DBManager.getInstance().storePago(pago);
-			logger.log(Level.INFO,"Pago guardado");
-		}
-
+		User user = DBManager.getInstance().getUser(username);
+		PaymentEnum paymentType = user.getPaymentMethod().getPaymentType();
+		PaymentGatewayFactory.getInstance().create(paymentType).pay(username, amount);
+		
+		Pago pago=new Pago();
+		pago.setDate(Calendar.getInstance().getTime());
+		pago.setExtraInfo(String.valueOf(amount));
+		DBManager.getInstance().storePago(pago);
+		
 	}
 	
 	

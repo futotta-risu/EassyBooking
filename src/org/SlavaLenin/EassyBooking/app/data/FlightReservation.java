@@ -12,16 +12,14 @@ public class FlightReservation implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Unique
-	private int flightReservationID;
+	private long flightReservationID;
 	private int price;
 	private int numberOfSeats;
-	private static int contador;
-	
 	
 	public FlightReservation() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.flightReservationID=contador++;
+		this.flightReservationID=  System.currentTimeMillis();
 	}
 	@NotPersistent
 	private List<PassengerInfo> passengersInfo;
@@ -54,7 +52,7 @@ public class FlightReservation implements Serializable {
 	public void setFlight(Flight flight) {
 		this.flight = flight;
 	}
-	public int getFlightReservationID() {
+	public long getFlightReservationID() {
 		return flightReservationID;
 	}
 	public void setFlightReservationID(int flightReservationID) {
