@@ -6,7 +6,12 @@ import org.SlavaLenin.EassyBooking.app.gateway.payment.PaymentGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.payment.PaypalGateway;
 
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ * 		<li>Factory</li>
+ * </ul>
+ */
 public class PaymentGatewayFactory {
 	
 	private static PaymentGatewayFactory instance;

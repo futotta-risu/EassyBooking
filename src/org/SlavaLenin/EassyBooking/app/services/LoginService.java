@@ -10,6 +10,17 @@ import org.SlavaLenin.EassyBooking.app.gateway.LoginGatewayFactory;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.log.ServerLogger;
 
+
+/**
+ * Application Service for Login Services
+ * </br>
+ * 
+ * <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Singleton</li>
+ * 		<li>Application Service</li>
+ *	</ul>
+ */
 public class LoginService {
 	
 	private static LoginService instance;

@@ -8,6 +8,16 @@ import org.SlavaLenin.EassyBooking.app.data.dto.UserAssembler;
 import org.SlavaLenin.EassyBooking.app.data.dto.UserDTO;
 import org.SlavaLenin.EassyBooking.app.db.DBManager;
 
+/**
+ * Application Service for Entity Data Services
+ * </br>
+ * 
+ * <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Singleton</li>
+ * 		<li>Application Service</li>
+ * </ul>
+ */
 public class EntityDataService {
 
 	private static EntityDataService instance;

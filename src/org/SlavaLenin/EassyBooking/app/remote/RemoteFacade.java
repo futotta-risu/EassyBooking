@@ -10,7 +10,22 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.services.AirlineService;
 import org.SlavaLenin.EassyBooking.app.services.LoginService;
 
-
+/**
+ *  <strong> Remote facade </strong>
+ *  Esta clase implementa la interfaz de nuestra façade remota. Los metodos que encapsula esta clase son los siguientes:
+ *  <ul>
+ *  	<li> login(String email, String password, LoginEnum loginType) : UserDTO </li>
+ *      <li> register(String email, String password, LoginEnum registerType) </li>
+ *      <li> bookFlight(String id, String username, String userKey) </li>
+ *      <li> buscarVuelo(String id, String username, String userKey) : List<FlightDTO/> </li>
+ *  </ul>
+ *  
+ *  <strong>Patterns</strong>
+ * <ul>
+ * 		<li>Façade</li>
+ * 		<li>Singleton</li>
+ *	</ul>
+ */
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade{
 
 	private static final long serialVersionUID = 1L;

@@ -5,6 +5,12 @@ import org.SlavaLenin.EassyBooking.app.gateway.login.LoginEnum;
 import org.SlavaLenin.EassyBooking.app.gateway.login.LoginGateway;
 
 
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ * 		<li>Factory</li>
+ * </ul>
+ */
 public class LoginGatewayFactory {
 	
 	private static LoginGatewayFactory instance;

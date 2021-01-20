@@ -6,7 +6,12 @@ import org.SlavaLenin.EassyBooking.app.gateway.airline.AirlineGateway;
 import org.SlavaLenin.EassyBooking.app.gateway.airline.KoreanAirGateway;
 
 
-
+/**
+ * <strong>Pattern</strong>
+ * <ul>
+ * 		<li>Factory</li>
+ * </ul>
+ */
 public class AirlineGatewayFactory {
 	
 	private static AirlineGatewayFactory instance;
